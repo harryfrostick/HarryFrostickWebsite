@@ -268,8 +268,6 @@
       100% { transform: translateX(-50%); }
     }
 
-
-
     /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -352,7 +350,6 @@
   <!-- Ticker -->
   <div class="ticker">
     <div class="ticker-inner">
-      <!-- Duplicated for seamless loop -->
       <span class="ticker-item">Motion Design<span class="ticker-dot"></span></span>
       <span class="ticker-item">After Effects<span class="ticker-dot"></span></span>
       <span class="ticker-item">Brand Animation<span class="ticker-dot"></span></span>
@@ -368,9 +365,7 @@
     </div>
   </div>
 
-
-
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
@@ -396,6 +391,14 @@
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.styl
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
