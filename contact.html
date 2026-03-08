@@ -20,7 +20,7 @@
     html { font-size: 16px; }
 
     body {
-      background: #0c0c0c;
+      background: #0a0a0a;
       color: var(--fg);
       font-family: 'Manrope', sans-serif;
       font-weight: 300;
@@ -115,19 +115,20 @@
       text-decoration: none;
       opacity: 0.85;
     }
-    .nav-back {
+    .nav-links {
       display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
       color: var(--muted);
       text-decoration: none;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      transition: color 0.3s, gap 0.3s;
+      transition: color 0.3s;
     }
-    .nav-back:hover { color: var(--fg); gap: 0.9rem; }
-    .nav-back svg { transform: rotate(180deg); transition: transform 0.3s; }
+    .nav-links a:hover { color: var(--fg); }
 
     /* Main */
     main {
@@ -292,12 +293,11 @@
 
   <nav>
     <a href="index.html" class="nav-logo">HF</a>
-    <a href="index.html" class="nav-back">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Back
-    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="contact.html">Get in touch</a></li>
+    </ul>
   </nav>
 
   <main>
