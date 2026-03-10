@@ -13,6 +13,8 @@
     :root {
       --fg: #f0ebe3;
       --accent: #e8d5b0;
+      --pink: #f5e0e0;
+      --pink-dim: rgba(245,224,224,0.15);
       --muted: #6b6560;
       --line: rgba(240,235,227,0.1);
     }
@@ -114,7 +116,9 @@
       color: var(--fg);
       text-decoration: none;
       opacity: 0.85;
+      transition: color 0.3s;
     }
+    .nav-logo:hover { color: var(--pink); opacity: 1; }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -128,7 +132,7 @@
       text-transform: uppercase;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover { color: var(--pink); }
 
     /* Main */
     main {
@@ -228,8 +232,9 @@
       transition: background 0.3s, border-color 0.3s, gap 0.3s;
     }
     .submit-btn:hover {
-      background: rgba(240,235,227,0.06);
-      border-color: rgba(240,235,227,0.3);
+      background: var(--pink-dim);
+      border-color: var(--pink);
+      color: var(--pink);
       gap: 1.3rem;
     }
     .submit-btn svg { transition: transform 0.3s; }
@@ -282,6 +287,7 @@
       main { padding: 6rem 1.5rem 3rem; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
     }
+
   </style>
 </head>
 <body>
@@ -295,6 +301,7 @@
     <a href="index.html" class="nav-logo">HF</a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Work</a></li>
       <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="contact.html">Get in touch</a></li>
     </ul>
@@ -357,6 +364,7 @@
   </main>
 
   <script>
+
     // Cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
