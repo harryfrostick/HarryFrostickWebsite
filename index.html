@@ -10,9 +10,12 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ── Dark mode (default) ── */
     :root {
       --fg: #f0ebe3;
       --accent: #e8d5b0;
+      --pink: #f5e0e0;
+      --pink-dim: rgba(245,224,224,0.15);
       --muted: #6b6560;
       --line: rgba(240,235,227,0.1);
     }
@@ -95,7 +98,9 @@
       color: var(--fg);
       text-decoration: none;
       opacity: 0.85;
+      transition: color 0.3s;
     }
+    .nav-logo:hover { color: var(--pink); opacity: 1; }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -109,7 +114,7 @@
       text-transform: uppercase;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover { color: var(--pink); }
 
     /* Hero */
     .hero {
@@ -157,13 +162,13 @@
     }
     .bg-orb-1 {
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(180,140,80,0.12), transparent 70%);
+      background: radial-gradient(circle, var(--orb1), transparent 70%);
       top: -100px; right: -100px;
       animation-delay: 0s;
     }
     .bg-orb-2 {
       width: 350px; height: 350px;
-      background: radial-gradient(circle, rgba(100,80,60,0.1), transparent 70%);
+      background: radial-gradient(circle, var(--orb2), transparent 70%);
       bottom: 100px; left: -50px;
       animation-delay: -5s;
     }
@@ -184,15 +189,16 @@
     }
 
     .hero-name {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: var(--hero-font);
       font-size: clamp(5rem, 16vw, 18rem);
       line-height: 0.88;
-      letter-spacing: -0.01em;
+      letter-spacing: var(--name-letter-spacing);
       color: var(--fg);
       opacity: 0;
       animation: fadeUp 0.9s ease 0.4s forwards;
       position: relative;
       z-index: 1;
+      transition: font-family 0.4s ease, color 0.5s ease;
     }
     .hero-name .first { display: block; }
     .hero-name .last { display: block; }
@@ -217,7 +223,7 @@
     .hero-desc {
       max-width: 420px;
       font-size: 0.95rem;
-      color: rgba(240,235,227,0.65);
+      color: rgba(var(--fg-rgb, 240,235,227),0.65); color: color-mix(in srgb, var(--fg) 65%, transparent);
       line-height: 1.75;
     }
     .hero-cta {
@@ -235,8 +241,9 @@
       white-space: nowrap;
     }
     .hero-cta:hover {
-      background: rgba(240,235,227,0.06);
-      border-color: rgba(240,235,227,0.3);
+      background: var(--pink-dim);
+      border-color: var(--pink);
+      color: var(--pink);
       gap: 1.3rem;
     }
     .hero-cta svg { transition: transform 0.3s; }
@@ -259,7 +266,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.1rem;
       letter-spacing: 0.15em;
-      color: var(--muted);
+      color: var(--ticker-color);
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -290,7 +297,7 @@
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
     ::-webkit-scrollbar-thumb { background: var(--muted); }
 
     /* Responsive */
@@ -304,6 +311,15 @@
       .hero-bottom { flex-direction: column; align-items: flex-start; }
       .section { padding: 5rem 1.5rem; }
     }
+
+    /* ── Mode toggle ── */
+
+    /* Light mode: hero name size tweak for Caveat */
+    body.light .hero-name {
+      font-size: clamp(4rem, 13vw, 15rem);
+      line-height: 0.92;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -313,15 +329,21 @@
 
   <div class="bg-orb bg-orb-1"></div>
   <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
 
   <!-- Nav -->
   <nav>
     <a href="index.html" class="nav-logo">HF</a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Work</a></li>
       <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="contact.html">Get in touch</a></li>
     </ul>
+    <button class="mode-toggle" id="modeToggle" aria-label="Toggle light/dark mode">
+      <span class="toggle-icon">◐</span>
+      <span class="toggle-label">Light</span>
+    </button>
   </nav>
 
   <!-- Hero -->
@@ -400,12 +422,14 @@
         cursor.style.height = '20px';
         ring.style.width = '60px';
         ring.style.height = '60px';
+        ring.style.borderColor = 'rgba(245,224,224,0.6)';
       });
       el.addEventListener('mouseleave', () => {
         cursor.style.width = '10px';
         cursor.style.height = '10px';
         ring.style.width = '36px';
         ring.style.height = '36px';
+        ring.style.borderColor = 'rgba(240,235,227,0.5)';
       });
     });
 
