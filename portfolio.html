@@ -93,7 +93,7 @@
     .nav-logo img {
       height: 26px;
       width: auto;
-      filter: drop-shadow(0 1px 4px rgba(26,20,18,0.15));
+      mix-blend-mode: difference;
     }
     .nav-links {
       display: flex;
@@ -107,6 +107,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       transition: color 0.3s;
+      mix-blend-mode: difference;
     }
     .nav-links a:hover { color: var(--fg); }
     .nav-links a.active { color: var(--fg); }
