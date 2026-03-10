@@ -6,59 +6,34 @@
   <title>Harry Frostick — Motion | Design | Illustration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Bebas+Neue&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── Dark mode (default) ── */
     :root {
-      --fg: #f0ebe3;
-      --accent: #e8d5b0;
-      --pink: #f5e0e0;
-      --pink-dim: rgba(245,224,224,0.15);
-      --muted: #6b6560;
-      --line: rgba(240,235,227,0.1);
+      --fg:        #f0ebe3;
+      --accent:    #e8d5b0;
+      --pink:      #f5e0e0;
+      --muted:     #6b6560;
+      --line:      rgba(240,235,227,0.12);
     }
 
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
 
     body {
       background: #0a0a0a;
       color: var(--fg);
       font-family: 'Manrope', sans-serif;
       font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
       cursor: none;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Custom cursor */
-    .cursor {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: var(--fg);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-      mix-blend-mode: difference;
-    }
-    .cursor-ring {
-      position: fixed;
-      width: 36px;
-      height: 36px;
-      border: 1px solid rgba(240,235,227,0.5);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease;
-    }
-    body:hover .cursor { opacity: 1; }
-
-    /* Grain overlay */
+    /* Grain */
     body::before {
       content: '';
       position: fixed;
@@ -66,259 +41,166 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9990;
-      opacity: 0.4;
+      opacity: 0.55;
+    }
+
+    /* Cursor */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--fg);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(240,235,227,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
     }
 
     /* Nav */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      z-index: 100;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 2rem 3rem;
-      mix-blend-mode: normal;
     }
     nav::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 3rem;
-      right: 3rem;
+      bottom: 0; left: 3rem; right: 3rem;
       height: 1px;
-      background: var(--line);
+      background: rgba(240,235,227,0.15);
     }
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.3rem;
-      letter-spacing: 0.12em;
-      color: var(--fg);
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      opacity: 0.85;
-      transition: color 0.3s;
+      opacity: 0.9;
+      transition: opacity 0.3s;
     }
-    .nav-logo:hover { color: var(--pink); opacity: 1; }
+    .nav-logo:hover { opacity: 1; }
+    .nav-logo img {
+      height: 28px;
+      width: auto;
+      filter: invert(1) brightness(2) drop-shadow(0 1px 6px rgba(0,0,0,0.5));
+    }
     .nav-links {
       display: flex;
       gap: 2.5rem;
       list-style: none;
     }
     .nav-links a {
-      color: var(--muted);
+      color: var(--fg);
       text-decoration: none;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      transition: color 0.3s;
+      opacity: 0.75;
+      transition: color 0.3s, opacity 0.3s;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
     }
-    .nav-links a:hover { color: var(--pink); }
+    .nav-links a:hover { color: var(--pink); opacity: 1; }
 
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 3rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
 
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero-video {
-      width: clamp(180px, 22vw, 340px);
-      aspect-ratio: 9/16;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .hero-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Animated background circles */
-    .bg-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      animation: orbFloat 12s ease-in-out infinite;
-    }
-    .bg-orb-1 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--orb1), transparent 70%);
-      top: -100px; right: -100px;
-      animation-delay: 0s;
-    }
-    .bg-orb-2 {
-      width: 350px; height: 350px;
-      background: radial-gradient(circle, var(--orb2), transparent 70%);
-      bottom: 100px; left: -50px;
-      animation-delay: -5s;
-    }
-    @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0); }
-      33% { transform: translate(30px, -20px); }
-      66% { transform: translate(-20px, 15px); }
-    }
-
-    .hero-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-    }
-
-    .hero-name {
-      font-family: var(--hero-font);
-      font-size: clamp(5rem, 16vw, 18rem);
-      line-height: 0.88;
-      letter-spacing: var(--name-letter-spacing);
-      color: var(--fg);
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.4s forwards;
-      position: relative;
-      z-index: 1;
-      transition: font-family 0.4s ease, color 0.5s ease;
-    }
-    .hero-name .first { display: block; }
-    .hero-name .last { display: block; }
-
-    .hero-divider {
-      width: 60px;
-      height: 1px;
-      background: var(--accent);
-      margin: 2.5rem 0;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.7s forwards;
-    }
-
-    .hero-bottom {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.9s forwards;
-    }
-    .hero-desc {
-      max-width: 420px;
-      font-size: 0.95rem;
-      color: rgba(var(--fg-rgb, 240,235,227),0.65); color: color-mix(in srgb, var(--fg) 65%, transparent);
-      line-height: 1.75;
-    }
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 1px solid var(--line);
-      padding: 1rem 1.8rem;
-      transition: background 0.3s, border-color 0.3s, gap 0.3s;
-      white-space: nowrap;
-    }
-    .hero-cta:hover {
-      background: var(--pink-dim);
-      border-color: var(--pink);
-      color: var(--pink);
-      gap: 1.3rem;
-    }
-    .hero-cta svg { transition: transform 0.3s; }
-    .hero-cta:hover svg { transform: translateX(4px); }
 
     /* Ticker */
     .ticker {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      flex-shrink: 0;
       border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
       padding: 1rem 0;
       overflow: hidden;
       white-space: nowrap;
     }
     .ticker-inner {
       display: inline-flex;
-      gap: 4rem;
-      animation: tickerScroll 20s linear infinite;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      animation: tickerScroll 22s linear infinite, fadeIn 0.6s ease 2.8s forwards;
     }
     .ticker-item {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       letter-spacing: 0.15em;
-      color: var(--ticker-color);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      color: rgba(240,235,227,0.45);
     }
-    .ticker-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+    .ticker-dot {
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
     @keyframes tickerScroll {
-      0% { transform: translateX(0); }
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-
-
-
-    /* Animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: var(--muted); }
-
-    /* Responsive */
     @media (max-width: 768px) {
       nav { padding: 1.5rem; }
       nav::after { left: 1.5rem; right: 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .nav-links a { font-size: 0.65rem; }
+    }
+    @media (max-width: 500px) {
       .nav-links { display: none; }
-      .hero { padding: 6rem 1.5rem 3rem; }
-      .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-video { width: 100%; max-width: 240px; }
-      .hero-bottom { flex-direction: column; align-items: flex-start; }
-      .section { padding: 5rem 1.5rem; }
     }
 
-    /* ── Mode toggle ── */
-
-    /* Light mode: hero name size tweak for Caveat */
-    body.light .hero-name {
-      font-size: clamp(4rem, 13vw, 15rem);
-      line-height: 0.92;
-      font-weight: 700;
+    /* Background video */
+    .bg-video-link {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      display: block;
+    }
+    .bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none;
+    }
+    /* Top gradient — flush with nav bar */
+    nav::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(28,3,21,0.35) 0%, transparent 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    /* Bottom gradient — matches top */
+    .ticker::before {
+      content: '';
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, rgba(28,3,21,0.35) 0%, transparent 100%);
+      z-index: -1;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -327,115 +209,77 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <div class="bg-orb bg-orb-1"></div>
-  <div class="bg-orb bg-orb-2"></div>
-  <div class="bg-orb bg-orb-3"></div>
+  <a href="portfolio.html" class="bg-video-link">
+    <video class="bg-video" autoplay loop muted playsinline>
+      <source src="00_HARRY_FROSTICK_Portfolio_16x9_COMP_1.mp4" type="video/mp4">
+    </video>
+  </a>
 
-  <!-- Nav -->
   <nav>
-    <a href="index.html" class="nav-logo">HF</a>
+    <a href="index.html" class="nav-logo">
+      <img src="HF.svg" alt="HF" />
+    </a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="portfolio.html">Work</a></li>
       <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="contact.html">Get in touch</a></li>
     </ul>
-    <button class="mode-toggle" id="modeToggle" aria-label="Toggle light/dark mode">
-      <span class="toggle-icon">◐</span>
-      <span class="toggle-label">Light</span>
-    </button>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-left">
-        <p class="hero-tag">Motion · Design · Illustration</p>
-        <h1 class="hero-name">
-          <span class="first">Harry</span>
-          <span class="last">FROSTICK</span>
-        </h1>
-        <div class="hero-divider"></div>
-        <div class="hero-bottom">
-          <p class="hero-desc">Motion designer with 7+ years of agency, in-house, and freelance experience. Blending creativity with empathetic problem-solving to craft engaging motion and video assets for social and web platforms.</p>
-          <a href="contact.html" class="hero-cta">
-            Get in touch
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="hero-video">
-        <video autoplay loop muted playsinline>
-          <source src="PhoneShowreel_30s_1_0.webm" type="video/webm">
-        </video>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ticker -->
   <div class="ticker">
     <div class="ticker-inner">
-      <!-- Duplicated for seamless loop -->
-      <span class="ticker-item">Motion Design<span class="ticker-dot"></span></span>
-      <span class="ticker-item">After Effects<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Brand Animation<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Illustration<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Social Content<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Visual Identity<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Motion Design<span class="ticker-dot"></span></span>
-      <span class="ticker-item">After Effects<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Brand Animation<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Illustration<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Social Content<span class="ticker-dot"></span></span>
-      <span class="ticker-item">Visual Identity<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Motion Design</span><span class="ticker-dot"></span>
+      <span class="ticker-item">After Effects</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Brand Animation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Illustration</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Social Content</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Visual Identity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Character Design</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Frame-by-Frame</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Motion Design</span><span class="ticker-dot"></span>
+      <span class="ticker-item">After Effects</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Brand Animation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Illustration</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Social Content</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Visual Identity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Character Design</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Frame-by-Frame</span><span class="ticker-dot"></span>
     </div>
   </div>
 
-
-
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Custom cursor
+  <script>
+    // Cursor
     const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
+    const ring   = document.getElementById('cursorRing');
     let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', e => {
       mouseX = e.clientX; mouseY = e.clientY;
       cursor.style.left = mouseX + 'px';
-      cursor.style.top = mouseY + 'px';
+      cursor.style.top  = mouseY + 'px';
     });
-
-    function animateRing() {
+    (function animateRing() {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
       ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
+      ring.style.top  = ringY + 'px';
       requestAnimationFrame(animateRing);
-    }
-    animateRing();
+    })();
 
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
-        ring.style.width = '60px';
-        ring.style.height = '60px';
-        ring.style.borderColor = 'rgba(245,224,224,0.6)';
+        cursor.style.width = '20px'; cursor.style.height = '20px';
+        ring.style.width = '60px';   ring.style.height = '60px';
+        ring.style.borderColor = 'rgba(240,235,227,0.7)';
       });
       el.addEventListener('mouseleave', () => {
-        cursor.style.width = '10px';
-        cursor.style.height = '10px';
-        ring.style.width = '36px';
-        ring.style.height = '36px';
-        ring.style.borderColor = 'rgba(240,235,227,0.5)';
+        cursor.style.width = '10px'; cursor.style.height = '10px';
+        ring.style.width = '36px';   ring.style.height = '36px';
+        ring.style.borderColor = 'rgba(240,235,227,0.4)';
       });
     });
+  </script>
 
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          entry.target.styl
+</body>
+</html>
