@@ -28,7 +28,7 @@
     .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.12em; color: var(--fg); text-decoration: none; opacity: 0.85; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover { color: var(--pink); }
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
@@ -70,7 +70,7 @@
     .client { border: 1px solid var(--line); padding: 2.5rem 1rem; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s; }
     .client:hover { border-color: rgba(240,235,227,0.25); background: rgba(240,235,227,0.03); }
     .client-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.08em; color: rgba(240,235,227,0.3); text-align: center; transition: color 0.3s; }
-    .client:hover .client-name { color: rgba(240,235,227,0.85); }
+    .client:hover .client-name { color: var(--pink); }
 
     .looking-section { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.6s forwards; }
     .looking-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem,7.2vw,8.1rem); line-height: 0.88; color: var(--fg); position: sticky; top: 0; }
@@ -78,7 +78,7 @@
     .looking-body { font-size: 0.95rem; color: rgba(240,235,227,0.6); line-height: 1.85; margin-bottom: 1.5rem; }
     .looking-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
     .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.5rem 1.1rem; transition: color 0.3s, border-color 0.3s; }
-    .tag:hover { color: var(--fg); border-color: rgba(240,235,227,0.25); }
+    .tag:hover { color: var(--pink); border-color: var(--pink); }
 
     .about-cta { margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 2rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.7s forwards; }
     .cta-text { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem,3vw,2.5rem); color: var(--fg); }
@@ -104,6 +104,7 @@
       .looking-label { position: static; }
       .about-cta { flex-direction: column; align-items: flex-start; }
     }
+
   </style>
 </head>
 <body>
@@ -117,6 +118,7 @@
     <a href="index.html" class="nav-logo">HF</a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Work</a></li>
       <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="contact.html">Get in touch</a></li>
     </ul>
