@@ -96,7 +96,8 @@
     .nav-logo img {
       height: 28px;
       width: auto;
-      filter: invert(1) brightness(2) drop-shadow(0 1px 6px rgba(0,0,0,0.5));
+      filter: invert(1) brightness(2);
+      mix-blend-mode: difference;
     }
     .nav-links {
       display: flex;
@@ -111,7 +112,7 @@
       text-transform: uppercase;
       opacity: 0.75;
       transition: color 0.3s, opacity 0.3s;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+      mix-blend-mode: difference;
     }
     .nav-links a:hover { color: var(--pink); opacity: 1; }
 
