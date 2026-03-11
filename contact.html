@@ -44,8 +44,6 @@
     }
 
     /* Cursor */
-    .cursor { position: fixed; width: 10px; height: 10px; background: var(--fg); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .3s, height .3s; mix-blend-mode: multiply; }
-    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(15,15,15,0.25); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .3s, height .3s; }
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
@@ -148,12 +146,13 @@
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
     .nav-logo-lottie { width: 33px; height: 44px; display: block; }
+    .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
+    .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
   </style>
 </head>
 <body>
 
   <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
 
   <nav>
         <a href="index.html" class="nav-logo" id="navLogo">
@@ -217,10 +216,64 @@
 
   <script>
     const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; cursor.style.left = mouseX+'px'; cursor.style.top = mouseY+'px'; });
-    (function tick(){ ringX += (mouseX-ringX)*0.12; ringY += (mouseY-ringY)*0.12; ring.style.left = ringX+'px'; ring.style.top = ringY+'px'; requestAnimationFrame(tick); })();
+
+    const TRAIL_COUNT = 90;
+    const echoes = [];
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const el = document.createElement('div');
+      el.className = 'cursor-echo';
+      document.body.appendChild(el);
+      echoes.push({ el, x: 0, y: 0 });
+    }
+
+    let mouseX = 0, mouseY = 0;
+    let prevX = 0, prevY = 0;
+    let speed = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top  = mouseY + 'px';
+    });
+
+    (function tick() {
+      const dx = mouseX - prevX;
+      const dy = mouseY - prevY;
+      speed = Math.sqrt(dx * dx + dy * dy);
+      prevX = mouseX;
+      prevY = mouseY;
+
+      // How many echoes are active — scales with speed, min 1, max TRAIL_COUNT
+      const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 3.0)));
+
+      for (let i = 0; i < TRAIL_COUNT; i++) {
+        const echo = echoes[i];
+        const lag = (i + 1) * 0.007;
+        echo.x += (mouseX - echo.x) * (1 - lag);
+        echo.y += (mouseY - echo.y) * (1 - lag);
+
+        if (i < activeCount) {
+          // Progress 0 (closest to cursor) → 1 (tail end)
+          const t = i / (activeCount - 1 || 1);
+          const size = 8.8 * (1 - t * 0.1);           // shrinks toward tail
+          const opacity = 0.55 * (1 - t);             // fades toward tail
+
+          echo.el.style.display = 'block';
+          echo.el.style.width  = size + 'px';
+          echo.el.style.height = size + 'px';
+          echo.el.style.left   = echo.x + 'px';
+          echo.el.style.top    = echo.y + 'px';
+          echo.el.style.opacity = opacity;
+          echo.el.style.background = '#ffffff';
+        } else {
+          echo.el.style.display = 'none';
+        }
+      }
+
+      requestAnimationFrame(tick);
+    })();
+
     document.querySelectorAll('a,button').forEach(el => {
       el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; });
       el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; });
