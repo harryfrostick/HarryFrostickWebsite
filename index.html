@@ -79,20 +79,6 @@
       padding: 2rem 3rem;
     }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      opacity: 0.9;
-      transition: opacity 0.3s;
-    }
-    .nav-logo:hover { opacity: 1; }
-    .nav-logo img {
-      height: 28px;
-      width: auto;
-      filter: invert(1) brightness(2);
-      mix-blend-mode: difference;
-    }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -197,20 +183,10 @@
       z-index: -1;
       pointer-events: none;
     }
-    /* Lottie ident hover */
-    .nav-logo { position: relative; }
-    .nav-logo-svg { display: block; transition: opacity 0.15s; }
-    .nav-logo-lottie {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 25px; height: 26px;
-      opacity: 0;
-      transition: opacity 0.15s;
-      pointer-events: none;
-    }
-    .nav-logo.playing .nav-logo-svg { opacity: 0; }
-    .nav-logo.playing .nav-logo-lottie { opacity: 1; }
+    /* Nav logo */
+    .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
+    .nav-logo:hover { opacity: 1; }
+    .nav-logo-lottie { width: 26px; height: 35px; display: block; }
   </style>
 </head>
 <body>
@@ -225,8 +201,7 @@
   </a>
 
   <nav>
-    <a href="index.html" class="nav-logo" id="navLogo">
-      <img src="HF.svg" alt="HF" class="nav-logo-svg" />
+        <a href="index.html" class="nav-logo" id="navLogo">
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
     <ul class="nav-links">
@@ -295,41 +270,22 @@
   <script>
     (function() {
       var logo = document.getElementById('navLogo');
-      var lottieContainer = document.getElementById('navLottie');
+      var container = document.getElementById('navLottie');
       var anim = lottie.loadAnimation({
-        container: lottieContainer,
+        container: container,
         renderer: 'svg',
-        loop: false,
+        loop: true,
         autoplay: false,
-        path: 'HF_Ident.json'
+        path: 'HF_Ident_white.json'
       });
-      // Tint: on pink pages use dark fill, on index (dark bg) keep white
-      var isIndex = document.title.indexOf('Harry Frostick —') === 0 && document.title.indexOf('Motion') > -1;
       anim.addEventListener('DOMLoaded', function() {
-        // Set all SVG paths/fills to match the page context
-        // Index = white (the JSON starts white at frame 0, perfect)
-        // Other pages = force dark from the start (skip white flash)
-        if (!isIndex) {
-          anim.goToAndStop(4, true); // skip to frame 4 where color = black
-          // Override SVG fill colors to match dark fg
-          var svgPaths = lottieContainer.querySelectorAll('path, rect, ellipse, polygon, polyline');
-          svgPaths.forEach(function(p) {
-            // will be set by lottie fill effect — we force via CSS filter workaround
-          });
-        }
+        anim.goToAndStop(0, true);
       });
-      var played = false;
       logo.addEventListener('mouseenter', function() {
-        if (played) return; // only play once per page load
-        logo.classList.add('playing');
-        if (!isIndex) {
-          anim.goToAndStop(0, true);
-        }
         anim.goToAndPlay(0, true);
-        played = true;
       });
-      anim.addEventListener('complete', function() {
-        logo.classList.remove('playing');
+      logo.addEventListener('mouseleave', function() {
+        anim.goToAndStop(0, true);
       });
     })();
   </script>
