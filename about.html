@@ -48,7 +48,6 @@
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
-    nav::before { content: ''; position: fixed; top: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to bottom, rgba(28,3,21,0.35) 0%, transparent 100%); z-index: -1; pointer-events: none; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
     .nav-links a:hover { opacity: 1; }
@@ -90,7 +89,7 @@
     /* What's next */
     .looking-section { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.55s forwards; }
     .looking-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,6.5vw,7.5rem); line-height: 0.88; color: var(--fg); position: sticky; top: 2rem; }
-    .looking-body { font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(15,15,15,0.55); margin-bottom: 1.5rem; }
+    .looking-body { font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); opacity: 0.85; margin-bottom: 1.5rem; }
     .looking-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
     .tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.45rem 1rem; transition: color 0.3s, border-color 0.3s; }
     .tag:hover { color: var(--accent); border-color: var(--accent); }
@@ -123,13 +122,12 @@
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
     .nav-logo-lottie { width: 41px; height: 55px; display: block; }
-    .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
-    .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
+
+    canvas#cursorCanvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
   </style>
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
 
   <nav>
         <a href="index.html" class="nav-logo" id="navLogo">
@@ -150,7 +148,7 @@
       <h1 class="about-headline">Harry<br>Frostick.</h1>
       <div class="about-divider"></div>
       <div class="about-bottom">
-        <p class="about-intro">A motion designer who believes the best work lives at the intersection of craft, curiosity, and genuine storytelling.</p>
+        <p class="about-intro">The best work lives at the intersection of craft, curiosity, and genuine storytelling.</p>
         <p class="about-body">With 7 years of experience across freelance, in-house, and agency environments, I have had the privilege of creating motion and video work for some of the world's most recognised commercial brands. I bring the same level of care to a five-second social loop as I do to a full brand campaign, because the details always matter.</p>
       </div>
     </div>
@@ -215,64 +213,6 @@
   </div>
 
   <script>
-    const cursor = document.getElementById('cursor');
-
-    const TRAIL_COUNT = 150;
-    const echoes = [];
-    for (let i = 0; i < TRAIL_COUNT; i++) {
-      const el = document.createElement('div');
-      el.className = 'cursor-echo';
-      document.body.appendChild(el);
-      echoes.push({ el, x: 0, y: 0 });
-    }
-
-    let mouseX = 0, mouseY = 0;
-    let prevX = 0, prevY = 0;
-    let speed = 0;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top  = mouseY + 'px';
-    });
-
-    (function tick() {
-      const dx = mouseX - prevX;
-      const dy = mouseY - prevY;
-      speed = Math.sqrt(dx * dx + dy * dy);
-      prevX = mouseX;
-      prevY = mouseY;
-
-      // How many echoes are active — scales with speed, min 1, max TRAIL_COUNT
-      const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 4.5)));
-
-      for (let i = 0; i < TRAIL_COUNT; i++) {
-        const echo = echoes[i];
-        const lag = (i + 1) * 0.003;
-        echo.x += (mouseX - echo.x) * (1 - lag);
-        echo.y += (mouseY - echo.y) * (1 - lag);
-
-        if (i < activeCount) {
-          // Progress 0 (closest to cursor) → 1 (tail end)
-          const t = i / (activeCount - 1 || 1);
-          const size = 8.8 * (1 - t * 0.1);           // shrinks toward tail
-          const opacity = 0.55 * (1 - t);             // fades toward tail
-
-          echo.el.style.display = 'block';
-          echo.el.style.width  = size + 'px';
-          echo.el.style.height = size + 'px';
-          echo.el.style.left   = echo.x + 'px';
-          echo.el.style.top    = echo.y + 'px';
-          echo.el.style.opacity = opacity;
-          echo.el.style.background = '#ffffff';
-        } else {
-          echo.el.style.display = 'none';
-        }
-      }
-
-      requestAnimationFrame(tick);
-    })();
 
     document.querySelectorAll('a,button').forEach(el => {
       el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; });
@@ -300,6 +240,88 @@
       logo.addEventListener('mouseleave', function() {
         anim.goToAndStop(0, true);
       });
+    })();
+  </script>
+  <script>
+    // Canvas cursor — history buffer trail, crisp dot
+    (function() {
+      const HISTORY      = 112;   // number of past positions stored
+      const DOT_RADIUS   = 8.8;
+      const LINE_WIDTH   = 10;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d', { alpha: true });
+
+      window.addEventListener('resize', () => {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      const cursor = { x: -200, y: -200 };
+      const history = [];
+      let initted = false;
+
+      document.addEventListener('mousemove', e => {
+        cursor.x = e.clientX;
+        cursor.y = e.clientY;
+        if (!initted) {
+          for (let i = 0; i < HISTORY; i++) history.push({ x: cursor.x, y: cursor.y });
+          initted = true;
+        }
+      });
+
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (!initted) { requestAnimationFrame(loop); return; }
+
+        // Prepend current position, drop oldest
+        history.unshift({ x: cursor.x, y: cursor.y });
+        if (history.length > HISTORY) history.pop();
+
+        // Draw trail as segments with fading opacity
+        const SEGMENT = 4;
+        const JITTER  = 1.6;
+        for (let i = 0; i < history.length - SEGMENT; i += SEGMENT) {
+          const t     = i / history.length;
+          const alpha = 0.85 * Math.pow(1 - t, 2.5);
+          const j     = JITTER * (1 - t * 0.4);
+          ctx.beginPath();
+          ctx.moveTo(
+            history[i].x + (Math.random() - 0.5) * j,
+            history[i].y + (Math.random() - 0.5) * j
+          );
+          for (let k = 1; k <= SEGMENT; k++) {
+            const idx = Math.min(i + k, history.length - 1);
+            ctx.lineTo(
+              history[idx].x + (Math.random() - 0.5) * j,
+              history[idx].y + (Math.random() - 0.5) * j
+            );
+          }
+          ctx.lineWidth   = LINE_WIDTH;
+          ctx.lineCap     = 'round';
+          ctx.lineJoin    = 'round';
+          ctx.strokeStyle = 'rgba(255,255,255,' + alpha + ')';
+          ctx.stroke();
+        }
+
+        // Solid cursor dot
+        ctx.save();
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.beginPath();
+        ctx.arc(cursor.x, cursor.y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#0f0f0f';
+        ctx.fill();
+        ctx.restore();
+
+        requestAnimationFrame(loop);
+      }
+
+      loop();
     })();
   </script>
 </body>
