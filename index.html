@@ -153,10 +153,11 @@
     /* Nav logo */
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
-    .nav-logo-lottie { width: 41px; height: 55px; display: block; }
+    .nav-logo-lottie { width: 41px; height: 55px; display: block; mix-blend-mode: difference; }
 
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
+    .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -259,10 +260,60 @@
 
       requestAnimationFrame(tick);
     })();
+
+    // Nav magnetic float + cursor scale
+    (function() {
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      const animateit = function(e) {
+        const span = this.querySelector('span');
+        if (!span) return;
+        const { offsetX: x, offsetY: y } = e,
+              { offsetWidth: w, offsetHeight: h } = this,
+              move = 4,
+              xMove = x / w * (move * 2) - move,
+              yMove = y / h * (move * 2) - move;
+        span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+        if (e.type === 'mouseleave') span.style.transform = '';
+      };
+
+      navLinks.forEach(a => {
+        // Wrap text in span if not already
+        if (!a.querySelector('span')) {
+          a.innerHTML = '<span>' + a.innerHTML + '</span>';
+        }
+        a.addEventListener('mousemove', animateit);
+        a.addEventListener('mouseleave', animateit);
+        a.addEventListener('mouseenter', () => {
+          cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
+          cursor.style.mixBlendMode = 'difference';
+          cursor.style.transition = 'transform 0.3s ease';
+        });
+        a.addEventListener('mouseleave', () => {
+          cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+          cursor.style.mixBlendMode = 'multiply';
+          cursor.style.transition = 'transform 0.3s ease';
+        });
+      });
+    })();
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <script>
+    // Nav link hover — scale cursor with difference blend
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
+        cursor.style.mixBlendMode = 'difference';
+        cursor.style.transition = 'transform 0.3s ease, mix-blend-mode 0s';
+      });
+      link.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursor.style.mixBlendMode = 'multiply';
+        cursor.style.transition = 'transform 0.3s ease';
+      });
+    });
     (function() {
       var logo = document.getElementById('navLogo');
       var container = document.getElementById('navLottie');
@@ -271,7 +322,7 @@
         renderer: 'svg',
         loop: true,
         autoplay: false,
-        path: 'HF_Ident_white.json'
+        path: 'HF_Ident.json'
       });
       anim.addEventListener('DOMLoaded', function() {
         anim.goToAndStop(0, true);

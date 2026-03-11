@@ -148,6 +148,7 @@
 
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
+    .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -271,6 +272,42 @@
       }
 
       requestAnimationFrame(tick);
+    })();
+
+    // Nav magnetic float + cursor scale
+    (function() {
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      const animateit = function(e) {
+        const span = this.querySelector('span');
+        if (!span) return;
+        const { offsetX: x, offsetY: y } = e,
+              { offsetWidth: w, offsetHeight: h } = this,
+              move = 4,
+              xMove = x / w * (move * 2) - move,
+              yMove = y / h * (move * 2) - move;
+        span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+        if (e.type === 'mouseleave') span.style.transform = '';
+      };
+
+      navLinks.forEach(a => {
+        // Wrap text in span if not already
+        if (!a.querySelector('span')) {
+          a.innerHTML = '<span>' + a.innerHTML + '</span>';
+        }
+        a.addEventListener('mousemove', animateit);
+        a.addEventListener('mouseleave', animateit);
+        a.addEventListener('mouseenter', () => {
+          cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
+          cursor.style.mixBlendMode = 'difference';
+          cursor.style.transition = 'transform 0.3s ease';
+        });
+        a.addEventListener('mouseleave', () => {
+          cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+          cursor.style.mixBlendMode = 'multiply';
+          cursor.style.transition = 'transform 0.3s ease';
+        });
+      });
     })();
 
     document.querySelectorAll('a,button').forEach(el => {
