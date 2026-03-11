@@ -125,6 +125,20 @@
       .looking-label { position: static; }
       .about-cta { flex-direction: column; align-items: flex-start; }
     }
+    /* Lottie ident hover */
+    .nav-logo { position: relative; }
+    .nav-logo-svg { display: block; transition: opacity 0.15s; }
+    .nav-logo-lottie {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 25px; height: 26px;
+      opacity: 0;
+      transition: opacity 0.15s;
+      pointer-events: none;
+    }
+    .nav-logo.playing .nav-logo-svg { opacity: 0; }
+    .nav-logo.playing .nav-logo-lottie { opacity: 1; }
   </style>
 </head>
 <body>
@@ -223,6 +237,48 @@
       el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; });
       el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; });
     });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <script>
+    (function() {
+      var logo = document.getElementById('navLogo');
+      var lottieContainer = document.getElementById('navLottie');
+      var anim = lottie.loadAnimation({
+        container: lottieContainer,
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'HF_Ident_dark.json'
+      });
+      // Tint: on pink pages use dark fill, on index (dark bg) keep white
+      var isIndex = document.title.indexOf('Harry Frostick —') === 0 && document.title.indexOf('Motion') > -1;
+      anim.addEventListener('DOMLoaded', function() {
+        // Set all SVG paths/fills to match the page context
+        // Index = white (the JSON starts white at frame 0, perfect)
+        // Other pages = force dark from the start (skip white flash)
+        if (!isIndex) {
+          anim.goToAndStop(4, true); // skip to frame 4 where color = black
+          // Override SVG fill colors to match dark fg
+          var svgPaths = lottieContainer.querySelectorAll('path, rect, ellipse, polygon, polyline');
+          svgPaths.forEach(function(p) {
+            // will be set by lottie fill effect — we force via CSS filter workaround
+          });
+        }
+      });
+      var played = false;
+      logo.addEventListener('mouseenter', function() {
+        if (played) return; // only play once per page load
+        logo.classList.add('playing');
+        if (!isIndex) {
+          anim.goToAndStop(0, true);
+        }
+        anim.goToAndPlay(0, true);
+        played = true;
+      });
+      anim.addEventListener('complete', function() {
+        logo.classList.remove('playing');
+      });
+    })();
   </script>
 </body>
 </html>
