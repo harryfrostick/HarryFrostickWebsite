@@ -6,23 +6,22 @@
   <title>Work — Harry Frostick</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --fg: #1a1412;
+      --fg: #0f0f0f;
       --accent: #e54e77;
-      --pink: #c0524a;
-      --pink-dim: rgba(192,82,74,0.12);
-      --muted: #7a5a58;
-      --line: rgba(26,20,18,0.12);
+      --muted: #7a6065;
+      --line: rgba(15,15,15,0.1);
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
 
     body {
       background: linear-gradient(to bottom, #fce8ec 0%, #f4b8c4 100%);
+      background-attachment: fixed;
       color: var(--fg);
       font-family: 'Manrope', sans-serif;
       font-weight: 300;
@@ -31,30 +30,7 @@
       cursor: none;
     }
 
-    /* Custom cursor */
-    .cursor {
-      position: fixed;
-      width: 10px; height: 10px;
-      background: var(--fg);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-      mix-blend-mode: multiply;
-    }
-    .cursor-ring {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1px solid rgba(26,20,18,0.3);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: left 0.18s ease, top 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-    }
-
-    /* Grain overlay */
+    /* Grain */
     body::before {
       content: '';
       position: fixed;
@@ -62,361 +38,97 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9990;
-      opacity: 0.6;
+      opacity: 0.45;
     }
+
+    /* Cursor */
+    .cursor { position: fixed; width: 10px; height: 10px; background: var(--fg); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .3s, height .3s; mix-blend-mode: multiply; }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(15,15,15,0.25); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .3s, height .3s, border-color .3s; }
 
     /* Nav */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 3rem;
-    }
-    nav::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 3rem; right: 3rem;
-      height: 1px;
-      background: var(--line);
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      opacity: 0.85;
-      transition: opacity 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
+    nav::before { content: ''; position: fixed; top: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to bottom, rgba(28,3,21,0.35) 0%, transparent 100%); z-index: -1; pointer-events: none; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
-    .nav-logo img {
-      height: 26px;
-      width: auto;
-      mix-blend-mode: difference;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-      mix-blend-mode: difference;
-    }
-    .nav-links a:hover { color: var(--fg); }
-    .nav-links a.active { color: var(--fg); }
+    .nav-logo img { height: 26px; width: auto; mix-blend-mode: difference; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
 
-    /* Page wrapper */
-    .page {
-      padding: 8rem 3rem 6rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .page { padding: 8rem 3rem 8rem; max-width: 1400px; margin: 0 auto; }
 
     /* Page header */
-    .page-header {
-      margin-bottom: 5rem;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.1s forwards;
-    }
-    .page-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    .page-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 16vw, 18rem);
-      line-height: 0.88;
-      letter-spacing: -0.01em;
-      color: var(--fg);
-    }
-    .page-divider {
-      width: 60px; height: 1px;
-      background: var(--accent);
-      margin: 2.5rem 0;
-    }
-    .page-sub {
-      font-size: 0.95rem;
-      color: rgba(26,20,18,0.5);
-      letter-spacing: 0.05em;
-    }
+    .page-header { margin-bottom: 5rem; opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
+    .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+    .page-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; }
+    .page-divider { width: 40px; height: 1px; background: var(--accent); margin: 2rem 0; }
+    .page-sub { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
-    /* ── Featured project ── */
-    .featured {
-      margin-bottom: 5rem;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.25s forwards;
-    }
-    .featured-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
+    /* Featured */
+    .featured { margin-bottom: 5rem; opacity: 0; animation: fadeUp 0.9s ease 0.25s forwards; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+
     .featured-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid rgba(26,20,18,0.12);
+      border: 1px solid var(--line);
       overflow: hidden;
       text-decoration: none;
       color: inherit;
-      position: relative;
       transition: border-color 0.4s;
     }
-    .featured-card:hover { border-color: rgba(26,20,18,0.2); }
+    .featured-card:hover { border-color: rgba(15,15,15,0.25); }
 
-    /* Video / thumbnail side */
-    .featured-media {
-      position: relative;
-      aspect-ratio: 16/10;
-      overflow: hidden;
-      background: rgba(240,200,200,0.3);
-    }
-    .featured-media video {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-    .featured-media .placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f8dde2 0%, #1c1612 100%);
-      transition: opacity 0.6s ease;
-    }
-    .placeholder-inner {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 8rem;
-      color: rgba(26,20,18,0.06);
-      letter-spacing: -0.02em;
-      user-select: none;
-    }
-    /* Play icon */
-    .play-icon {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 56px; height: 56px;
-      border: 1px solid rgba(240,235,227,0.3);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, transform 0.3s, background 0.3s;
-      z-index: 2;
-    }
-    .play-icon svg { margin-left: 4px; }
-    .featured-card:hover .play-icon {
-      border-color: var(--pink);
-      background: var(--pink-dim);
-      transform: translate(-50%, -50%) scale(1.1);
-    }
+    .featured-media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: rgba(244,184,196,0.4); }
+    .featured-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s; }
+    .featured-media .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s; }
+    .placeholder-inner { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(15,15,15,0.07); }
+    .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 52px; height: 52px; border: 1px solid rgba(15,15,15,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s, transform 0.3s; z-index: 2; }
+    .play-icon svg { margin-left: 3px; }
+    .featured-card:hover .play-icon { border-color: var(--accent); background: rgba(229,78,119,0.08); transform: translate(-50%,-50%) scale(1.08); }
     .featured-card:hover .featured-media video { opacity: 1; }
     .featured-card:hover .featured-media .placeholder { opacity: 0; }
 
-    /* Info side */
-    .featured-info {
-      padding: 3.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-left: 1px solid var(--line);
-      transition: border-color 0.4s;
-      background: linear-gradient(to bottom, #fce8ec 0%, #f4b8c4 100%);
-    }
-    .featured-card:hover .featured-info { border-color: rgba(245,224,224,0.15); }
-    .featured-info-top {}
-    .featured-client {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    .featured-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 4vw, 5rem);
-      line-height: 0.92;
-      color: var(--fg);
-      margin-bottom: 2rem;
-      transition: color 0.3s;
-    }
-    .featured-card:hover .featured-title { color: var(--pink); }
-    .featured-desc {
-      font-size: 0.9rem;
-      color: rgba(26,20,18,0.5);
-      line-height: 1.8;
-      max-width: 360px;
-    }
-    .featured-info-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 2rem;
-      border-top: 1px solid var(--line);
-      margin-top: 2.5rem;
-    }
-    .featured-meta {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .featured-arrow {
-      width: 40px; height: 40px;
-      border: 1px solid rgba(26,20,18,0.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
-    }
-    .featured-card:hover .featured-arrow {
-      border-color: var(--pink);
-      background: var(--pink-dim);
-      transform: rotate(45deg);
-    }
+    .featured-info { padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid var(--line); background: transparent; }
+    .featured-client { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .featured-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,4vw,4.5rem); line-height: 0.92; margin-bottom: 1.5rem; transition: color 0.3s; }
+    .featured-card:hover .featured-title { color: var(--accent); }
+    .featured-desc { font-size: 0.88rem; color: rgba(15,15,15,0.5); line-height: 1.8; }
+    .featured-info-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--line); margin-top: 2rem; }
+    .featured-meta { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .featured-arrow { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, transform 0.3s; }
+    .featured-card:hover .featured-arrow { border-color: var(--accent); transform: rotate(45deg); }
 
-    /* ── Masonry grid ── */
-    .grid-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.4s forwards;
-    }
-    .masonry {
-      columns: 3;
-      column-gap: 2px;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.5s forwards;
-    }
-    .masonry-item {
-      break-inside: avoid;
-      margin-bottom: 2px;
-      position: relative;
-      overflow: hidden;
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      cursor: none;
-    }
-    /* Varied heights via aspect ratios */
+    /* Masonry */
+    .grid-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
+    .masonry { columns: 3; column-gap: 2px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
+    .masonry-item { break-inside: avoid; margin-bottom: 2px; position: relative; overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: none; }
     .masonry-item:nth-child(3n+1) .masonry-thumb { aspect-ratio: 4/5; }
     .masonry-item:nth-child(3n+2) .masonry-thumb { aspect-ratio: 16/10; }
     .masonry-item:nth-child(3n)   .masonry-thumb { aspect-ratio: 3/4; }
     .masonry-item:nth-child(5)    .masonry-thumb { aspect-ratio: 1/1; }
     .masonry-item:nth-child(7)    .masonry-thumb { aspect-ratio: 4/3; }
 
-    .masonry-thumb {
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-      background: rgba(240,200,200,0.3);
-    }
-    .masonry-thumb-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.6s ease;
-    }
+    .masonry-thumb { width: 100%; position: relative; overflow: hidden; background: rgba(244,184,196,0.35); }
+    .masonry-thumb-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(244,184,196,0.25); transition: transform 0.6s ease; }
     .masonry-item:hover .masonry-thumb-inner { transform: scale(1.04); }
+    .masonry-placeholder-letter { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: rgba(15,15,15,0.07); user-select: none; }
 
-    /* Placeholder backgrounds — subtle variety */
-    .masonry-item:nth-child(1)  .masonry-thumb-inner { background: linear-gradient(135deg, #161210 0%, #1e1a14 100%); }
-    .masonry-item:nth-child(2)  .masonry-thumb-inner { background: linear-gradient(135deg, #f5d8e0 0%, #181520 100%); }
-    .masonry-item:nth-child(3)  .masonry-thumb-inner { background: linear-gradient(135deg, #f8e0e4 0%, #181e14 100%); }
-    .masonry-item:nth-child(4)  .masonry-thumb-inner { background: linear-gradient(135deg, #f5d5db 0%, #1e1414 100%); }
-    .masonry-item:nth-child(5)  .masonry-thumb-inner { background: linear-gradient(135deg, #f5d8df 0%, #141c1c 100%); }
-    .masonry-item:nth-child(6)  .masonry-thumb-inner { background: linear-gradient(135deg, #f5d5e0 0%, #1c181c 100%); }
-    .masonry-item:nth-child(7)  .masonry-thumb-inner { background: linear-gradient(135deg, #f8d8de 0%, #1c1614 100%); }
-    .masonry-item:nth-child(8)  .masonry-thumb-inner { background: linear-gradient(135deg, #f5d5e2 0%, #14141e 100%); }
-
-    .masonry-placeholder-letter {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 6rem;
-      color: rgba(240,235,227,0.05);
-      user-select: none;
-    }
-
-    /* Overlay on hover */
-    .masonry-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(252,232,236,0.95) 0%, rgba(10,10,10,0.2) 50%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.8rem;
-    }
+    .masonry-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(244,184,196,0.92) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
     .masonry-item:hover .masonry-overlay { opacity: 1; }
-    .masonry-overlay-client {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--pink);
-      margin-bottom: 0.4rem;
-      transform: translateY(8px);
-      transition: transform 0.4s ease 0.05s;
-    }
-    .masonry-overlay-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.6rem;
-      color: var(--fg);
-      line-height: 1;
-      transform: translateY(8px);
-      transition: transform 0.4s ease 0.1s;
-    }
+    .masonry-overlay-client { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; transform: translateY(6px); transition: transform 0.4s ease 0.05s; }
+    .masonry-overlay-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--fg); line-height: 1; transform: translateY(6px); transition: transform 0.4s ease 0.1s; }
     .masonry-item:hover .masonry-overlay-client,
-    .masonry-item:hover .masonry-overlay-title {
-      transform: translateY(0);
-    }
+    .masonry-item:hover .masonry-overlay-title { transform: translateY(0); }
+    .masonry-item::after { content: ''; position: absolute; inset: 0; border: 1px solid transparent; transition: border-color 0.3s; pointer-events: none; }
+    .masonry-item:hover::after { border-color: rgba(15,15,15,0.15); }
 
-    /* Border flash on hover */
-    .masonry-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 1px solid transparent;
-      transition: border-color 0.3s;
-      pointer-events: none;
-    }
-    .masonry-item:hover::after { border-color: rgba(26,20,18,0.15); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: linear-gradient(to bottom, #fce8ec 0%, #f4b8c4 100%); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--muted); }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .featured-card { grid-template-columns: 1fr; }
       .featured-info { border-left: none; border-top: 1px solid var(--line); }
@@ -424,31 +136,9 @@
     }
     @media (max-width: 600px) {
       nav { padding: 1.5rem; }
-      nav::after { left: 1.5rem; right: 1.5rem; }
       .nav-links { display: none; }
-      .page { padding: 6rem 1.5rem 4rem; }
+      .page { padding: 6rem 1.5rem 5rem; }
       .masonry { columns: 1; }
-    }
-
-    /* Top gradient overlay */
-    nav::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 140px;
-      background: linear-gradient(to bottom, rgba(28,3,21,0.35) 0%, transparent 100%);
-      z-index: 0;
-      pointer-events: none;
-    }
-    /* Bottom gradient overlay */
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 140px;
-      background: linear-gradient(to top, rgba(28,3,21,0.35) 0%, transparent 100%);
-      z-index: 0;
-      pointer-events: none;
     }
   </style>
 </head>
@@ -457,11 +147,8 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Nav -->
   <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="HF.svg" alt="HF" />
-    </a>
+    <a href="index.html" class="nav-logo"><img src="HF.svg" alt="HF" /></a>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="portfolio.html" class="active">Work</a></li>
@@ -472,38 +159,29 @@
 
   <div class="page">
 
-    <!-- Header -->
     <div class="page-header">
-      <p class="page-eyebrow">Selected work</p>
+      <p class="eyebrow">Selected work</p>
       <h1 class="page-headline">Work</h1>
       <div class="page-divider"></div>
       <p class="page-sub">Motion · Design · Illustration</p>
     </div>
 
-    <!-- Featured project -->
     <div class="featured">
-      <p class="featured-label">Featured project</p>
+      <p class="section-label">Featured project</p>
       <a href="#" class="featured-card">
-
-        <!-- Media -->
         <div class="featured-media">
-          <div class="placeholder">
-            <span class="placeholder-inner">HF</span>
-          </div>
-          <!-- Swap src for real video when ready -->
+          <div class="placeholder"><span class="placeholder-inner">HF</span></div>
           <video loop muted playsinline id="featuredVideo">
             <source src="featured-project.mp4" type="video/mp4">
           </video>
           <div class="play-icon">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3 2l9 5-9 5V2z" fill="var(--fg)"/>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M3 2l8 4.5-8 4.5V2z" fill="currentColor"/>
             </svg>
           </div>
         </div>
-
-        <!-- Info -->
         <div class="featured-info">
-          <div class="featured-info-top">
+          <div>
             <p class="featured-client">Client Name</p>
             <h2 class="featured-title">Project Title Here</h2>
             <p class="featured-desc">A short description of the project — what it was, what you made, and what made it interesting. Keep it to two or three sentences.</p>
@@ -511,168 +189,70 @@
           <div class="featured-info-bottom">
             <span class="featured-meta">Brand Animation · 2024</span>
             <div class="featured-arrow">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M7 2l5 5-5 5" stroke="var(--fg)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path d="M2 6.5h9M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
           </div>
         </div>
-
       </a>
     </div>
 
-    <!-- Masonry grid -->
     <p class="grid-label">All projects</p>
     <div class="masonry">
 
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">01</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Pepsi</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">01</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Pepsi</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">02</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Sky</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">02</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Sky</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">03</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Mars</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">03</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Mars</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">04</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">BT</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">04</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">BT</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">05</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Waitrose</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">05</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Waitrose</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">06</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Monzo</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">06</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Monzo</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">07</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Personal</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">07</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
-
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb">
-          <div class="masonry-thumb-inner">
-            <span class="masonry-placeholder-letter">08</span>
-          </div>
-        </div>
-        <div class="masonry-overlay">
-          <p class="masonry-overlay-client">Client Name</p>
-          <p class="masonry-overlay-title">Project Title</p>
-        </div>
+        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">08</span></div></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Client Name</p><p class="masonry-overlay-title">Project Title</p></div>
       </a>
 
     </div>
   </div>
 
   <script>
-    // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top = mouseY + 'px';
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; cursor.style.left = mouseX+'px'; cursor.style.top = mouseY+'px'; });
+    (function tick(){ ringX += (mouseX-ringX)*0.12; ringY += (mouseY-ringY)*0.12; ring.style.left = ringX+'px'; ring.style.top = ringY+'px'; requestAnimationFrame(tick); })();
+    document.querySelectorAll('a,button').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; ring.style.borderColor='rgba(15,15,15,0.45)'; });
+      el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(15,15,15,0.25)'; });
     });
-
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
-        ring.style.width = '60px';
-        ring.style.height = '60px';
-        ring.style.borderColor = 'rgba(26,20,18,0.5)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '10px';
-        cursor.style.height = '10px';
-        ring.style.width = '36px';
-        ring.style.height = '36px';
-        ring.style.borderColor = 'rgba(26,20,18,0.3)';
-      });
-    });
-
-    // Featured video — play on hover, pause on leave
     const featuredCard = document.querySelector('.featured-card');
     const featuredVideo = document.getElementById('featuredVideo');
     if (featuredCard && featuredVideo) {
-      featuredCard.addEventListener('mouseenter', () => { featuredVideo.play(); });
-      featuredCard.addEventListener('mouseleave', () => {
-        featuredVideo.pause();
-        featuredVideo.currentTime = 0;
-      });
+      featuredCard.addEventListener('mouseenter', () => featuredVideo.play());
+      featuredCard.addEventListener('mouseleave', () => { featuredVideo.pause(); featuredVideo.currentTime = 0; });
     }
   </script>
-
 </body>
 </html>

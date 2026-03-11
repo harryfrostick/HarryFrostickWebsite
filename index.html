@@ -41,7 +41,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9990;
-      opacity: 0.55;
+      opacity: 0.45;
     }
 
     /* Cursor */
@@ -78,13 +78,7 @@
       align-items: center;
       padding: 2rem 3rem;
     }
-    nav::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 3rem; right: 3rem;
-      height: 1px;
-      background: rgba(240,235,227,0.15);
-    }
+
     .nav-logo {
       display: flex;
       align-items: center;
@@ -107,14 +101,14 @@
     .nav-links a {
       color: var(--fg);
       text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      opacity: 0.75;
-      transition: color 0.3s, opacity 0.3s;
+      opacity: 0.5;
+      transition: opacity 0.3s;
       mix-blend-mode: difference;
     }
-    .nav-links a:hover { color: var(--pink); opacity: 1; }
+    .nav-links a:hover { opacity: 1; }
 
 
 
