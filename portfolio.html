@@ -45,6 +45,7 @@
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
+    nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
     .nav-links a:hover, .nav-links a.active { opacity: 1; }
@@ -97,15 +98,17 @@
     .grid-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
     .masonry { columns: 3; column-gap: 2px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
     .masonry-item { break-inside: avoid; margin-bottom: 2px; position: relative; overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: none; }
-    .masonry-item:nth-child(3n+1) .masonry-thumb { aspect-ratio: 4/5; }
-    .masonry-item:nth-child(3n+2) .masonry-thumb { aspect-ratio: 16/10; }
-    .masonry-item:nth-child(3n)   .masonry-thumb { aspect-ratio: 3/4; }
-    .masonry-item:nth-child(5)    .masonry-thumb { aspect-ratio: 1/1; }
-    .masonry-item:nth-child(7)    .masonry-thumb { aspect-ratio: 4/3; }
+    .masonry-item .masonry-thumb { aspect-ratio: 9/16; }
+
+
+
+
 
     .masonry-thumb { width: 100%; position: relative; overflow: hidden; background: rgba(244,184,196,0.35); }
+    .masonry-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .masonry-item:hover .masonry-thumb img { transform: scale(1.04); }
     .masonry-thumb-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(244,184,196,0.25); transition: transform 0.6s ease; }
-    .masonry-item:hover .masonry-thumb-inner { transform: scale(1.04); }
+
     .masonry-placeholder-letter { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: rgba(15,15,15,0.07); user-select: none; }
 
     .masonry-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(244,184,196,0.92) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
@@ -209,36 +212,24 @@
     <div class="masonry">
 
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">01</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Pepsi</p><p class="masonry-overlay-title">Project Title</p></div>
+        <div class="masonry-thumb">
+          <img src="Thumbnail_Duck_Boy.png" alt="Duck &amp; Boy" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Duck &amp; Boy</p></div>
       </a>
       <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">02</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Sky</p><p class="masonry-overlay-title">Project Title</p></div>
+        <div class="masonry-thumb">
+          <img src="Thumbnail_Zora.png" alt="Zorra" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Zorra</p></div>
       </a>
       <a href="#" class="masonry-item">
         <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">03</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Mars</p><p class="masonry-overlay-title">Project Title</p></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">—</p><p class="masonry-overlay-title">Coming Soon</p></div>
       </a>
       <a href="#" class="masonry-item">
         <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">04</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">BT</p><p class="masonry-overlay-title">Project Title</p></div>
-      </a>
-      <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">05</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Waitrose</p><p class="masonry-overlay-title">Project Title</p></div>
-      </a>
-      <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">06</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Monzo</p><p class="masonry-overlay-title">Project Title</p></div>
-      </a>
-      <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">07</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Project Title</p></div>
-      </a>
-      <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">08</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Client Name</p><p class="masonry-overlay-title">Project Title</p></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">—</p><p class="masonry-overlay-title">Coming Soon</p></div>
       </a>
 
     </div>
@@ -346,8 +337,8 @@
     })();
 
     document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; ring.style.borderColor='rgba(15,15,15,0.45)'; });
-      el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(15,15,15,0.25)'; });
+      el.addEventListener('mouseenter', () => {});
+      el.addEventListener('mouseleave', () => {});
     });
     const featuredCard = document.querySelector('.featured-card');
     const featuredVideo = document.getElementById('featuredVideo');

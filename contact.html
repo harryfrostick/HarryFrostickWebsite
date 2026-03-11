@@ -47,6 +47,7 @@
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
+    nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
     .nav-links a:hover { opacity: 1; }
@@ -120,7 +121,7 @@
       cursor: none;
       transition: border-color 0.3s, color 0.3s, gap 0.3s;
     }
-    .submit-btn:hover { border-color: var(--accent); color: var(--accent); gap: 1.3rem; }
+    .submit-btn:hover { border-color: var(--accent); color: var(--accent); background: transparent; gap: 1.3rem; }
     .submit-btn svg { transition: transform 0.3s; }
     .submit-btn:hover svg { transform: translateX(4px); }
 
