@@ -129,13 +129,25 @@
     @media (max-width: 900px) {
       .featured-card { grid-template-columns: 1fr; }
       .featured-info { border-left: none; border-top: 1px solid var(--line); }
+      .featured-media { aspect-ratio: 16/9; }
       .masonry { columns: 2; }
     }
-    @media (max-width: 600px) {
-      nav { padding: 1.5rem; }
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
-      .page { padding: 6rem 1.5rem 5rem; }
+      .page { padding: 7rem 1.5rem 4rem; }
+      .featured-info { padding: 2rem 1.5rem; }
+      .featured-title { font-size: clamp(2rem,8vw,3.5rem); }
+      .featured-desc { font-size: 0.8rem; }
+      .grid-label { margin-bottom: 1rem; }
+    }
+    @media (max-width: 500px) {
       .masonry { columns: 1; }
+      .featured-media { aspect-ratio: 4/3; }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor, .cursor-echo { display: none !important; }
     }
     /* Nav logo */
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
@@ -149,6 +161,20 @@
     nav.scrolled .nav-links a:hover { opacity: 1; }
     nav { transition: none; }
     .nav-links a { transition: opacity 0.3s, color 0.4s; }
+
+    /* Hamburger */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--fg); transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,10vw,4rem); color: var(--fg); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
@@ -165,6 +191,17 @@
       <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="contact.html">Get in touch</a></li>
     </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Work</a>
+    <a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact.html">Get in touch</a>
+  </div>
+
   </nav>
 
   <div class="page">
@@ -299,6 +336,23 @@
     window.addEventListener('scroll', () => {
       document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
     });
+
+
+    // Hamburger menu
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      });
+    }
 
     // Nav magnetic float + cursor scale
     (function() {

@@ -126,13 +126,16 @@
     }
 
     @media (max-width: 768px) {
-      nav { padding: 1.5rem; }
-      nav::after { left: 1.5rem; right: 1.5rem; }
+      nav { padding: 1.2rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
       .nav-links a { font-size: 0.65rem; }
     }
     @media (max-width: 500px) {
       .nav-links { display: none; }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor, .cursor-echo { display: none !important; }
     }
 
     /* Background video */
@@ -162,6 +165,20 @@
     nav.scrolled .nav-links a:hover { opacity: 1; }
     nav { transition: none; }
     .nav-links a { transition: opacity 0.3s, color 0.4s; }
+
+    /* Hamburger */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: #fff; transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: #1a1a1a; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,10vw,4rem); color: #fff; text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
@@ -184,6 +201,17 @@
       <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="contact.html">Get in touch</a></li>
     </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Work</a>
+    <a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact.html">Get in touch</a>
+  </div>
+
   </nav>
 
   <div class="ticker">
@@ -270,6 +298,23 @@
     window.addEventListener('scroll', () => {
       document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
     });
+
+
+    // Hamburger menu
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      });
+    }
 
     // Nav magnetic float + cursor scale
     (function() {
