@@ -145,7 +145,7 @@
     /* Nav logo */
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
-    .nav-logo-lottie { width: 33px; height: 44px; display: block; }
+    .nav-logo-lottie { width: 41px; height: 55px; display: block; }
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
   </style>
@@ -217,7 +217,7 @@
   <script>
     const cursor = document.getElementById('cursor');
 
-    const TRAIL_COUNT = 90;
+    const TRAIL_COUNT = 150;
     const echoes = [];
     for (let i = 0; i < TRAIL_COUNT; i++) {
       const el = document.createElement('div');
@@ -245,11 +245,11 @@
       prevY = mouseY;
 
       // How many echoes are active — scales with speed, min 1, max TRAIL_COUNT
-      const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 3.0)));
+      const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 4.5)));
 
       for (let i = 0; i < TRAIL_COUNT; i++) {
         const echo = echoes[i];
-        const lag = (i + 1) * 0.007;
+        const lag = (i + 1) * 0.003;
         echo.x += (mouseX - echo.x) * (1 - lag);
         echo.y += (mouseY - echo.y) * (1 - lag);
 
