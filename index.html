@@ -56,6 +56,15 @@
       align-items: center;
       padding: 2rem 3rem;
     }
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
 
     .nav-links {
       display: flex;
