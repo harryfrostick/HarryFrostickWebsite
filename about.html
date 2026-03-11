@@ -6,7 +6,7 @@
   <title>About — Harry Frostick</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,7 +25,7 @@
       background: linear-gradient(to bottom, var(--bg-top) 0%, var(--bg-bot) 100%);
       background-attachment: fixed;
       color: var(--fg);
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 300;
       line-height: 1.6;
       min-height: 100vh;
@@ -65,7 +65,7 @@
     .about-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; }
     .about-divider { width: 40px; height: 1px; background: var(--accent); margin: 2.5rem 0; }
     .about-bottom { display: flex; align-items: flex-start; justify-content: space-between; gap: 6rem; }
-    .about-intro { font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.65; color: var(--fg); max-width: 480px; opacity: 0.85; }
+    .about-intro { font-family: 'Montserrat', sans-serif; font-style: normal; font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); max-width: 480px; opacity: 0.85; }
     .about-body { font-size: 0.88rem; color: rgba(15,15,15,0.55); line-height: 1.9; max-width: 420px; }
 
     /* Divider */
@@ -92,15 +92,14 @@
     /* What's next */
     .looking-section { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.55s forwards; }
     .looking-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,6.5vw,7.5rem); line-height: 0.88; color: var(--fg); position: sticky; top: 2rem; }
-    .looking-body { font-size: 0.88rem; color: rgba(15,15,15,0.55); line-height: 1.9; margin-bottom: 1.5rem; }
+    .looking-body { font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(15,15,15,0.55); margin-bottom: 1.5rem; }
     .looking-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
     .tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 0.45rem 1rem; transition: color 0.3s, border-color 0.3s; }
     .tag:hover { color: var(--accent); border-color: var(--accent); }
 
     /* CTA */
     .about-cta { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 2rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.65s forwards; }
-    .cta-text { font-size: clamp(1.1rem,2.2vw,1.8rem); color: rgba(15,15,15,0.7); }
-    .cta-text em { font-style: italic; color: var(--accent); }
+    .cta-text { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(15,15,15,0.85); }
     .cta-btn { display: inline-flex; align-items: center; gap: 0.8rem; color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--line); padding: 0.9rem 1.6rem; white-space: nowrap; transition: border-color 0.3s, color 0.3s, gap 0.3s; }
     .cta-btn:hover { border-color: var(--accent); color: var(--accent); gap: 1.3rem; }
     .cta-btn svg { transition: transform 0.3s; }
@@ -205,7 +204,7 @@
     </div>
 
     <div class="about-cta">
-      <p class="cta-text">Want to make something <em>together?</em></p>
+      <p class="cta-text">Want to make something together?</p>
       <a href="contact.html" class="cta-btn">
         Get in touch
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
