@@ -53,6 +53,21 @@
     .nav-links a:hover { opacity: 1; }
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes drawPath { to { stroke-dashoffset: 0; } }
+    @keyframes wordFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .scroll-reveal { opacity: 0; transform: translateX(30px); transition: none; }
+    .scroll-reveal.visible { animation: fadeSlideRight 0.75s ease forwards; }
+
+    .stat-infinity { display: flex; align-items: center; flex: 1; }
+    .accent-plus { color: var(--accent); }
+
+    #infinityPath { stroke-dasharray: 480; stroke-dashoffset: 480; }
+    #infinityPath.draw { animation: drawPath 1.4s ease forwards; }
+
+    .list-word { opacity: 0; display: inline-block; }
+    .list-word.visible { animation: wordFadeUp 0.4s ease forwards; }
 
     .page { padding: 11rem 3rem 8rem; max-width: 1400px; margin: 0 auto; }
 
@@ -69,11 +84,11 @@
     .section-divider { width: 100%; height: 1px; background: var(--line); margin: 4rem 0; }
 
     /* Stats */
-    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-bottom: 4rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.3s forwards; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-bottom: 4rem; }
     .stat { padding: 2.5rem; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; transition: background 0.3s; }
     .stat:hover { background: rgba(15,15,15,0.04); }
     .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem,8vw,9rem); line-height: 1; color: var(--fg); flex: 1; display: flex; align-items: center; }
-    .stat-num span { color: var(--accent); }
+    .stat-num .accent-plus { color: var(--accent); }
     .stat-list { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem,2.8vw,2.8rem); line-height: 1.05; color: var(--fg); flex: 1; display: flex; flex-direction: column; justify-content: center; }
     .stat-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; }
 
@@ -83,7 +98,7 @@
     .clients-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; }
     .client { border: 1px solid var(--line); padding: 2rem 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
     .client:hover { background: rgba(15,15,15,0.04); }
-    .client-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.08em; color: rgba(15,15,15,0.25); text-align: center; transition: color 0.3s; }
+    .client-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.08em; color: #0f0f0f; text-align: center; transition: color 0.3s; }
     .client:hover .client-name { color: var(--accent); }
 
     /* What's next */
@@ -126,6 +141,10 @@
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
     .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
+    nav.scrolled .nav-links a { color: var(--accent); opacity: 0.7; }
+    nav.scrolled .nav-links a:hover { opacity: 1; }
+    nav { transition: none; }
+    .nav-links a { transition: opacity 0.3s, color 0.4s; }
   </style>
 </head>
 <body>
@@ -157,16 +176,25 @@
     </div>
 
     <div class="stats">
-      <div class="stat">
-        <p class="stat-num">7<span>+</span></p>
+      <div class="stat scroll-reveal">
+        <p class="stat-num"><span id="counterNum">7</span><span class="accent-plus">+</span></p>
         <p class="stat-label">Years of experience</p>
       </div>
-      <div class="stat">
-        <p class="stat-list">In-House<br>Agency<br>Freelance</p>
+      <div class="stat scroll-reveal">
+        <p class="stat-list">
+          <span class="list-word" id="word0">In-House</span>
+          <span class="list-word" id="word1">Agency</span>
+          <span class="list-word" id="word2">Freelance</span>
+        </p>
         <p class="stat-label">Worked in</p>
       </div>
-      <div class="stat">
-        <p class="stat-num">&#8734;</p>
+      <div class="stat scroll-reveal">
+        <svg id="infinitySvg" class="stat-num" viewBox="0 0 184.28 78.88" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:1;width:100%;max-width:65px;overflow:visible;">
+          <path id="infinityPath"
+            d="M35.87,5.5C18.52,5.5,5.31,22.47,5.5,39.44c.19,16.97,13.77,33.94,30.37,33.94,54.61,0,56.32-67.88,112.63-67.88,16.74,0,30.04,16.97,30.28,33.94s-12.59,33.94-30.28,33.94c-56.32,0-56.32-67.88-112.63-67.88Z"
+            stroke="#0f0f0f" stroke-width="13" fill="none"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <p class="stat-label">Frames drawn by hand</p>
       </div>
     </div>
@@ -188,8 +216,8 @@
     <div class="looking-section">
       <div class="looking-label">What's<br>next.</div>
       <div>
-        <p class="looking-body">After years of honing my craft on commercial projects, I am carving out more space for personal work — the kind that can only come from someone who grew up drawing. I am drawn to character design, frame-by-frame animation, and the warmth that only hand-crafted motion can carry.</p>
-        <p class="looking-body">Whether it is a passion project, an independent commission, or something in between — if it lets me push the boundaries of what motion can feel like, I am interested.</p>
+        <p class="looking-body">After years of honing my craft on commercial projects, I am carving out more space for personal work — the kind that can only come from someone who grew up drawing.</p>
+        <p class="about-body" style="margin-bottom:1.5rem;">I am drawn to character design, frame-by-frame animation, and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent commission, or something in between — if it lets me push the boundaries of what motion can feel like, I am interested.</p>
         <div class="looking-tags">
           <span class="tag">Drawing</span>
           <span class="tag">Character Design</span>
@@ -273,6 +301,77 @@
 
       requestAnimationFrame(tick);
     })();
+
+
+    // ── Scroll reveal ──────────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.scroll-reveal');
+    let statsTriggered = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = el.dataset.delay || 0;
+          setTimeout(() => el.classList.add('visible'), delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach((el, i) => {
+      el.dataset.delay = i * 120;
+      observer.observe(el);
+    });
+
+    // Add scroll-reveal to non-stats sections too
+    document.querySelectorAll('.clients-section, .looking-section, .about-cta, .section-divider').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateX(30px)';
+      el.style.transition = 'none';
+      el.classList.add('scroll-reveal');
+      el.dataset.delay = i * 100;
+      observer.observe(el);
+    });
+
+    // ── Stats section observer ──────────────────────────────────────
+    const statsSection = document.querySelector('.stats');
+    const statsObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !statsTriggered) {
+        statsTriggered = true;
+        statsObserver.unobserve(statsSection);
+
+        // Counter: 5 → 6 → 7
+        const counterEl = document.getElementById('counterNum');
+        const sequence = [5, 6, 7];
+        let step = 0;
+        const tick = () => {
+          counterEl.textContent = sequence[step];
+          step++;
+          if (step < sequence.length) setTimeout(tick, 220);
+        };
+        setTimeout(tick, 200);
+
+        // Words one-by-one
+        ['word0','word1','word2'].forEach((id, i) => {
+          setTimeout(() => {
+            document.getElementById(id).classList.add('visible');
+          }, 200 + i * 200);
+        });
+
+        // Infinity path draw
+        setTimeout(() => {
+          document.getElementById('infinityPath').classList.add('draw');
+        }, 300);
+      }
+    }, { threshold: 0.3 });
+
+    statsObserver.observe(statsSection);
+
+
+    // Nav scrolled state
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+    });
 
     // Nav magnetic float + cursor scale
     (function() {

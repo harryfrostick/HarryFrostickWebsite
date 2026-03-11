@@ -149,6 +149,10 @@
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
     .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
+    nav.scrolled .nav-links a { color: var(--accent); opacity: 0.7; }
+    nav.scrolled .nav-links a:hover { opacity: 1; }
+    nav { transition: none; }
+    .nav-links a { transition: opacity 0.3s, color 0.4s; }
   </style>
 </head>
 <body>
@@ -273,6 +277,12 @@
 
       requestAnimationFrame(tick);
     })();
+
+
+    // Nav scrolled state
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+    });
 
     // Nav magnetic float + cursor scale
     (function() {
