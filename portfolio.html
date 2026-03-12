@@ -408,7 +408,7 @@
         <div class="featured-media">
           <div class="placeholder"><span class="placeholder-inner">HF</span></div>
           <video loop muted playsinline id="featuredVideo">
-            <source src="featured-project.mp4" type="video/mp4">
+            <source src="Projects/featured-project.mp4" type="video/mp4">
           </video>
           <div class="play-icon">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -443,10 +443,10 @@
          data-type="Frame-by-Frame Animation"
          data-year="2024"
          data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — every frame crafted with care to give the characters warmth and weight."
-         data-media="Thumbnail_Duck_Boy.png"
+         data-media="Projects/Thumbnail_Duck_Boy.png"
          data-media-type="image">
         <div class="masonry-thumb">
-          <img src="Thumbnail_Duck_Boy.png" alt="Duck &amp; Boy" />
+          <img src="Projects/Thumbnail_Duck_Boy.png" alt="Duck &amp; Boy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Duck &amp; Boy</p></div>
       </a>
@@ -456,10 +456,10 @@
          data-type="Logo Animation"
          data-year="2024"
          data-desc="A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
-         data-media="Thumbnail_Zora.png"
+         data-media="Projects/Thumbnail_Zora.png"
          data-media-type="image">
         <div class="masonry-thumb">
-          <img src="Thumbnail_Zora.png" alt="Zorra" />
+          <img src="Projects/Thumbnail_Zora.png" alt="Zorra" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Logo Animation</p><p class="masonry-overlay-title">Zorra</p></div>
       </a>
@@ -469,10 +469,10 @@
          data-type="Frame-by-Frame · Illustration"
          data-year="2025"
          data-desc="A personal project exploring the small rituals and routines we can't seem to shake. Illustrated and animated frame-by-frame — leaning into the lo-fi charm that only hand-drawn motion can carry."
-         data-media="Thumbnail_Bad_Habits.png"
+         data-media="Projects/Thumbnail_Bad_Habits.png"
          data-media-type="image">
         <div class="masonry-thumb">
-          <img src="Thumbnail_Bad_Habits.png" alt="Bad Habits" />
+          <img src="Projects/Thumbnail_Bad_Habits.png" alt="Bad Habits" />
         </div>
         <div class="masonry-overlay">
           <p class="masonry-overlay-client">Personal</p>
@@ -485,10 +485,10 @@
          data-type="Social Content · Motion"
          data-year="2025"
          data-desc="Social video content created via Vidsy for Lay's Max — a bold, high-energy campaign to launch the Heinz Tomato Ketchup flavour. Fast-cut motion designed to stop the scroll."
-         data-media="Thumbnail_Vidsy.png"
+         data-media="Projects/Thumbnail_Vidsy.png"
          data-media-type="image">
         <div class="masonry-thumb">
-          <img src="Thumbnail_Vidsy.png" alt="Vidsy" />
+          <img src="Projects/Thumbnail_Vidsy.png" alt="Vidsy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Lay's Max</p></div>
       </a>
@@ -624,118 +624,6 @@
       featuredCard.addEventListener('mouseenter', () => featuredVideo.play());
       featuredCard.addEventListener('mouseleave', () => { featuredVideo.pause(); featuredVideo.currentTime = 0; });
     }
-
-    // ── Modal ──────────────────────────────────────────────────────
-    const backdrop   = document.getElementById('modalBackdrop');
-    const modalClose = document.getElementById('modalClose');
-    const modalPrev  = document.getElementById('modalPrev');
-    const modalNext  = document.getElementById('modalNext');
-    const modalMedia = document.getElementById('modalMedia');
-    const modalClient= document.getElementById('modalClient');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc  = document.getElementById('modalDesc');
-    const modalType  = document.getElementById('modalType');
-    const modalYear  = document.getElementById('modalYear');
-    const modalCounter = document.getElementById('modalCounter');
-
-    const items = Array.from(document.querySelectorAll('.masonry-item[data-project]'));
-    let currentIndex = 0;
-
-    function buildCounter() {
-      modalCounter.innerHTML = '';
-      items.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
-        modalCounter.appendChild(dot);
-      });
-    }
-
-    function openModal(index) {
-      currentIndex = index;
-      loadProject(index);
-      backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-      // Clear media to stop video playback
-      setTimeout(() => { modalMedia.innerHTML = ''; }, 350);
-    }
-
-    function loadProject(index) {
-      const item = items[index];
-      const mediaType = item.dataset.mediaType;
-      const mediaSrc  = item.dataset.media;
-
-      // Swap media
-      modalMedia.innerHTML = '';
-      if (mediaType === 'video') {
-        const vid = document.createElement('video');
-        vid.src = mediaSrc;
-        vid.autoplay = true;
-        vid.loop = true;
-        vid.muted = true;
-        vid.playsInline = true;
-        modalMedia.appendChild(vid);
-      } else {
-        const img = document.createElement('img');
-        img.src = mediaSrc;
-        img.alt = item.dataset.title;
-        modalMedia.appendChild(img);
-      }
-
-      // Animate text swap
-      [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(8px)';
-      });
-      setTimeout(() => {
-        modalClient.textContent = item.dataset.client;
-        modalTitle.textContent  = item.dataset.title;
-        modalDesc.textContent   = item.dataset.desc;
-        modalType.textContent   = item.dataset.type;
-        modalYear.textContent   = item.dataset.year;
-        [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach((el, i) => {
-          el.style.transition = `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`;
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        });
-      }, 80);
-
-      buildCounter();
-    }
-
-    // Open on click
-    items.forEach((item, i) => {
-      item.addEventListener('click', e => {
-        e.preventDefault();
-        openModal(i);
-      });
-    });
-
-    // Close
-    modalClose.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-
-    // Nav
-    modalPrev.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + items.length) % items.length;
-      loadProject(currentIndex);
-    });
-    modalNext.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % items.length;
-      loadProject(currentIndex);
-    });
-
-    // Keyboard
-    document.addEventListener('keydown', e => {
-      if (!backdrop.classList.contains('open')) return;
-      if (e.key === 'Escape') closeModal();
-      if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + items.length) % items.length; loadProject(currentIndex); }
-      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % items.length; loadProject(currentIndex); }
-    });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <script>
@@ -747,7 +635,7 @@
         renderer: 'svg',
         loop: true,
         autoplay: false,
-        path: 'HF_Ident.json'
+        path: 'Assets/HF_Ident.json'
       });
       anim.addEventListener('DOMLoaded', function() {
         anim.goToAndStop(0, true);
@@ -794,6 +682,117 @@
     </div>
     <div class="modal-counter" id="modalCounter"></div>
   </div>
+
+  <script>
+    // ── Modal — runs after modal HTML is in the DOM ────────────────
+    (function() {
+      const backdrop    = document.getElementById('modalBackdrop');
+      const modalClose  = document.getElementById('modalClose');
+      const modalPrev   = document.getElementById('modalPrev');
+      const modalNext   = document.getElementById('modalNext');
+      const modalMedia  = document.getElementById('modalMedia');
+      const modalClient = document.getElementById('modalClient');
+      const modalTitle  = document.getElementById('modalTitle');
+      const modalDesc   = document.getElementById('modalDesc');
+      const modalType   = document.getElementById('modalType');
+      const modalYear   = document.getElementById('modalYear');
+      const modalCounter= document.getElementById('modalCounter');
+
+      const items = Array.from(document.querySelectorAll('.masonry-item[data-project]'));
+      let currentIndex = 0;
+
+      function buildCounter() {
+        modalCounter.innerHTML = '';
+        items.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
+          modalCounter.appendChild(dot);
+        });
+      }
+
+      function openModal(index) {
+        currentIndex = index;
+        loadProject(index);
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { modalMedia.innerHTML = ''; }, 350);
+      }
+
+      function loadProject(index) {
+        const item = items[index];
+        const mediaType = item.dataset.mediaType;
+        const mediaSrc  = item.dataset.media;
+
+        modalMedia.innerHTML = '';
+        if (mediaType === 'video') {
+          const vid = document.createElement('video');
+          vid.src = mediaSrc; vid.autoplay = true; vid.loop = true;
+          vid.muted = true; vid.playsInline = true;
+          modalMedia.appendChild(vid);
+        } else {
+          const img = document.createElement('img');
+          img.src = mediaSrc;
+          img.alt = item.dataset.title;
+          modalMedia.appendChild(img);
+        }
+
+        [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach(el => {
+          el.style.transition = 'none';
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(8px)';
+        });
+        setTimeout(() => {
+          modalClient.textContent = item.dataset.client;
+          modalTitle.textContent  = item.dataset.title;
+          modalDesc.textContent   = item.dataset.desc;
+          modalType.textContent   = item.dataset.type;
+          modalYear.textContent   = item.dataset.year;
+          [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach((el, i) => {
+            el.style.transition = `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          });
+        }, 80);
+
+        buildCounter();
+      }
+
+      // Open on click
+      items.forEach((item, i) => {
+        item.addEventListener('click', e => {
+          e.preventDefault();
+          openModal(i);
+        });
+      });
+
+      // Close
+      modalClose.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+      // Nav
+      modalPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        loadProject(currentIndex);
+      });
+      modalNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % items.length;
+        loadProject(currentIndex);
+      });
+
+      // Keyboard
+      document.addEventListener('keydown', e => {
+        if (!backdrop.classList.contains('open')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + items.length) % items.length; loadProject(currentIndex); }
+        if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % items.length; loadProject(currentIndex); }
+      });
+    })();
+  </script>
 
 </body>
 </html>
