@@ -177,6 +177,7 @@
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
     .nav-logo-lottie { width: 41px; height: 55px; display: block; mix-blend-mode: difference; }
+    @media (max-width: 768px) { .nav-logo-lottie { mix-blend-mode: normal; filter: invert(1); } }
 
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }

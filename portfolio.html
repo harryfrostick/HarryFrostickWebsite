@@ -122,6 +122,21 @@
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* Bad Habits placeholder */
+    .bad-habits-placeholder { flex-direction: column; gap: 0.5rem; background: rgba(229,78,119,0.06); }
+    .bh-smoke { width: 80px; height: 110px; overflow: visible; }
+    .bh-wisp { stroke-dasharray: 200; stroke-dashoffset: 200; animation: smokeRise 2.4s ease-in-out infinite; }
+    .bh-wisp-1 { animation-delay: 0s; }
+    .bh-wisp-2 { animation-delay: 0.4s; }
+    .bh-wisp-3 { animation-delay: 0.8s; }
+    @keyframes smokeRise {
+      0%   { stroke-dashoffset: 200; opacity: 0; }
+      20%  { opacity: 1; }
+      80%  { opacity: 0.6; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    .bh-label { font-size: 3rem; opacity: 0.12; margin-top: 0.5rem; }
+
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--muted); }
@@ -174,6 +189,180 @@
     .mobile-menu a:hover { color: var(--accent); }
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; }
+    }
+    /* ── Modal ────────────────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(10,10,10,0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-frame {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      width: min(92vw, 1100px);
+      height: min(88vh, 720px);
+      background: #faf6f3;
+      overflow: hidden;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-backdrop.open .modal-frame {
+      transform: translateY(0) scale(1);
+    }
+    .modal-media {
+      position: relative;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .modal-media img,
+    .modal-media video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .modal-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem 2rem;
+      border-left: 1px solid rgba(15,15,15,0.1);
+      background: #faf6f3;
+      overflow-y: auto;
+    }
+    .modal-info-top { display: flex; flex-direction: column; }
+    .modal-client {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 0.92;
+      color: #0f0f0f;
+      margin-bottom: 1.4rem;
+    }
+    .modal-divider {
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .modal-desc {
+      font-size: 0.82rem;
+      line-height: 1.85;
+      color: rgba(15,15,15,0.6);
+      font-weight: 300;
+    }
+    .modal-info-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(15,15,15,0.08);
+      margin-top: 2rem;
+    }
+    .modal-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    /* Close button */
+    .modal-close {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1001;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(240,235,227,0.25);
+      background: transparent;
+      color: #f0ebe3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+    }
+    .modal-close:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: rotate(90deg);
+    }
+    /* Nav arrows */
+    .modal-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1001;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(240,235,227,0.2);
+      background: transparent;
+      color: #f0ebe3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+    }
+    .modal-nav:hover { border-color: rgba(240,235,227,0.6); color: #fff; }
+    .modal-nav--prev { left: 1.5rem; }
+    .modal-nav--next { right: 1.5rem; }
+    .modal-nav--prev:hover { transform: translateY(-50%) translateX(-3px); }
+    .modal-nav--next:hover { transform: translateY(-50%) translateX(3px); }
+    /* Counter */
+    .modal-counter {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .modal-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(240,235,227,0.3);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .modal-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+    /* Mobile modal */
+    @media (max-width: 768px) {
+      .modal-frame {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55vw 1fr;
+        width: 95vw;
+        height: 85vh;
+      }
+      .modal-info { border-left: none; border-top: 1px solid rgba(15,15,15,0.1); padding: 1.5rem; }
+      .modal-nav--prev { left: 0.75rem; }
+      .modal-nav--next { right: 0.75rem; }
+      .modal-close { top: 1rem; right: 1rem; }
     }
   </style>
 </head>
@@ -248,25 +437,60 @@
     <p class="grid-label">All projects</p>
     <div class="masonry">
 
-      <a href="#" class="masonry-item">
+      <a href="#" class="masonry-item" data-project="0"
+         data-title="Duck &amp; Boy"
+         data-client="Personal"
+         data-type="Frame-by-Frame Animation"
+         data-year="2024"
+         data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — every frame crafted with care to give the characters warmth and weight."
+         data-media="Thumbnail_Duck_Boy.png"
+         data-media-type="image">
         <div class="masonry-thumb">
           <img src="Thumbnail_Duck_Boy.png" alt="Duck &amp; Boy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Duck &amp; Boy</p></div>
       </a>
-      <a href="#" class="masonry-item">
+      <a href="#" class="masonry-item" data-project="1"
+         data-title="Zorra"
+         data-client="Personal"
+         data-type="Logo Animation"
+         data-year="2024"
+         data-desc="A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
+         data-media="Thumbnail_Zora.png"
+         data-media-type="image">
         <div class="masonry-thumb">
           <img src="Thumbnail_Zora.png" alt="Zorra" />
         </div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Zorra</p></div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Logo Animation</p><p class="masonry-overlay-title">Zorra</p></div>
       </a>
-      <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">03</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">—</p><p class="masonry-overlay-title">Coming Soon</p></div>
+      <a href="#" class="masonry-item masonry-item--bad-habits" data-project="2"
+         data-title="Bad Habits"
+         data-client="Personal"
+         data-type="Frame-by-Frame · Illustration"
+         data-year="2025"
+         data-desc="A personal project exploring the small rituals and routines we can't seem to shake. Illustrated and animated frame-by-frame — leaning into the lo-fi charm that only hand-drawn motion can carry."
+         data-media="Thumbnail_Bad_Habits.png"
+         data-media-type="image">
+        <div class="masonry-thumb">
+          <img src="Thumbnail_Bad_Habits.png" alt="Bad Habits" />
+        </div>
+        <div class="masonry-overlay">
+          <p class="masonry-overlay-client">Personal</p>
+          <p class="masonry-overlay-title">Bad Habits</p>
+        </div>
       </a>
-      <a href="#" class="masonry-item">
-        <div class="masonry-thumb"><div class="masonry-thumb-inner"><span class="masonry-placeholder-letter">04</span></div></div>
-        <div class="masonry-overlay"><p class="masonry-overlay-client">—</p><p class="masonry-overlay-title">Coming Soon</p></div>
+      <a href="#" class="masonry-item" data-project="3"
+         data-title="Lay's Max"
+         data-client="Vidsy"
+         data-type="Social Content · Motion"
+         data-year="2025"
+         data-desc="Social video content created via Vidsy for Lay's Max — a bold, high-energy campaign to launch the Heinz Tomato Ketchup flavour. Fast-cut motion designed to stop the scroll."
+         data-media="Thumbnail_Vidsy.png"
+         data-media-type="image">
+        <div class="masonry-thumb">
+          <img src="Thumbnail_Vidsy.png" alt="Vidsy" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Lay's Max</p></div>
       </a>
 
     </div>
@@ -400,6 +624,118 @@
       featuredCard.addEventListener('mouseenter', () => featuredVideo.play());
       featuredCard.addEventListener('mouseleave', () => { featuredVideo.pause(); featuredVideo.currentTime = 0; });
     }
+
+    // ── Modal ──────────────────────────────────────────────────────
+    const backdrop   = document.getElementById('modalBackdrop');
+    const modalClose = document.getElementById('modalClose');
+    const modalPrev  = document.getElementById('modalPrev');
+    const modalNext  = document.getElementById('modalNext');
+    const modalMedia = document.getElementById('modalMedia');
+    const modalClient= document.getElementById('modalClient');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc  = document.getElementById('modalDesc');
+    const modalType  = document.getElementById('modalType');
+    const modalYear  = document.getElementById('modalYear');
+    const modalCounter = document.getElementById('modalCounter');
+
+    const items = Array.from(document.querySelectorAll('.masonry-item[data-project]'));
+    let currentIndex = 0;
+
+    function buildCounter() {
+      modalCounter.innerHTML = '';
+      items.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
+        modalCounter.appendChild(dot);
+      });
+    }
+
+    function openModal(index) {
+      currentIndex = index;
+      loadProject(index);
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      // Clear media to stop video playback
+      setTimeout(() => { modalMedia.innerHTML = ''; }, 350);
+    }
+
+    function loadProject(index) {
+      const item = items[index];
+      const mediaType = item.dataset.mediaType;
+      const mediaSrc  = item.dataset.media;
+
+      // Swap media
+      modalMedia.innerHTML = '';
+      if (mediaType === 'video') {
+        const vid = document.createElement('video');
+        vid.src = mediaSrc;
+        vid.autoplay = true;
+        vid.loop = true;
+        vid.muted = true;
+        vid.playsInline = true;
+        modalMedia.appendChild(vid);
+      } else {
+        const img = document.createElement('img');
+        img.src = mediaSrc;
+        img.alt = item.dataset.title;
+        modalMedia.appendChild(img);
+      }
+
+      // Animate text swap
+      [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+      });
+      setTimeout(() => {
+        modalClient.textContent = item.dataset.client;
+        modalTitle.textContent  = item.dataset.title;
+        modalDesc.textContent   = item.dataset.desc;
+        modalType.textContent   = item.dataset.type;
+        modalYear.textContent   = item.dataset.year;
+        [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach((el, i) => {
+          el.style.transition = `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      }, 80);
+
+      buildCounter();
+    }
+
+    // Open on click
+    items.forEach((item, i) => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        openModal(i);
+      });
+    });
+
+    // Close
+    modalClose.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+    // Nav
+    modalPrev.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      loadProject(currentIndex);
+    });
+    modalNext.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      loadProject(currentIndex);
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (!backdrop.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + items.length) % items.length; loadProject(currentIndex); }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % items.length; loadProject(currentIndex); }
+    });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <script>
@@ -424,5 +760,40 @@
       });
     })();
   </script>
+  <!-- Project Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="modal-nav modal-nav--prev" id="modalPrev" aria-label="Previous">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M13 3l-7 7 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="modal-nav modal-nav--next" id="modalNext" aria-label="Next">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 3l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="modal-frame" id="modalFrame">
+      <div class="modal-media" id="modalMedia"></div>
+      <div class="modal-info">
+        <div class="modal-info-top">
+          <p class="modal-client" id="modalClient"></p>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <div class="modal-divider"></div>
+          <p class="modal-desc" id="modalDesc"></p>
+        </div>
+        <div class="modal-info-bottom">
+          <span class="modal-meta" id="modalType"></span>
+          <span class="modal-meta" id="modalYear"></span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-counter" id="modalCounter"></div>
+  </div>
+
 </body>
 </html>
