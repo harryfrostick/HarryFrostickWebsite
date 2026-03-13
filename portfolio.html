@@ -53,7 +53,7 @@
     .page { padding: 8rem 3rem 8rem; max-width: 1400px; margin: 0 auto; }
 
     /* Page header */
-    .page-header { margin-bottom: 5rem; opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
+    .page-header { margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
     .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
     .page-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; }
     .page-divider { width: 40px; height: 1px; background: var(--accent); margin: 2rem 0; }
@@ -78,9 +78,17 @@
     .featured-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s; }
     .featured-media .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s; }
     .placeholder-inner { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(15,15,15,0.07); }
-    .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 52px; height: 52px; border: 1px solid rgba(15,15,15,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s, transform 0.3s; z-index: 2; }
+    .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 52px; height: 52px; border: 1px solid rgba(15,15,15,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s, transform 0.3s; z-index: 2; }
     .play-icon svg { margin-left: 3px; }
-    .featured-card:hover .play-icon { border-color: var(--accent); background: rgba(229,78,119,0.08); transform: translate(-50%,-50%) scale(1.08); }
+    .featured-card:hover .play-icon { border-color: var(--accent); background: rgba(229,78,119,0.08); transform: translate(-50%,-50%) scale(1.12); }
+    .showreel-card .play-icon { border-color: rgba(255,255,255,0.7); color: #fff; }
+    .showreel-card .play-icon svg path { fill: #fff; }
+    .showreel-card:hover .play-icon { border-color: #fff; background: rgba(255,255,255,0.12); transform: translate(-50%,-50%) scale(1.12); }
+    .showreel-title { font-size: clamp(3.5rem, 7vw, 7rem) !important; margin-bottom: 1.2rem; }
+    .showreel-info-bottom { border-top: 1px solid var(--line) !important; padding-top: 2rem !important; margin-top: 2rem; }
+    .showreel-desc { font-size: 0.75rem !important; }
+    .showreel-meta { color: var(--accent) !important; }
+    .showreel-card:hover .play-icon { border-color: var(--accent) !important; background: rgba(229,78,119,0.4) !important; transform: translate(-50%,-50%) scale(1.12) !important; }
     .featured-card:hover .featured-media video { opacity: 1; }
     .featured-card:hover .featured-media .placeholder { opacity: 0; }
 
@@ -96,8 +104,8 @@
 
     /* Masonry */
     .grid-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
-    .masonry { columns: 3; column-gap: 2px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
-    .masonry-item { break-inside: avoid; margin-bottom: 2px; position: relative; overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: none; }
+    .masonry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
+    .masonry-item { margin-bottom: 0; position: relative; overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: none; }
     .masonry-item .masonry-thumb { aspect-ratio: 9/16; }
 
 
@@ -145,7 +153,7 @@
       .featured-card { grid-template-columns: 1fr; }
       .featured-info { border-left: none; border-top: 1px solid var(--line); }
       .featured-media { aspect-ratio: 16/9; }
-      .masonry { columns: 2; }
+      .masonry { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -157,7 +165,7 @@
       .grid-label { margin-bottom: 1rem; }
     }
     @media (max-width: 500px) {
-      .masonry { columns: 1; }
+      .masonry { grid-template-columns: 1fr; }
       .featured-media { aspect-ratio: 4/3; }
     }
     @media (hover: none) and (pointer: coarse) {
@@ -364,7 +372,89 @@
       .modal-nav--next { right: 0.75rem; }
       .modal-close { top: 1rem; right: 1rem; }
     }
-    /* ── Carousel (inside modal media) ───────────────────────────── */
+    /* ── Showreel card ────────────────────────────────────────────── */
+    .showreel-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      cursor: none;
+    }
+    .showreel-media {
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0a;
+      aspect-ratio: unset;
+      min-height: 300px;
+    }
+    .showreel-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, opacity 0.4s ease;
+    }
+    .showreel-card:hover .showreel-thumb { transform: scale(1.02); opacity: 0.85; }
+
+    @media (max-width: 900px) {
+      .showreel-card { grid-template-columns: 1fr; }
+      .showreel-media { aspect-ratio: 16/9; min-height: unset; }
+    }
+
+    /* ── Theatre modal (fullscreen, no info panel) ────────────────── */
+    .theatre-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      background: rgba(0,0,0,0.97);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .theatre-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .theatre-inner {
+      position: relative;
+      width: min(96vw, 1400px);
+      aspect-ratio: 16/9;
+      background: #000;
+      transform: scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .theatre-backdrop.open .theatre-inner { transform: scale(1); }
+    .theatre-inner video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    .theatre-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 1002;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+    }
+    .theatre-close:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: rotate(90deg);
+    }
+
     .carousel-track {
       position: absolute;
       inset: 0;
@@ -477,18 +567,13 @@
       <p class="eyebrow">Selected work</p>
       <h1 class="page-headline">Work</h1>
       <div class="page-divider"></div>
-      <p class="page-sub">Motion · Design · Illustration</p>
     </div>
 
     <div class="featured">
-      <p class="section-label">Featured project</p>
-      <a href="#" class="featured-card">
-        <div class="featured-media">
-          <div class="placeholder"><span class="placeholder-inner">HF</span></div>
-          <video loop muted playsinline id="featuredVideo">
-            <source src="Projects/featured-project.mp4" type="video/mp4">
-          </video>
-          <div class="play-icon">
+      <div class="featured-card showreel-card" id="showreelCard">
+        <div class="featured-media showreel-media">
+          <img src="Projects/00 HARRY FROSTICK_Showreel_Thumbnail.webp" alt="Showreel" class="showreel-thumb" />
+          <div class="play-icon" id="showreelPlay">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
               <path d="M3 2l8 4.5-8 4.5V2z" fill="currentColor"/>
             </svg>
@@ -496,12 +581,11 @@
         </div>
         <div class="featured-info">
           <div>
-            <p class="featured-client">Client Name</p>
-            <h2 class="featured-title">Project Title Here</h2>
-            <p class="featured-desc">A short description of the project — what it was, what you made, and what made it interesting. Keep it to two or three sentences.</p>
+            <h2 class="featured-title showreel-title">Showreel</h2>
+            <p class="featured-desc showreel-desc">A short description of the project — what it was, what you made, and what made it interesting. Keep it to two or three sentences.</p>
           </div>
-          <div class="featured-info-bottom">
-            <span class="featured-meta">Brand Animation · 2024</span>
+          <div class="featured-info-bottom showreel-info-bottom">
+            <span class="featured-meta showreel-meta">Motion · Design · Illustration</span>
             <div class="featured-arrow">
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                 <path d="M2 6.5h9M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -509,7 +593,7 @@
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
 
     <p class="grid-label">All projects</p>
@@ -698,8 +782,7 @@
       featuredCard.addEventListener('mouseenter', () => featuredVideo.play());
       featuredCard.addEventListener('mouseleave', () => { featuredVideo.pause(); featuredVideo.currentTime = 0; });
     }
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  </script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <script>
     (function() {
       var logo = document.getElementById('navLogo');
@@ -768,6 +851,20 @@
       </div>
     </div>
     <div class="modal-counter" id="modalCounter"></div>
+  </div>
+
+  <!-- Theatre modal — showreel fullscreen -->
+  <div class="theatre-backdrop" id="theatreBackdrop">
+    <button class="theatre-close" id="theatreClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="theatre-inner">
+      <video id="theatreVideo" controls playsinline>
+        <source src="Projects/00 HARRY FROSTICK_Showreel_16x9.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 
   <script>
@@ -947,6 +1044,36 @@
         if (Math.abs(diff) < 40) return;
         if (diff > 0 && slideIndex < slides.length - 1) goToSlide(slideIndex + 1);
         if (diff < 0 && slideIndex > 0) goToSlide(slideIndex - 1);
+      });
+    })();
+  </script>
+  <script>
+    // ── Theatre modal — showreel ───────────────────────────────────
+    (function() {
+      const card     = document.getElementById('showreelCard');
+      const backdrop = document.getElementById('theatreBackdrop');
+      const closeBtn = document.getElementById('theatreClose');
+      const video    = document.getElementById('theatreVideo');
+
+      function openTheatre() {
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        video.currentTime = 0;
+        video.play();
+      }
+
+      function closeTheatre() {
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+        video.pause();
+        video.currentTime = 0;
+      }
+
+      card.addEventListener('click', openTheatre);
+      closeBtn.addEventListener('click', closeTheatre);
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) closeTheatre(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && backdrop.classList.contains('open')) closeTheatre();
       });
     })();
   </script>
