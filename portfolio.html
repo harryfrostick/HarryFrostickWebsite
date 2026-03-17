@@ -46,9 +46,92 @@
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
     nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
-    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+    /* ── Proximity nav ────────────────────────────────────────────── */
+    .prox-nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .prox-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      overflow: hidden;
+      max-width: 0;
+      transition: max-width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .prox-links.expanded { max-width: 700px; }
+
+    .prox-links li {
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    /* Expand — rightmost link first, stagger toward left */
+    .prox-links.expanded li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+    .prox-links.expanded li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.22s; }
+    .prox-links.expanded li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.34s; }
+    .prox-links.expanded li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.46s; }
+
+    /* Collapse — leftmost fades first */
+    .prox-links:not(.expanded) li:nth-child(1) { transition-delay: 0s; }
+    .prox-links:not(.expanded) li:nth-child(2) { transition-delay: 0.08s; }
+    .prox-links:not(.expanded) li:nth-child(3) { transition-delay: 0.16s; }
+    .prox-links:not(.expanded) li:nth-child(4) { transition-delay: 0.24s; }
+
+    .prox-links a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      transition: opacity 0.3s, color 0.4s;
+      mix-blend-mode: difference;
+    }
+    .prox-links a:hover,
+    .prox-links a.active { opacity: 1; }
+    .prox-links a span { display: inline-block; transition: transform 0.1s linear; }
+
+    /* Burger — always visible */
+    .prox-burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: none;
+      padding: 6px;
+      background: none;
+      border: none;
+      margin-left: 1.5rem;
+      flex-shrink: 0;
+    }
+    .prox-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--fg);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                  opacity 0.25s ease,
+                  width 0.3s ease;
+      transform-origin: center;
+    }
+    .prox-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .prox-burger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .prox-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Suppress original nav elements on desktop */
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: none !important; }
+
+    @media (max-width: 768px) {
+      .prox-nav { display: none; }
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    }
 
     .page { padding: 8rem 3rem 8rem; max-width: 1400px; margin: 0 auto; }
 
@@ -56,6 +139,19 @@
     .page-header { margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
     .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
     .page-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; }
+    .work-wave { display: flex; }
+    .wave-letter {
+      display: inline-block;
+      animation: wave 2s ease-in-out infinite;
+    }
+    .wave-letter:nth-child(1) { animation-delay: 0s; }
+    .wave-letter:nth-child(2) { animation-delay: 0.2s; }
+    .wave-letter:nth-child(3) { animation-delay: 0.4s; }
+    .wave-letter:nth-child(4) { animation-delay: 0.6s; }
+    @keyframes wave {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-0.12em); }
+    }
     .page-divider { width: 40px; height: 1px; background: var(--accent); margin: 2rem 0; }
     .page-sub { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
@@ -512,19 +608,30 @@
 
 
   <div class="cursor" id="cursor"></div>
-  <nav>
-        <a href="index.html" class="nav-logo" id="navLogo">
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo" id="navLogo">
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
-    <ul class="nav-links">
-      <li><a href="about.html">About</a></li>
-      <li><a href="portfolio.html" class="active">Work</a></li>
-      <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="contact.html">Get in touch</a></li>
-    </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+
+    <!-- Proximity nav — desktop only -->
+    <div class="prox-nav" id="proxNav">
+      <ul class="prox-links" id="proxLinks">
+        <li><a href="about.html"><span>About</span></a></li>
+        <li><a href="portfolio.html" class="active"><span>Work</span></a></li>
+        <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener"><span>Instagram</span></a></li>
+        <li><a href="contact.html"><span>Get in touch</span></a></li>
+      </ul>
+      <button class="prox-burger" id="proxBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu (unchanged) -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -533,13 +640,13 @@
     <a href="contact.html">Get in touch</a>
   </div>
 
-  </nav>
-
   <div class="page">
 
     <div class="page-header">
       <p class="eyebrow">Selected work</p>
-      <h1 class="page-headline">Work</h1>
+      <h1 class="page-headline work-wave">
+        <span class="wave-letter" style="--i:0">W</span><span class="wave-letter" style="--i:1">O</span><span class="wave-letter" style="--i:2">R</span><span class="wave-letter" style="--i:3">K</span>
+      </h1>
       <div class="page-divider"></div>
     </div>
 
@@ -603,7 +710,7 @@
          data-type="Frame-by-Frame · Illustration"
          data-year="2025"
          data-desc="A personal project exploring the small rituals and routines we can't seem to shake. Illustrated and animated frame-by-frame — leaning into the lo-fi charm that only hand-drawn motion can carry."
-         data-images='[{"src":"Projects/Bad_Habits_1.mp4","type":"video"},{"src":"Projects/Bad_Habits_2.mp4","type":"video"},{"src":"Projects/Bad_Habits_3.mp4","type":"video"},{"src":"Projects/Bad_Habits_4.mp4","type":"video"},{"src":"Projects/Bad_Habits_5.mp4","type":"video"},{"src":"Projects/Bad_Habits_6.webp","type":"image"},{"src":"Projects/Bad_Habits_7.webp","type":"image"}]'>
+         data-images='[{"src":"Projects/Bad_Habits_1.mp4","type":"video","desc":"Staying up too late — again. This short follows the familiar spiral of one more episode, one more scroll, one more reason not to sleep."},{"src":"Projects/Bad_Habits_2.mp4","type":"video","desc":"The snooze button: a daily negotiation. Frame-by-frame animation capturing that half-conscious battle between the alarm and the pillow."},{"src":"Projects/Bad_Habits_3.mp4","type":"video","desc":"Mindless snacking. The hand that reaches without thinking — illustrated with the kind of loose, instinctive energy the habit itself has."},{"src":"Projects/Bad_Habits_4.mp4","type":"video","desc":"Phone first, everything else second. A small portrait of the morning ritual nobody admits to but everyone recognises."},{"src":"Projects/Bad_Habits_5.mp4","type":"video","desc":"Putting it off until tomorrow. Again. The final scene in the series — drawn with the same warmth and self-awareness that runs through the whole project."},{"src":"Projects/Bad_Habits_6.webp","type":"image","desc":"Development stills from the project — early character explorations and scene compositions, hand-drawn before moving into animation."},{"src":"Projects/Bad_Habits_7.webp","type":"image","desc":"Colour and texture studies. Each scene in Bad Habits uses a distinct palette to give each habit its own mood and feeling."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Bad_Habits.webp" alt="Bad Habits" />
         </div>
@@ -693,8 +800,7 @@
       document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-
-    // Hamburger menu
+    // Hamburger menu (mobile)
     const hamburger = document.getElementById('navHamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
@@ -710,27 +816,74 @@
       });
     }
 
-    // Nav magnetic float + cursor scale
+    // ── Proximity nav ──────────────────────────────────────────────
     (function() {
-      const navLinks = document.querySelectorAll('.nav-links a');
+      const proxLinks = document.getElementById('proxLinks');
+      const proxBurger = document.getElementById('proxBurger');
 
-      const animateit = function(e) {
-        const span = this.querySelector('span');
-        if (!span) return;
-        const { offsetX: x, offsetY: y } = e,
-              { offsetWidth: w, offsetHeight: h } = this,
-              move = 4,
-              xMove = x / w * (move * 2) - move,
-              yMove = y / h * (move * 2) - move;
-        span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
-        if (e.type === 'mouseleave') span.style.transform = '';
-      };
+      // Proximity threshold — distance in px from top-right corner
+      const PROX_X = 320; // how far left from right edge
+      const PROX_Y = 100; // how far down from top
 
-      navLinks.forEach(a => {
-        // Wrap text in span if not already
+      let isExpanded = false;
+      let collapseTimer = null;
+
+      function expand() {
+        if (isExpanded) return;
+        isExpanded = true;
+        clearTimeout(collapseTimer);
+        proxLinks.classList.add('expanded');
+        proxBurger.classList.add('open');
+      }
+
+      function collapse() {
+        collapseTimer = setTimeout(() => {
+          isExpanded = false;
+          proxLinks.classList.remove('expanded');
+          proxBurger.classList.remove('open');
+        }, 180); // small grace delay to prevent flicker
+      }
+
+      document.addEventListener('mousemove', e => {
+        const fromRight = window.innerWidth - e.clientX;
+        const fromTop   = e.clientY;
+
+        if (fromRight < PROX_X && fromTop < PROX_Y) {
+          clearTimeout(collapseTimer);
+          expand();
+        } else if (isExpanded) {
+          // Keep open if hovering over the nav itself
+          const navEl = document.getElementById('mainNav');
+          const rect  = navEl.getBoundingClientRect();
+          const overNav = e.clientX >= rect.left && e.clientX <= rect.right &&
+                          e.clientY >= rect.top  && e.clientY <= rect.bottom;
+          if (!overNav) collapse();
+          else clearTimeout(collapseTimer);
+        }
+      });
+
+      // Also keep open while mouse is over nav
+      document.getElementById('mainNav').addEventListener('mouseleave', () => {
+        if (isExpanded) collapse();
+      });
+
+      // Magnetic float + cursor scale on prox-links
+      const proxAnchors = document.querySelectorAll('.prox-links a');
+      proxAnchors.forEach(a => {
         if (!a.querySelector('span')) {
           a.innerHTML = '<span>' + a.innerHTML + '</span>';
         }
+        const animateit = function(e) {
+          const span = this.querySelector('span');
+          if (!span) return;
+          const { offsetX: x, offsetY: y } = e,
+                { offsetWidth: w, offsetHeight: h } = this,
+                move = 4,
+                xMove = x / w * (move * 2) - move,
+                yMove = y / h * (move * 2) - move;
+          span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+          if (e.type === 'mouseleave') span.style.transform = '';
+        };
         a.addEventListener('mousemove', animateit);
         a.addEventListener('mouseleave', animateit);
         a.addEventListener('mouseenter', () => {
@@ -868,11 +1021,24 @@
         slideCounter.textContent = slides.length > 1 ? `${slideIndex + 1} of ${slides.length}` : '';
       }
 
+      // ── Swap slide description if per-slide desc exists ───────────
+      function updateSlideDesc(projectItem) {
+        const slide = slides[slideIndex];
+        const desc = (slide && slide.desc) ? slide.desc : projectItem.dataset.desc;
+        modalDesc.style.transition = 'opacity 0.25s ease';
+        modalDesc.style.opacity = '0';
+        setTimeout(() => {
+          modalDesc.textContent = desc;
+          modalDesc.style.opacity = '1';
+        }, 150);
+      }
+
       // ── Slide navigation ──────────────────────────────────────────
       function goToSlide(index) {
         slideIndex = index;
         carouselTrack.style.transform = `translateX(-${slideIndex * 100}%)`;
         updateSlideCounter();
+        updateSlideDesc(projects[projectIndex]);
         carouselPrev.classList.toggle('hidden', slideIndex === 0);
         carouselNext.classList.toggle('hidden', slideIndex === slides.length - 1);
       }
@@ -911,18 +1077,21 @@
         carouselPrev.classList.add('hidden');
         carouselNext.classList.toggle('hidden', slides.length <= 1);
 
-        // Animate text in
-        [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach(el => {
+        // Animate text in — client, title, type, year stay constant; desc swaps per slide
+        [modalClient, modalTitle, modalType, modalYear].forEach(el => {
           el.style.transition = 'none';
           el.style.opacity = '0';
           el.style.transform = 'translateY(8px)';
         });
+        modalDesc.style.transition = 'none';
+        modalDesc.style.opacity = '0';
         setTimeout(() => {
           modalClient.textContent = item.dataset.client;
           modalTitle.textContent  = item.dataset.title;
-          modalDesc.textContent   = item.dataset.desc;
           modalType.textContent   = item.dataset.type;
           modalYear.textContent   = item.dataset.year;
+          const firstDesc = (slides[0] && slides[0].desc) ? slides[0].desc : item.dataset.desc;
+          modalDesc.textContent = firstDesc;
           [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach((el, i) => {
             el.style.transition = `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`;
             el.style.opacity = '1';
