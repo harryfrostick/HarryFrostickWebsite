@@ -49,9 +49,6 @@
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
     nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
-    .nav-links a:hover { opacity: 1; }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
@@ -171,20 +168,7 @@
     nav { transition: none; }
     .nav-links a { transition: opacity 0.3s, color 0.4s; }
 
-    /* Hamburger */
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
-    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--fg); transition: transform 0.3s, opacity 0.3s; }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,10vw,4rem); color: var(--fg); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
-    .mobile-menu a:hover { color: var(--accent); }
-    @media (max-width: 768px) {
-      .nav-hamburger { display: flex; }
-    }
- ────────────────────────────────────────────── */
+    /* ── Proximity nav ────────────────────────────────────────────── */
     .prox-nav {
       display: flex;
       align-items: center;
@@ -257,10 +241,18 @@
       .prox-nav { display: none; }
       .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
     }
-      25%  { transform: translateY(-0.03em); }
-      50%  { transform: translateY(0); }
-      75%  { transform: translateY(0.03em); }
-      100% { transform: translateY(0); }
+    /* Hamburger */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--fg); transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,10vw,4rem); color: var(--fg); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
     }
   </style>
 </head>
@@ -268,25 +260,29 @@
 
 
   <div class="cursor" id="cursor"></div>
-  <nav>
-        <a href="index.html" class="nav-logo" id="navLogo">
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo" id="navLogo">
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
+
     <!-- Proximity nav — desktop only -->
     <div class="prox-nav" id="proxNav">
       <ul class="prox-links" id="proxLinks">
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="portfolio.html">Work</a></li>
-        <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="contact.html">Get in touch</a></li>
+        <li><a href="about.html" class="active"><span>About</span></a></li>
+        <li><a href="portfolio.html"><span>Work</span></a></li>
+        <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener"><span>Instagram</span></a></li>
+        <li><a href="contact.html"><span>Get in touch</span></a></li>
       </ul>
       <button class="prox-burger" id="proxBurger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+
+    <!-- Mobile menu button -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -294,8 +290,6 @@
     <a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a>
     <a href="contact.html">Get in touch</a>
   </div>
-
-  </nav>
 
   <div class="page">
 
@@ -336,12 +330,12 @@
     <div class="clients-section">
       <p class="section-label">Creating for</p>
       <div class="clients-grid">
-        <div class="client"><img class="client-logo" src="assets/logo-pepsi.svg" alt="Pepsi" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-sky.svg" alt="Sky" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-mars.svg" alt="Mars" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-bt.svg" alt="BT" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-waitrose.svg" alt="Waitrose" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-monzo.svg" alt="Monzo" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-pepsi.webp" alt="Pepsi" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-sky.webp" alt="Sky" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-mars.webp" alt="Mars" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-bt.webp" alt="BT" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-waitrose.webp" alt="Waitrose" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-monzo.webp" alt="Monzo" /></div>
       </div>
     </div>
 
@@ -544,27 +538,63 @@
       });
     }
 
-    // Nav magnetic float + cursor scale
+    // ── Proximity nav ──────────────────────────────────────────────
     (function() {
-      const navLinks = document.querySelectorAll('.nav-links a');
+      const proxLinks  = document.getElementById('proxLinks');
+      const proxBurger = document.getElementById('proxBurger');
+      const PROX_X = 320;
+      const PROX_Y = 100;
+      let isExpanded = false;
+      let collapseTimer = null;
 
-      const animateit = function(e) {
-        const span = this.querySelector('span');
-        if (!span) return;
-        const { offsetX: x, offsetY: y } = e,
-              { offsetWidth: w, offsetHeight: h } = this,
-              move = 4,
-              xMove = x / w * (move * 2) - move,
-              yMove = y / h * (move * 2) - move;
-        span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
-        if (e.type === 'mouseleave') span.style.transform = '';
-      };
-
-      navLinks.forEach(a => {
-        // Wrap text in span if not already
+      function expand() {
+        if (isExpanded) return;
+        isExpanded = true;
+        clearTimeout(collapseTimer);
+        proxLinks.classList.add('expanded');
+        proxBurger.classList.add('open');
+      }
+      function collapse() {
+        collapseTimer = setTimeout(() => {
+          isExpanded = false;
+          proxLinks.classList.remove('expanded');
+          proxBurger.classList.remove('open');
+        }, 180);
+      }
+      document.addEventListener('mousemove', e => {
+        const fromRight = window.innerWidth - e.clientX;
+        const fromTop   = e.clientY;
+        if (fromRight < PROX_X && fromTop < PROX_Y) {
+          clearTimeout(collapseTimer);
+          expand();
+        } else if (isExpanded) {
+          const navEl = document.getElementById('mainNav');
+          const rect  = navEl.getBoundingClientRect();
+          const overNav = e.clientX >= rect.left && e.clientX <= rect.right &&
+                          e.clientY >= rect.top  && e.clientY <= rect.bottom;
+          if (!overNav) collapse();
+          else clearTimeout(collapseTimer);
+        }
+      });
+      document.getElementById('mainNav').addEventListener('mouseleave', () => {
+        if (isExpanded) collapse();
+      });
+      const proxAnchors = document.querySelectorAll('.prox-links a');
+      proxAnchors.forEach(a => {
         if (!a.querySelector('span')) {
           a.innerHTML = '<span>' + a.innerHTML + '</span>';
         }
+        const animateit = function(e) {
+          const span = this.querySelector('span');
+          if (!span) return;
+          const { offsetX: x, offsetY: y } = e,
+                { offsetWidth: w, offsetHeight: h } = this,
+                move = 4,
+                xMove = x / w * (move * 2) - move,
+                yMove = y / h * (move * 2) - move;
+          span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+          if (e.type === 'mouseleave') span.style.transform = '';
+        };
         a.addEventListener('mousemove', animateit);
         a.addEventListener('mouseleave', animateit);
         a.addEventListener('mouseenter', () => {
@@ -595,7 +625,7 @@
         renderer: 'svg',
         loop: true,
         autoplay: false,
-        path: 'HF_Ident.json'
+        path: 'Assets/HF_Ident.json'
       });
       anim.addEventListener('DOMLoaded', function() {
         anim.goToAndStop(0, true);

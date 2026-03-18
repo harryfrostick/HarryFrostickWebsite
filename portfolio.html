@@ -6,7 +6,7 @@
   <title>Work — Harry Frostick</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,7 +24,7 @@
       background-attachment: fixed;
       color: var(--fg);
       font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.6;
       overflow-x: hidden;
       cursor: none;
@@ -46,8 +46,7 @@
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
     nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
-
-    /* ── Proximity nav ────────────────────────────────────────────── */
+ ────────────────────────────────────────────── */
     .prox-nav {
       display: flex;
       align-items: center;
@@ -139,19 +138,6 @@
     .page-header { margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
     .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
     .page-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; }
-    .work-wave { display: flex; }
-    .wave-letter {
-      display: inline-block;
-      animation: wave 2s ease-in-out infinite;
-    }
-    .wave-letter:nth-child(1) { animation-delay: 0s; }
-    .wave-letter:nth-child(2) { animation-delay: 0.2s; }
-    .wave-letter:nth-child(3) { animation-delay: 0.4s; }
-    .wave-letter:nth-child(4) { animation-delay: 0.6s; }
-    @keyframes wave {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-0.12em); }
-    }
     .page-divider { width: 40px; height: 1px; background: var(--accent); margin: 2rem 0; }
     .page-sub { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
@@ -271,7 +257,7 @@
     /* Nav logo */
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
-    .nav-logo-lottie { width: 41px; height: 55px; display: block; }
+    .nav-logo-lottie { width: 49px; height: 66px; display: block; }
 
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
@@ -374,7 +360,7 @@
       font-size: 0.82rem;
       line-height: 1.85;
       color: rgba(15,15,15,0.6);
-      font-weight: 300;
+      font-weight: 400;
     }
     .modal-info-bottom {
       display: flex;
@@ -644,9 +630,7 @@
 
     <div class="page-header">
       <p class="eyebrow">Selected work</p>
-      <h1 class="page-headline work-wave">
-        <span class="wave-letter" style="--i:0">W</span><span class="wave-letter" style="--i:1">O</span><span class="wave-letter" style="--i:2">R</span><span class="wave-letter" style="--i:3">K</span>
-      </h1>
+      <h1 class="page-headline">Work</h1>
       <div class="page-divider"></div>
     </div>
 
