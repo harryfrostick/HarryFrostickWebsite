@@ -6,7 +6,7 @@
   <title>About — Harry Frostick</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,7 +26,7 @@
       background-attachment: fixed;
       color: var(--fg);
       font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -53,13 +53,14 @@
     .nav-links a { color: var(--fg); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; mix-blend-mode: difference; }
     .nav-links a:hover { opacity: 1; }
 
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes statFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes drawPath { to { stroke-dashoffset: 0; } }
     @keyframes wordFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-    .scroll-reveal { opacity: 0; transform: translateX(30px); transition: none; }
-    .scroll-reveal.visible { animation: fadeSlideRight 0.75s ease forwards; }
+    .scroll-reveal { opacity: 0; transform: translateY(30px); transition: none; }
+    .scroll-reveal.visible { animation: statFadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
 
     .stat-infinity { display: flex; align-items: center; flex: 1; }
     .accent-plus { color: var(--accent); }
@@ -75,7 +76,7 @@
     /* Hero */
     .about-hero { min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.15s forwards; }
     .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-    .about-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; }
+    .about-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 16vw, 18rem); line-height: 0.88; letter-spacing: -0.01em; opacity: 0; transform: translateY(40px); animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards; }
     .about-divider { width: 40px; height: 1px; background: var(--accent); margin: 2.5rem 0; }
     .about-bottom { display: flex; align-items: flex-start; justify-content: space-between; gap: 6rem; }
     .about-intro { font-family: 'Montserrat', sans-serif; font-style: normal; font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); max-width: 480px; opacity: 0.85; }
@@ -86,8 +87,8 @@
 
     /* Stats */
     .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-bottom: 4rem; }
-    .stat { padding: 2.5rem; border: 1px solid var(--line); transition: background 0.3s, border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; transition: background 0.3s, border-color 0.3s; }
-    .stat:hover { background: rgba(229,78,119,0.05); border-color: var(--accent); }
+    .stat { padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; transition: background 0.3s; }
+    .stat:hover { background: rgba(229,78,119,0.05); }
     .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem,8vw,9rem); line-height: 1; color: var(--fg); flex: 1; display: flex; align-items: center; }
     .stat-num .accent-plus { color: var(--accent); }
     .stat-list { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem,2.8vw,2.8rem); line-height: 1.05; color: var(--fg); flex: 1; display: flex; flex-direction: column; justify-content: center; }
@@ -97,14 +98,18 @@
     .clients-section { opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.45s forwards; margin-bottom: 4rem; }
     .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
     .clients-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; }
-    .client { border: 1px solid var(--line); transition: background 0.3s, border-color 0.3s; padding: 2rem 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.3s, border-color 0.3s; }
-    .client:hover { background: rgba(229,78,119,0.05); border-color: var(--accent); }
-    .client-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.08em; color: #0f0f0f; text-align: center; transition: color 0.3s; }
-    .client:hover .client-name { color: var(--accent); }
+    .client { padding: 2rem 1.5rem; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
+    .client:hover { opacity: 0.6; }
+    .client-logo { max-height: 32px; max-width: 100%; width: auto; display: block; filter: grayscale(1) brightness(0); transition: filter 0.3s; }
+    .client:hover .client-logo { filter: grayscale(1) brightness(0) opacity(0.5); }
+    
 
     /* What's next */
-    .looking-section { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s ease 0.55s forwards; }
-    .looking-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,6.5vw,7.5rem); line-height: 0.88; color: #0f0f0f; position: sticky; top: 2rem; }
+    .looking-section { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; }
+    .looking-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,6.5vw,7.5rem); line-height: 0.88; color: #0f0f0f; position: sticky; top: 2rem; opacity: 0; transform: translateX(30px); transition: none; }
+    .looking-label.visible { animation: fadeSlideRight 0.85s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .looking-body-wrap { opacity: 0; transform: translateX(30px); transition: none; }
+    .looking-body-wrap.visible { animation: fadeSlideRight 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s forwards; }
     .looking-body { font-weight: 600; font-size: 0.88rem; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); opacity: 0.85; margin-bottom: 1.5rem; }
     .looking-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
     .tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #0f0f0f; border: 1px solid var(--line); padding: 0.45rem 1rem; transition: color 0.3s, border-color 0.3s; }
@@ -155,7 +160,7 @@
     /* Nav logo */
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; }
     .nav-logo:hover { opacity: 1; }
-    .nav-logo-lottie { width: 41px; height: 55px; display: block; }
+    .nav-logo-lottie { width: 49px; height: 66px; display: block; }
 
     .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
@@ -179,6 +184,84 @@
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; }
     }
+ ────────────────────────────────────────────── */
+    .prox-nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .prox-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      overflow: hidden;
+      max-width: 0;
+      transition: max-width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .prox-links.expanded { max-width: 700px; }
+    .prox-links li {
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .prox-links.expanded li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+    .prox-links.expanded li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.22s; }
+    .prox-links.expanded li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.34s; }
+    .prox-links.expanded li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.46s; }
+    .prox-links:not(.expanded) li:nth-child(1) { transition-delay: 0s; }
+    .prox-links:not(.expanded) li:nth-child(2) { transition-delay: 0.08s; }
+    .prox-links:not(.expanded) li:nth-child(3) { transition-delay: 0.16s; }
+    .prox-links:not(.expanded) li:nth-child(4) { transition-delay: 0.24s; }
+    .prox-links a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      transition: opacity 0.3s, color 0.4s;
+      mix-blend-mode: difference;
+    }
+    .prox-links a:hover,
+    .prox-links a.active { opacity: 1; }
+    .prox-links a span { display: inline-block; transition: transform 0.1s linear; }
+    .prox-burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: none;
+      padding: 6px;
+      background: none;
+      border: none;
+      margin-left: 1.5rem;
+      flex-shrink: 0;
+    }
+    .prox-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--fg);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                  opacity 0.25s ease,
+                  width 0.3s ease;
+      transform-origin: center;
+    }
+    .prox-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .prox-burger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .prox-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: none !important; }
+    @media (max-width: 768px) {
+      .prox-nav { display: none; }
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    }
+      25%  { transform: translateY(-0.03em); }
+      50%  { transform: translateY(0); }
+      75%  { transform: translateY(0.03em); }
+      100% { transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -189,12 +272,18 @@
         <a href="index.html" class="nav-logo" id="navLogo">
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
-    <ul class="nav-links">
-      <li><a href="about.html">About</a></li>
-      <li><a href="portfolio.html">Work</a></li>
-      <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="contact.html">Get in touch</a></li>
-    </ul>
+    <!-- Proximity nav — desktop only -->
+    <div class="prox-nav" id="proxNav">
+      <ul class="prox-links" id="proxLinks">
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="contact.html">Get in touch</a></li>
+      </ul>
+      <button class="prox-burger" id="proxBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -222,7 +311,7 @@
 
     <div class="stats">
       <div class="stat scroll-reveal">
-        <p class="stat-num"><span id="counterNum">7</span><span class="accent-plus">+</span></p>
+        <p class="stat-num"><span id="counterNum">7</span>+</p>
         <p class="stat-label">Years of experience</p>
       </div>
       <div class="stat scroll-reveal">
@@ -237,7 +326,7 @@
         <svg id="infinitySvg" class="stat-num" viewBox="0 0 184.28 78.88" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:1;width:100%;max-width:65px;overflow:visible;">
           <path id="infinityPath"
             d="M35.87,5.5C18.52,5.5,5.31,22.47,5.5,39.44c.19,16.97,13.77,33.94,30.37,33.94,54.61,0,56.32-67.88,112.63-67.88,16.74,0,30.04,16.97,30.28,33.94s-12.59,33.94-30.28,33.94c-56.32,0-56.32-67.88-112.63-67.88Z"
-            stroke="var(--accent)" stroke-width="13" fill="none"
+            stroke="var(--fg)" stroke-width="13" fill="none"
             stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <p class="stat-label">Frames drawn by hand</p>
@@ -247,21 +336,21 @@
     <div class="clients-section">
       <p class="section-label">Creating for</p>
       <div class="clients-grid">
-        <div class="client"><p class="client-name">Pepsi</p></div>
-        <div class="client"><p class="client-name">Sky</p></div>
-        <div class="client"><p class="client-name">Mars</p></div>
-        <div class="client"><p class="client-name">BT</p></div>
-        <div class="client"><p class="client-name">Waitrose</p></div>
-        <div class="client"><p class="client-name">Monzo</p></div>
+        <div class="client"><img class="client-logo" src="assets/logo-pepsi.svg" alt="Pepsi" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-sky.svg" alt="Sky" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-mars.svg" alt="Mars" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-bt.svg" alt="BT" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-waitrose.svg" alt="Waitrose" /></div>
+        <div class="client"><img class="client-logo" src="assets/logo-monzo.svg" alt="Monzo" /></div>
       </div>
     </div>
 
 
     <div class="looking-section">
       <div class="looking-label">What's<br>next.</div>
-      <div>
+      <div class="looking-body-wrap">
         <p class="looking-body">After years of honing my craft on commercial projects, I am carving out more space for personal work — the kind that can only come from someone who grew up drawing.</p>
-        <p class="about-body" style="margin-bottom:1.5rem;">I am drawn to <span class="kw">character design</span>, <span class="kw">frame-by-frame animation</span>, and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent commission, or something in between — if it lets me push the boundaries of <span class="kw">what motion can feel like</span>, I am interested.</p>
+        <p class="about-body" style="margin-bottom:1.5rem;">I am drawn to character design, frame-by-frame animation, and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent commission, or something in between — if it lets me push the boundaries of what motion can feel like, I am interested.</p>
         <div class="looking-tags">
           <span class="tag">Drawing</span>
           <span class="tag">Character Design</span>
@@ -368,7 +457,7 @@
     });
 
     // Add scroll-reveal to non-stats sections too
-    document.querySelectorAll('.clients-section, .looking-section, .about-cta, .section-divider').forEach((el, i) => {
+    document.querySelectorAll('.clients-section, .about-cta, .section-divider').forEach((el, i) => {
       el.style.opacity = '0';
       el.style.transform = 'translateX(30px)';
       el.style.transition = 'none';
@@ -410,6 +499,27 @@
     }, { threshold: 0.3 });
 
     statsObserver.observe(statsSection);
+
+    // ── What's Next scroll reveal ───────────────────────────────────
+    const lookingLabel = document.querySelector('.looking-label');
+    const lookingBodyWrap = document.querySelector('.looking-body-wrap');
+
+    const lookingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target === lookingLabel) {
+            lookingLabel.classList.add('visible');
+            // Body wrap follows 200ms later
+            setTimeout(() => {
+              if (lookingBodyWrap) lookingBodyWrap.classList.add('visible');
+            }, 200);
+          }
+          lookingObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    if (lookingLabel) lookingObserver.observe(lookingLabel);
 
 
     // Nav scrolled state
@@ -485,7 +595,7 @@
         renderer: 'svg',
         loop: true,
         autoplay: false,
-        path: 'Assets/HF_Ident.json'
+        path: 'HF_Ident.json'
       });
       anim.addEventListener('DOMLoaded', function() {
         anim.goToAndStop(0, true);
