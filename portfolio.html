@@ -259,7 +259,7 @@
     .nav-logo:hover { opacity: 1; }
     .nav-logo-lottie { width: 49px; height: 66px; display: block; }
 
-    .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
+    .cursor { position: fixed; width: 12.7px; height: 12.7px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
     .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
     nav.scrolled .nav-links a { color: var(--accent); opacity: 0.7; }
@@ -267,19 +267,7 @@
     nav { transition: none; }
     .nav-links a { transition: opacity 0.3s, color 0.4s; }
 
-    /* Hamburger */
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
-    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--fg); transition: transform 0.3s, opacity 0.3s; }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,10vw,4rem); color: var(--fg); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
-    .mobile-menu a:hover { color: var(--accent); }
-    @media (max-width: 768px) {
-      .nav-hamburger { display: flex; }
-    }
+
     /* ── Modal ────────────────────────────────────────────────── */
     .modal-backdrop {
       position: fixed;
@@ -588,6 +576,94 @@
     }
     /* Hide prev on first slide, next on last */
     .carousel-nav.hidden { opacity: 0 !important; pointer-events: none !important; }
+    /* ── Proximity nav ────────────────────────────────────────────── */
+    .prox-nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .prox-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      overflow: hidden;
+      max-width: 0;
+      transition: max-width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .prox-links.expanded { max-width: 700px; }
+    .prox-links li {
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .prox-links.expanded li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+    .prox-links.expanded li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.22s; }
+    .prox-links.expanded li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.34s; }
+    .prox-links.expanded li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.46s; }
+    .prox-links:not(.expanded) li:nth-child(1) { transition-delay: 0s; }
+    .prox-links:not(.expanded) li:nth-child(2) { transition-delay: 0.08s; }
+    .prox-links:not(.expanded) li:nth-child(3) { transition-delay: 0.16s; }
+    .prox-links:not(.expanded) li:nth-child(4) { transition-delay: 0.24s; }
+    .prox-links a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      transition: opacity 0.3s, color 0.4s;
+      mix-blend-mode: difference;
+    }
+    .prox-links a:hover,
+    .prox-links a.active { opacity: 1; }
+    .prox-links a span { display: inline-block; transition: transform 0.1s linear; }
+    .prox-burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: none;
+      padding: 6px;
+      background: none;
+      border: none;
+      margin-left: 1.5rem;
+      flex-shrink: 0;
+    }
+    .prox-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--fg);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                  opacity 0.25s ease,
+                  width 0.3s ease;
+      transform-origin: center;
+    }
+    .prox-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .prox-burger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .prox-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: none !important; }
+    @media (max-width: 768px) {
+      .prox-nav { display: none; }
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    }
+    /* Hamburger */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--fg); transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; cursor: none; color: var(--fg); display: flex; align-items: center; justify-content: center; padding: 0.5rem; transition: color 0.2s, transform 0.3s; }
+    .mobile-menu-close:hover { color: var(--accent); transform: rotate(90deg); }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,16vw,7rem); color: var(--fg); text-decoration: none; letter-spacing: -0.05em; line-height: 0.85; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
@@ -619,6 +695,11 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M3 3l16 16M19 3L3 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="portfolio.html">Work</a>
@@ -670,9 +751,9 @@
          data-type="Frame-by-Frame Animation"
          data-year="2024"
          data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — every frame crafted with care to give the characters warmth and weight."
-         data-images='[{"src":"Projects/Thumbnail_Duck_Boy.webp","type":"image"}]'>
+         data-images='[{"src":"Projects/Duck&Boy_1.mp4","type":"video"},{"src":"Projects/Duck&Boy_2.mp4","type":"video"},{"src":"Projects/Duck&Boy_3.mp4","type":"video"},{"src":"Projects/Duck&Boy_4.mp4","type":"video"},{"src":"Projects/Duck&Boy_5.mp4","type":"video"},{"src":"Projects/Duck&Boy_6.gif","type":"image"},{"src":"Projects/Duck&boy_7.mp4","type":"video"},{"src":"Projects/Duck&Boy_8.mp4","type":"video"},{"src":"Projects/Duck&Boy_9.mp4","type":"video"},{"src":"Projects/Duck&Boy_10.mp4","type":"video"}]'>
         <div class="masonry-thumb">
-          <img src="Projects/Thumbnail_Duck_Boy.webp" alt="Duck &amp; Boy" />
+          <img src="Projects/Thumbnail_Duck & Boy.webp" alt="Duck &amp; Boy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Duck &amp; Boy</p></div>
       </a>
@@ -682,7 +763,7 @@
          data-type="Logo Animation"
          data-year="2024"
          data-desc="A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
-         data-images='[{"src":"Projects/Thumbnail_Zora.webp","type":"image"}]'>
+         data-images='[{"src":"Projects/Zorra_1.mp4","type":"video"},{"src":"Projects/Zorra_2.png","type":"image"},{"src":"Projects/Zorra_3.mp4","type":"video"},{"src":"Projects/Zorra_4.mp4","type":"video"},{"src":"Projects/Zorra_5.mp4","type":"video"},{"src":"Projects/Zorra_6.mp4","type":"video"},{"src":"Projects/Zorra_7.mp4","type":"video"}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Zora.webp" alt="Zorra" />
         </div>
@@ -694,7 +775,7 @@
          data-type="Frame-by-Frame · Illustration"
          data-year="2025"
          data-desc="A personal project exploring the small rituals and routines we can't seem to shake. Illustrated and animated frame-by-frame — leaning into the lo-fi charm that only hand-drawn motion can carry."
-         data-images='[{"src":"Projects/Bad_Habits_1.mp4","type":"video","desc":"Staying up too late — again. This short follows the familiar spiral of one more episode, one more scroll, one more reason not to sleep."},{"src":"Projects/Bad_Habits_2.mp4","type":"video","desc":"The snooze button: a daily negotiation. Frame-by-frame animation capturing that half-conscious battle between the alarm and the pillow."},{"src":"Projects/Bad_Habits_3.mp4","type":"video","desc":"Mindless snacking. The hand that reaches without thinking — illustrated with the kind of loose, instinctive energy the habit itself has."},{"src":"Projects/Bad_Habits_4.mp4","type":"video","desc":"Phone first, everything else second. A small portrait of the morning ritual nobody admits to but everyone recognises."},{"src":"Projects/Bad_Habits_5.mp4","type":"video","desc":"Putting it off until tomorrow. Again. The final scene in the series — drawn with the same warmth and self-awareness that runs through the whole project."},{"src":"Projects/Bad_Habits_6.webp","type":"image","desc":"Development stills from the project — early character explorations and scene compositions, hand-drawn before moving into animation."},{"src":"Projects/Bad_Habits_7.webp","type":"image","desc":"Colour and texture studies. Each scene in Bad Habits uses a distinct palette to give each habit its own mood and feeling."}]'>
+         data-images='[{"src":"Projects/Bad_Habits_1.mp4","type":"video","desc":"Staying up too late — again. This short follows the familiar spiral of one more episode, one more scroll, one more reason not to sleep."},{"src":"Projects/Bad_Habits_2.mp4","type":"video","desc":"The snooze button: a daily negotiation. Frame-by-frame animation capturing that half-conscious battle between the alarm and the pillow."},{"src":"Projects/Bad_Habits_3.mp4","type":"video","desc":"Mindless snacking. The hand that reaches without thinking — illustrated with the kind of loose, instinctive energy the habit itself has."},{"src":"Projects/Bad_Habits_4.mp4","type":"video","desc":"Phone first, everything else second. A small portrait of the morning ritual nobody admits to but everyone recognises."},{"src":"Projects/Bad_Habits_5.mp4","type":"video","desc":"Putting it off until tomorrow. Again. The final scene in the series — drawn with the same warmth and self-awareness that runs through the whole project."},{"src":"Projects/Bad_Habits_6.mp4","type":"video","desc":"The full project, compiled — every habit laid out in sequence."},{"src":"Projects/Bad_Habits_7.mp4","type":"video","desc":"An extended look at the animation process and the frame-by-frame craft behind each scene."},{"src":"Projects/Bad_Habits_8.mp4","type":"video","desc":"Further scenes exploring the quiet absurdity of our everyday rituals."},{"src":"Projects/Bad_Habits_9.mp4","type":"video","desc":"Character studies and movement tests — the building blocks of the finished animations."},{"src":"Projects/Bad_Habits_10.mp4","type":"video","desc":"Behind the scenes: early sketches and development work from the Bad Habits series."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Bad_Habits.webp" alt="Bad Habits" />
         </div>
@@ -704,6 +785,18 @@
         </div>
       </a>
       <a href="#" class="masonry-item" data-project="3"
+         data-title="BCN Moving Forward"
+         data-client="BCN"
+         data-type="Motion · Brand Animation"
+         data-year="2025"
+         data-desc="A motion project for BCN Moving Forward — bringing the brand's energy and momentum to life through a blend of animation, illustration and dynamic visual storytelling."
+         data-images='[{"src":"Projects/BCN_MovingForward_1.mp4","type":"video"},{"src":"Projects/BCN_MovingForward_2.webp","type":"image"},{"src":"Projects/BCN_MovingForward_3.webp","type":"image"},{"src":"Projects/BCN_MovingForward_4.webp","type":"image"},{"src":"Projects/BCN_MovingForward_5.webm","type":"video"},{"src":"Projects/BCN_MovingForward_6.webm","type":"video"},{"src":"Projects/BCN_MovingForward_7.webm","type":"video"},{"src":"Projects/BCN_MovingForward_8.webm","type":"video"}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_BCN_Moving Forward.webp" alt="BCN Moving Forward" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">BCN</p><p class="masonry-overlay-title">Moving Forward</p></div>
+      </a>
+      <a href="#" class="masonry-item" data-project="4"
          data-title="Lay's Max"
          data-client="Vidsy"
          data-type="Social Content · Motion"
@@ -719,203 +812,6 @@
     </div>
   </div>
 
-  <script>
-
-    const cursor = document.getElementById('cursor');
-
-    const TRAIL_COUNT = 90;
-    const echoes = [];
-    for (let i = 0; i < TRAIL_COUNT; i++) {
-      const el = document.createElement('div');
-      el.className = 'cursor-echo';
-      document.body.appendChild(el);
-      echoes.push({ el, x: 0, y: 0 });
-    }
-
-    let mouseX = 0, mouseY = 0;
-    let prevX = 0, prevY = 0;
-    let speed = 0;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top  = mouseY + 'px';
-    });
-
-    (function tick() {
-      const dx = mouseX - prevX;
-      const dy = mouseY - prevY;
-      speed = Math.sqrt(dx * dx + dy * dy);
-      prevX = mouseX;
-      prevY = mouseY;
-
-      const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 3.0)));
-
-      for (let i = 0; i < TRAIL_COUNT; i++) {
-        const echo = echoes[i];
-        const lag = (i + 1) * 0.007;
-        echo.x += (mouseX - echo.x) * (1 - lag);
-        echo.y += (mouseY - echo.y) * (1 - lag);
-
-        if (i < activeCount) {
-          const t = i / (activeCount - 1 || 1);
-          const size = 8.8 * (1 - t * 0.1);
-          const opacity = 0.55 * (1 - t);
-
-          echo.el.style.display = 'block';
-          echo.el.style.width  = size + 'px';
-          echo.el.style.height = size + 'px';
-          echo.el.style.left   = echo.x + 'px';
-          echo.el.style.top    = echo.y + 'px';
-          echo.el.style.opacity = opacity;
-          echo.el.style.background = '#ffffff';
-        } else {
-          echo.el.style.display = 'none';
-        }
-      }
-
-      requestAnimationFrame(tick);
-    })();
-
-
-    // Nav scrolled state
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // Hamburger menu (mobile)
-    const hamburger = document.getElementById('navHamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (hamburger && mobileMenu) {
-      hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('open');
-        mobileMenu.classList.toggle('open');
-      });
-      mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          hamburger.classList.remove('open');
-          mobileMenu.classList.remove('open');
-        });
-      });
-    }
-
-    // ── Proximity nav ──────────────────────────────────────────────
-    (function() {
-      const proxLinks = document.getElementById('proxLinks');
-      const proxBurger = document.getElementById('proxBurger');
-
-      // Proximity threshold — distance in px from top-right corner
-      const PROX_X = 320; // how far left from right edge
-      const PROX_Y = 100; // how far down from top
-
-      let isExpanded = false;
-      let collapseTimer = null;
-
-      function expand() {
-        if (isExpanded) return;
-        isExpanded = true;
-        clearTimeout(collapseTimer);
-        proxLinks.classList.add('expanded');
-        proxBurger.classList.add('open');
-      }
-
-      function collapse() {
-        collapseTimer = setTimeout(() => {
-          isExpanded = false;
-          proxLinks.classList.remove('expanded');
-          proxBurger.classList.remove('open');
-        }, 180); // small grace delay to prevent flicker
-      }
-
-      document.addEventListener('mousemove', e => {
-        const fromRight = window.innerWidth - e.clientX;
-        const fromTop   = e.clientY;
-
-        if (fromRight < PROX_X && fromTop < PROX_Y) {
-          clearTimeout(collapseTimer);
-          expand();
-        } else if (isExpanded) {
-          // Keep open if hovering over the nav itself
-          const navEl = document.getElementById('mainNav');
-          const rect  = navEl.getBoundingClientRect();
-          const overNav = e.clientX >= rect.left && e.clientX <= rect.right &&
-                          e.clientY >= rect.top  && e.clientY <= rect.bottom;
-          if (!overNav) collapse();
-          else clearTimeout(collapseTimer);
-        }
-      });
-
-      // Also keep open while mouse is over nav
-      document.getElementById('mainNav').addEventListener('mouseleave', () => {
-        if (isExpanded) collapse();
-      });
-
-      // Magnetic float + cursor scale on prox-links
-      const proxAnchors = document.querySelectorAll('.prox-links a');
-      proxAnchors.forEach(a => {
-        if (!a.querySelector('span')) {
-          a.innerHTML = '<span>' + a.innerHTML + '</span>';
-        }
-        const animateit = function(e) {
-          const span = this.querySelector('span');
-          if (!span) return;
-          const { offsetX: x, offsetY: y } = e,
-                { offsetWidth: w, offsetHeight: h } = this,
-                move = 4,
-                xMove = x / w * (move * 2) - move,
-                yMove = y / h * (move * 2) - move;
-          span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
-          if (e.type === 'mouseleave') span.style.transform = '';
-        };
-        a.addEventListener('mousemove', animateit);
-        a.addEventListener('mouseleave', animateit);
-        a.addEventListener('mouseenter', () => {
-          cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
-          cursor.style.mixBlendMode = 'difference';
-          cursor.style.transition = 'transform 0.3s ease';
-        });
-        a.addEventListener('mouseleave', () => {
-          cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-          cursor.style.mixBlendMode = 'multiply';
-          cursor.style.transition = 'transform 0.3s ease';
-        });
-      });
-    })();
-
-    document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('mouseenter', () => {});
-      el.addEventListener('mouseleave', () => {});
-    });
-    const featuredCard = document.querySelector('.featured-card');
-    const featuredVideo = document.getElementById('featuredVideo');
-    if (featuredCard && featuredVideo) {
-      featuredCard.addEventListener('mouseenter', () => featuredVideo.play());
-      featuredCard.addEventListener('mouseleave', () => { featuredVideo.pause(); featuredVideo.currentTime = 0; });
-    }
-  </script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-  <script>
-    (function() {
-      var logo = document.getElementById('navLogo');
-      var container = document.getElementById('navLottie');
-      var anim = lottie.loadAnimation({
-        container: container,
-        renderer: 'svg',
-        loop: true,
-        autoplay: false,
-        path: 'Assets/HF_Ident.json'
-      });
-      anim.addEventListener('DOMLoaded', function() {
-        anim.goToAndStop(0, true);
-      });
-      logo.addEventListener('mouseenter', function() {
-        anim.goToAndPlay(0, true);
-      });
-      logo.addEventListener('mouseleave', function() {
-        anim.goToAndStop(0, true);
-      });
-    })();
-  </script>
   <!-- Project Modal -->
   <div class="modal-backdrop" id="modalBackdrop">
     <button class="modal-close" id="modalClose" aria-label="Close">
@@ -978,46 +874,218 @@
   </div>
 
   <script>
-    // ── Modal + Carousel — runs after modal HTML is in the DOM ─────
+
+    const cursor = document.getElementById('cursor');
+
+    const TRAIL_COUNT = 90;
+    const echoes = [];
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const el = document.createElement('div');
+      el.className = 'cursor-echo';
+      document.body.appendChild(el);
+      echoes.push({ el, x: 0, y: 0 });
+    }
+
+    let mouseX = 0, mouseY = 0;
+    let prevX = 0, prevY = 0;
+    let speed = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top  = mouseY + 'px';
+    });
+
+    (function tick() {
+      const dx = mouseX - prevX;
+      const dy = mouseY - prevY;
+      speed = Math.sqrt(dx * dx + dy * dy);
+      prevX = mouseX;
+      prevY = mouseY;
+
+      const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 3.0)));
+
+      for (let i = 0; i < TRAIL_COUNT; i++) {
+        const echo = echoes[i];
+        const lag = (i + 1) * 0.007;
+        echo.x += (mouseX - echo.x) * (1 - lag);
+        echo.y += (mouseY - echo.y) * (1 - lag);
+
+        if (i < activeCount) {
+          const t = i / (activeCount - 1 || 1);
+          const size = 12.7 * (1 - t * 0.1);
+          const opacity = 0.55 * (1 - t);
+
+          echo.el.style.display = 'block';
+          echo.el.style.width  = size + 'px';
+          echo.el.style.height = size + 'px';
+          echo.el.style.left   = echo.x + 'px';
+          echo.el.style.top    = echo.y + 'px';
+          echo.el.style.opacity = opacity;
+          echo.el.style.background = '#ffffff';
+        } else {
+          echo.el.style.display = 'none';
+        }
+      }
+
+      requestAnimationFrame(tick);
+    })();
+
+
+    // Nav scrolled state
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hamburger menu (mobile)
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      });
+      const mobileClose = document.getElementById('mobileClose');
+      if (mobileClose) {
+        mobileClose.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      }
+    }
+
+    // ── Proximity nav ──────────────────────────────────────────────
     (function() {
-      const backdrop      = document.getElementById('modalBackdrop');
-      const modalClose    = document.getElementById('modalClose');
-      const modalPrev     = document.getElementById('modalPrev');      // project prev
-      const modalNext     = document.getElementById('modalNext');      // project next
-      const modalMedia    = document.getElementById('modalMedia');
-      const carouselTrack = document.getElementById('carouselTrack');
-      const carouselPrev  = document.getElementById('carouselPrev');   // slide prev
-      const carouselNext  = document.getElementById('carouselNext');   // slide next
-      const modalClient   = document.getElementById('modalClient');
-      const modalTitle    = document.getElementById('modalTitle');
-      const modalDesc     = document.getElementById('modalDesc');
-      const modalType     = document.getElementById('modalType');
-      const modalYear     = document.getElementById('modalYear');
-      const slideCounter  = document.getElementById('slideCounter');
+      const proxLinks  = document.getElementById('proxLinks');
+      const proxBurger = document.getElementById('proxBurger');
+      const PROX_X = 320;
+      const PROX_Y = 100;
+      let isExpanded = false;
+      let collapseTimer = null;
+
+      function expand() {
+        if (isExpanded) return;
+        isExpanded = true;
+        clearTimeout(collapseTimer);
+        proxLinks.classList.add('expanded');
+        proxBurger.classList.add('open');
+      }
+      function collapse() {
+        collapseTimer = setTimeout(() => {
+          isExpanded = false;
+          proxLinks.classList.remove('expanded');
+          proxBurger.classList.remove('open');
+        }, 180);
+      }
+      document.addEventListener('mousemove', e => {
+        const fromRight = window.innerWidth - e.clientX;
+        const fromTop   = e.clientY;
+        if (fromRight < PROX_X && fromTop < PROX_Y) {
+          clearTimeout(collapseTimer);
+          expand();
+        } else if (isExpanded) {
+          const navEl = document.getElementById('mainNav');
+          const rect  = navEl.getBoundingClientRect();
+          const overNav = e.clientX >= rect.left && e.clientX <= rect.right &&
+                          e.clientY >= rect.top  && e.clientY <= rect.bottom;
+          if (!overNav) collapse();
+          else clearTimeout(collapseTimer);
+        }
+      });
+      document.getElementById('mainNav').addEventListener('mouseleave', () => {
+        if (isExpanded) collapse();
+      });
+      const proxAnchors = document.querySelectorAll('.prox-links a');
+      proxAnchors.forEach(a => {
+        if (!a.querySelector('span')) {
+          a.innerHTML = '<span>' + a.innerHTML + '</span>';
+        }
+        const animateit = function(e) {
+          const span = this.querySelector('span');
+          if (!span) return;
+          const { offsetX: x, offsetY: y } = e,
+                { offsetWidth: w, offsetHeight: h } = this,
+                move = 4,
+                xMove = x / w * (move * 2) - move,
+                yMove = y / h * (move * 2) - move;
+          span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+          if (e.type === 'mouseleave') span.style.transform = '';
+        };
+        a.addEventListener('mousemove', animateit);
+        a.addEventListener('mouseleave', animateit);
+        a.addEventListener('mouseenter', () => {
+          cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
+          cursor.style.mixBlendMode = 'difference';
+          cursor.style.transition = 'transform 0.3s ease';
+        });
+        a.addEventListener('mouseleave', () => {
+          cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+          cursor.style.mixBlendMode = 'multiply';
+          cursor.style.transition = 'transform 0.3s ease';
+        });
+      });
+    })();
+
+    document.querySelectorAll('a,button').forEach(el => {
+      el.addEventListener('mouseenter', () => {});
+      el.addEventListener('mouseleave', () => {});
+    });
+
+  </script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <script>
+    (function() {
+      var logo = document.getElementById('navLogo');
+      var container = document.getElementById('navLottie');
+      var anim = lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: false,
+        path: 'Assets/HF_Ident.json'
+      });
+      anim.addEventListener('DOMLoaded', function() {
+        anim.goToAndStop(0, true);
+      });
+      logo.addEventListener('mouseenter', function() {
+        anim.goToAndPlay(0, true);
+      });
+      logo.addEventListener('mouseleave', function() {
+        anim.goToAndStop(0, true);
+      });
+    })();
+  </script>
+  <script>
+    // ── Modal + Carousel ───────────────────────────────────────────
+    (function() {
+      const backdrop     = document.getElementById('modalBackdrop');
+      const modalClose   = document.getElementById('modalClose');
+      const modalPrev    = document.getElementById('modalPrev');
+      const modalNext    = document.getElementById('modalNext');
+      const modalMedia   = document.getElementById('modalMedia');
+      const carouselTrack= document.getElementById('carouselTrack');
+      const carouselPrev = document.getElementById('carouselPrev');
+      const carouselNext = document.getElementById('carouselNext');
+      const slideCounter = document.getElementById('slideCounter');
+      const modalClient  = document.getElementById('modalClient');
+      const modalTitle   = document.getElementById('modalTitle');
+      const modalDesc    = document.getElementById('modalDesc');
+      const modalType    = document.getElementById('modalType');
+      const modalYear    = document.getElementById('modalYear');
 
       const projects = Array.from(document.querySelectorAll('.masonry-item[data-project]'));
-      let projectIndex = 0;
-      let slideIndex   = 0;
-      let slides       = [];
+      let projectIndex = 0, slideIndex = 0, slides = [];
 
-      // ── Slide counter text ─────────────────────────────────────────
       function updateSlideCounter() {
         slideCounter.textContent = slides.length > 1 ? `${slideIndex + 1} of ${slides.length}` : '';
       }
 
-      // ── Swap slide description if per-slide desc exists ───────────
-      function updateSlideDesc(projectItem) {
-        const slide = slides[slideIndex];
-        const desc = (slide && slide.desc) ? slide.desc : projectItem.dataset.desc;
-        modalDesc.style.transition = 'opacity 0.25s ease';
-        modalDesc.style.opacity = '0';
-        setTimeout(() => {
-          modalDesc.textContent = desc;
-          modalDesc.style.opacity = '1';
-        }, 150);
-      }
-
-      // ── Slide navigation ──────────────────────────────────────────
       function goToSlide(index) {
         slideIndex = index;
         carouselTrack.style.transform = `translateX(-${slideIndex * 100}%)`;
@@ -1027,13 +1095,19 @@
         carouselNext.classList.toggle('hidden', slideIndex === slides.length - 1);
       }
 
-      // ── Load a project into the modal ─────────────────────────────
+      function updateSlideDesc(item) {
+        const slide = slides[slideIndex];
+        const desc = (slide && slide.desc) ? slide.desc : item.dataset.desc;
+        modalDesc.style.transition = 'opacity 0.25s ease';
+        modalDesc.style.opacity = '0';
+        setTimeout(() => { modalDesc.textContent = desc; modalDesc.style.opacity = '1'; }, 150);
+      }
+
       function loadProject(index) {
         const item = projects[index];
         slides = JSON.parse(item.dataset.images || '[]');
         slideIndex = 0;
 
-        // Build carousel slides
         carouselTrack.innerHTML = '';
         slides.forEach(s => {
           const slide = document.createElement('div');
@@ -1045,14 +1119,12 @@
             slide.appendChild(vid);
           } else {
             const img = document.createElement('img');
-            img.src = s.src;
-            img.alt = item.dataset.title;
+            img.src = s.src; img.alt = item.dataset.title;
             slide.appendChild(img);
           }
           carouselTrack.appendChild(slide);
         });
 
-        // Toggle carousel UI — only show arrows/counter if >1 slide
         modalMedia.classList.toggle('has-carousel', slides.length > 1);
         updateSlideCounter();
         carouselTrack.style.transition = 'none';
@@ -1061,14 +1133,10 @@
         carouselPrev.classList.add('hidden');
         carouselNext.classList.toggle('hidden', slides.length <= 1);
 
-        // Animate text in — client, title, type, year stay constant; desc swaps per slide
         [modalClient, modalTitle, modalType, modalYear].forEach(el => {
-          el.style.transition = 'none';
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(8px)';
+          el.style.transition = 'none'; el.style.opacity = '0'; el.style.transform = 'translateY(8px)';
         });
-        modalDesc.style.transition = 'none';
-        modalDesc.style.opacity = '0';
+        modalDesc.style.transition = 'none'; modalDesc.style.opacity = '0';
         setTimeout(() => {
           modalClient.textContent = item.dataset.client;
           modalTitle.textContent  = item.dataset.title;
@@ -1078,13 +1146,11 @@
           modalDesc.textContent = firstDesc;
           [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach((el, i) => {
             el.style.transition = `opacity 0.3s ease ${i * 0.05}s, transform 0.3s ease ${i * 0.05}s`;
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
+            el.style.opacity = '1'; el.style.transform = 'translateY(0)';
           });
         }, 80);
       }
 
-      // ── Open / close ──────────────────────────────────────────────
       function openModal(index) {
         projectIndex = index;
         loadProject(index);
@@ -1098,17 +1164,13 @@
         setTimeout(() => { carouselTrack.innerHTML = ''; }, 350);
       }
 
-      // ── Event listeners ───────────────────────────────────────────
-      // Open on project card click
       projects.forEach((item, i) => {
         item.addEventListener('click', e => { e.preventDefault(); openModal(i); });
       });
 
-      // Close
       modalClose.addEventListener('click', closeModal);
       backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
 
-      // Outer project navigation
       modalPrev.addEventListener('click', () => {
         projectIndex = (projectIndex - 1 + projects.length) % projects.length;
         loadProject(projectIndex);
@@ -1118,11 +1180,9 @@
         loadProject(projectIndex);
       });
 
-      // Inner carousel navigation
       carouselPrev.addEventListener('click', e => { e.stopPropagation(); goToSlide(slideIndex - 1); });
       carouselNext.addEventListener('click', e => { e.stopPropagation(); goToSlide(slideIndex + 1); });
 
-      // Keyboard — arrow keys navigate slides first, then projects when at boundary
       document.addEventListener('keydown', e => {
         if (!backdrop.classList.contains('open')) return;
         if (e.key === 'Escape') { closeModal(); return; }
@@ -1136,7 +1196,6 @@
         }
       });
 
-      // Touch swipe on media
       let touchStartX = 0;
       modalMedia.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
       modalMedia.addEventListener('touchend', e => {
@@ -1147,6 +1206,7 @@
       });
     })();
   </script>
+
   <script>
     // ── Theatre modal — showreel ───────────────────────────────────
     (function() {
@@ -1161,7 +1221,6 @@
         video.currentTime = 0;
         video.play();
       }
-
       function closeTheatre() {
         backdrop.classList.remove('open');
         document.body.style.overflow = '';

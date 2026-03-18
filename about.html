@@ -159,7 +159,7 @@
     .nav-logo:hover { opacity: 1; }
     .nav-logo-lottie { width: 49px; height: 66px; display: block; }
 
-    .cursor { position: fixed; width: 8.8px; height: 8.8px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
+    .cursor { position: fixed; width: 12.7px; height: 12.7px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
     .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
     .kw { color: var(--accent); font-style: inherit; }
@@ -247,9 +247,11 @@
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .mobile-menu-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; cursor: none; color: var(--fg); display: flex; align-items: center; justify-content: center; padding: 0.5rem; transition: color 0.2s, transform 0.3s; }
+    .mobile-menu-close:hover { color: var(--accent); transform: rotate(90deg); }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: #fae6eb; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,10vw,4rem); color: var(--fg); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+    .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,16vw,7rem); color: var(--fg); text-decoration: none; letter-spacing: -0.05em; line-height: 0.85; transition: color 0.2s; }
     .mobile-menu a:hover { color: var(--accent); }
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; }
@@ -284,6 +286,11 @@
     </button>
   </nav>
   <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M3 3l16 16M19 3L3 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="portfolio.html">Work</a>
@@ -411,7 +418,7 @@
 
         if (i < activeCount) {
           const t = i / (activeCount - 1 || 1);
-          const size = 8.8 * (1 - t * 0.1);
+          const size = 12.7 * (1 - t * 0.1);
           const opacity = 0.55 * (1 - t);
 
           echo.el.style.display = 'block';
@@ -536,6 +543,13 @@
           mobileMenu.classList.remove('open');
         });
       });
+      const mobileClose = document.getElementById('mobileClose');
+      if (mobileClose) {
+        mobileClose.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      }
     }
 
     // ── Proximity nav ──────────────────────────────────────────────
