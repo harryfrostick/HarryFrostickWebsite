@@ -45,7 +45,7 @@
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
-    nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
+    nav::before { content: ''; position: absolute; inset: 0; height: 120px; background: linear-gradient(to bottom, #fae6eb 0%, #fae6eb 50%, transparent 100%); pointer-events: none; z-index: -1; }
  ────────────────────────────────────────────── */
     .prox-nav {
       display: flex;
@@ -545,6 +545,10 @@
       object-fit: contain;
       display: block;
     }
+    .carousel-slide video::-webkit-media-controls { opacity: 1; }
+    .carousel-slide video { opacity: 1; }
+    .carousel-slide video:not(:hover)::-webkit-media-controls { opacity: 0; }
+    .carousel-slide:hover video::-webkit-media-controls { opacity: 1; }
     /* Carousel arrows — sit on left/right of media */
     .carousel-nav {
       position: absolute;
@@ -807,6 +811,45 @@
           <img src="Projects/Thumbnail_Vidsy.webp" alt="Vidsy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Lay's Max</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="5"
+         data-title="Walkers"
+         data-client="Vidsy"
+         data-type="Social Content · Motion"
+         data-year="2025"
+         data-desc="Social video content created via Vidsy for Walkers — punchy, product-forward motion designed to perform across social platforms."
+         data-images='[{"src":"Projects/Vidsy_Walkers_1.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_2.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_3.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_4.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_5.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_6.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_7.mp4","type":"video"}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_Vidsy_Walkers.png" alt="Walkers" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Walkers</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="6"
+         data-title="Mountain Dew"
+         data-client="Vidsy"
+         data-type="Social Content · Motion"
+         data-year="2025"
+         data-desc="Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."
+         data-images='[{"src":"Projects/Vidsy_MountainDew_1.mp4","type":"video"},{"src":"Projects/Vidsy_MountainDew_2.png","type":"image"},{"src":"Projects/Vidsy_MountainDew_3.png","type":"image"},{"src":"Projects/Vidsy_MountainDew_4.mp4","type":"video"},{"src":"Projects/Vidsy_MountainDew_5.png","type":"image"},{"src":"Projects/Vidsy_MountainDew_6.webp","type":"image"},{"src":"Projects/Vidsy_MountainDew_7.mp4","type":"video"},{"src":"Projects/Vidsy_MountainDew_8.mp4","type":"video"}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_Vidsy_MountainDew.png" alt="Mountain Dew" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Mountain Dew</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="7"
+         data-title="TWSD"
+         data-client="Personal"
+         data-type="Illustration · Design"
+         data-year="2025"
+         data-desc="A personal illustration and design project — a collection of hand-crafted visuals exploring the visual language and aesthetic of TWSD."
+         data-images='[{"src":"Projects/TWSD_1.jpg","type":"image"},{"src":"Projects/TWSD_2.jpg","type":"image"},{"src":"Projects/TWSD_3.png","type":"image"},{"src":"Projects/TWSD_4.jpg","type":"image"},{"src":"Projects/TWSD_5.jpg","type":"image"},{"src":"Projects/TWSD_6.jpg","type":"image"},{"src":"Projects/TWSD_7.png","type":"image"},{"src":"Projects/TWSD_8.png","type":"image"},{"src":"Projects/TWSD_9.png","type":"image"}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_TWSD.png" alt="TWSD" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">TWSD</p></div>
       </a>
 
     </div>
@@ -1087,12 +1130,26 @@
       }
 
       function goToSlide(index) {
-        slideIndex = index;
+        // Capture muted state of current video before leaving
+        const currentSlide = carouselTrack.children[slideIndex];
+        let mutedState = false;
+        if (currentSlide) {
+          const currentVid = currentSlide.querySelector('video');
+          if (currentVid) { mutedState = currentVid.muted; currentVid.pause(); currentVid.currentTime = 0; }
+        }
+        // Wrap around for looping
+        slideIndex = (index + slides.length) % slides.length;
         carouselTrack.style.transform = `translateX(-${slideIndex * 100}%)`;
         updateSlideCounter();
         updateSlideDesc(projects[projectIndex]);
-        carouselPrev.classList.toggle('hidden', slideIndex === 0);
-        carouselNext.classList.toggle('hidden', slideIndex === slides.length - 1);
+        carouselPrev.classList.remove('hidden');
+        carouselNext.classList.remove('hidden');
+        // Autoplay new slide's video, inheriting muted state
+        const newSlide = carouselTrack.children[slideIndex];
+        if (newSlide) {
+          const vid = newSlide.querySelector('video');
+          if (vid) { vid.muted = mutedState; vid.currentTime = 0; vid.play().catch(() => {}); }
+        }
       }
 
       function updateSlideDesc(item) {
@@ -1114,8 +1171,8 @@
           slide.className = 'carousel-slide';
           if (s.type === 'video') {
             const vid = document.createElement('video');
-            vid.src = s.src; vid.autoplay = true; vid.loop = true;
-            vid.muted = true; vid.playsInline = true;
+            vid.src = s.src; vid.controls = true; vid.loop = true;
+            vid.playsInline = true; vid.muted = false;
             slide.appendChild(vid);
           } else {
             const img = document.createElement('img');
@@ -1130,8 +1187,14 @@
         carouselTrack.style.transition = 'none';
         carouselTrack.style.transform = 'translateX(0)';
         setTimeout(() => { carouselTrack.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)'; }, 20);
-        carouselPrev.classList.add('hidden');
+        carouselPrev.classList.toggle('hidden', slides.length <= 1);
         carouselNext.classList.toggle('hidden', slides.length <= 1);
+        // Play only the first slide's video
+        const firstSlide = carouselTrack.children[0];
+        if (firstSlide) {
+          const firstVid = firstSlide.querySelector('video');
+          if (firstVid) firstVid.play().catch(() => {});
+        }
 
         [modalClient, modalTitle, modalType, modalYear].forEach(el => {
           el.style.transition = 'none'; el.style.opacity = '0'; el.style.transform = 'translateY(8px)';
@@ -1161,6 +1224,8 @@
       function closeModal() {
         backdrop.classList.remove('open');
         document.body.style.overflow = '';
+        // Pause all videos before clearing
+        carouselTrack.querySelectorAll('video').forEach(v => v.pause());
         setTimeout(() => { carouselTrack.innerHTML = ''; }, 350);
       }
 
@@ -1186,14 +1251,8 @@
       document.addEventListener('keydown', e => {
         if (!backdrop.classList.contains('open')) return;
         if (e.key === 'Escape') { closeModal(); return; }
-        if (e.key === 'ArrowLeft') {
-          if (slideIndex > 0) goToSlide(slideIndex - 1);
-          else { projectIndex = (projectIndex - 1 + projects.length) % projects.length; loadProject(projectIndex); }
-        }
-        if (e.key === 'ArrowRight') {
-          if (slideIndex < slides.length - 1) goToSlide(slideIndex + 1);
-          else { projectIndex = (projectIndex + 1) % projects.length; loadProject(projectIndex); }
-        }
+        if (e.key === 'ArrowLeft')  goToSlide(slideIndex - 1);
+        if (e.key === 'ArrowRight') goToSlide(slideIndex + 1);
       });
 
       let touchStartX = 0;
@@ -1201,8 +1260,8 @@
       modalMedia.addEventListener('touchend', e => {
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) < 40) return;
-        if (diff > 0 && slideIndex < slides.length - 1) goToSlide(slideIndex + 1);
-        if (diff < 0 && slideIndex > 0) goToSlide(slideIndex - 1);
+        if (diff > 0) goToSlide(slideIndex + 1);
+        if (diff < 0) goToSlide(slideIndex - 1);
       });
     })();
   </script>

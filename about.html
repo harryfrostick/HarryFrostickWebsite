@@ -48,7 +48,7 @@
 
     /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; }
-    nav::before { content: ''; position: absolute; inset: 0; height: 80px; background: linear-gradient(to bottom, #fae6eb 0%, transparent 100%); pointer-events: none; z-index: -1; }
+    nav::before { content: ''; position: absolute; inset: 0; height: 120px; background: linear-gradient(to bottom, #fae6eb 0%, #fae6eb 50%, transparent 100%); pointer-events: none; z-index: -1; }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
@@ -97,8 +97,8 @@
     .clients-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; }
     .client { padding: 2rem 1.5rem; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
     .client:hover { opacity: 0.6; }
-    .client-logo { max-height: 32px; max-width: 100%; width: auto; display: block; filter: grayscale(1) brightness(0); transition: filter 0.3s; }
-    .client:hover .client-logo { filter: grayscale(1) brightness(0) opacity(0.5); }
+    .client-logo { max-height: 32px; max-width: 100%; width: auto; display: block; opacity: 0.75; transition: opacity 0.3s; }
+    .client:hover .client-logo { opacity: 0.4; }
     
 
     /* What's next */
