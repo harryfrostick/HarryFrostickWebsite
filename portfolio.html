@@ -545,9 +545,8 @@
       object-fit: contain;
       display: block;
     }
-    .carousel-slide video::-webkit-media-controls { opacity: 1; }
-    .carousel-slide video { opacity: 1; }
-    .carousel-slide video:not(:hover)::-webkit-media-controls { opacity: 0; }
+    .carousel-slide video { opacity: 1 !important; }
+    .carousel-slide video::-webkit-media-controls { opacity: 0; transition: opacity 0.2s; }
     .carousel-slide:hover video::-webkit-media-controls { opacity: 1; }
     /* Carousel arrows — sit on left/right of media */
     .carousel-nav {
@@ -732,7 +731,7 @@
         <div class="featured-info">
           <div>
             <h2 class="featured-title showreel-title">Showreel</h2>
-            <p class="featured-desc showreel-desc">A curated selection of motion design work, highlighting a versatile approach across styles, formats, and creative challenges.</p>
+            <p class="featured-desc showreel-desc">A curated selection of my motion design work, displaying a versatility across styles, project types, and creative challenges.</p>
           </div>
           <div class="featured-info-bottom showreel-info-bottom">
             <span class="featured-meta showreel-meta">Motion · Design · Illustration</span>
@@ -754,8 +753,8 @@
          data-client="Personal"
          data-type="Frame-by-Frame Animation"
          data-year="2024"
-         data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — every frame crafted with care to give the characters warmth and weight."
-         data-images='[{"src":"Projects/Duck&Boy_1.mp4","type":"video"},{"src":"Projects/Duck&Boy_2.mp4","type":"video"},{"src":"Projects/Duck&Boy_3.mp4","type":"video"},{"src":"Projects/Duck&Boy_4.mp4","type":"video"},{"src":"Projects/Duck&Boy_5.mp4","type":"video"},{"src":"Projects/Duck&Boy_6.gif","type":"image"},{"src":"Projects/Duck&boy_7.mp4","type":"video"},{"src":"Projects/Duck&Boy_8.mp4","type":"video"},{"src":"Projects/Duck&Boy_9.mp4","type":"video"},{"src":"Projects/Duck&Boy_10.mp4","type":"video"}]'>
+         data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — with every frame, a new part of the story unfolds"
+         data-images='[{"src": "Projects/Duck&Boy_1.mp4", "type": "video", "desc": "A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — with every frame, a new part of the story unfolds"}, {"src": "Projects/Duck&Boy_2.mp4", "type": "video", "desc": "An unlikely meeting. This pair appeared one evening while I doodled on my iPad."}, {"src": "Projects/Duck&Boy_3.mp4", "type": "video", "desc": "I wanted to develop my abilities in frame-by-frame animation, hoping for it to start to bleed into my commercial work. I decided to bring the doodle to life."}, {"src": "Projects/Duck&Boy_4.mp4", "type": "video", "desc": "A friend suggested to me that I should see what happens if I animated with a consistent character. I followed their advice and imagined them in different scenarios - often inspired by things that were happening in my life."}, {"src": "Projects/Duck&Boy_5.mp4", "type": "video", "desc": "It became a fun experiment, encouraging me to draw the pair in illustrations first, without worrying about the practicalities of animating them."}, {"src": "Projects/Duck&Boy_6.gif", "type": "image", "desc": "A story began to unfold. Looking intraspectively, I can see that what was unfolding was recreation of the same emotional journey that I was currently going through."}, {"src": "Projects/Duck&boy_7.mp4", "type": "video", "desc": "I had friends that were moving away, and moving abroad. And I was having to adjust to the change in my immediate social circles."}, {"src": "Projects/Duck&Boy_8.mp4", "type": "video", "desc": "I wasn't noticeably unhappy, but the course of this project caused me to reflect on the change that was happening."}, {"src": "Projects/Duck&Boy_9.mp4", "type": "video", "desc": "It's a sort of grieving, but the friends are still there. They just aren't as immediately close as they once were."}, {"src": "Projects/Duck&Boy_10.mp4", "type": "video", "desc": "And you learn to apadt to the new circumstances. The mark of a good friend is that the distance doesn't change anything."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Duck & Boy.webp" alt="Duck &amp; Boy" />
         </div>
@@ -767,7 +766,7 @@
          data-type="Logo Animation"
          data-year="2024"
          data-desc="A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
-         data-images='[{"src":"Projects/Zorra_1.mp4","type":"video"},{"src":"Projects/Zorra_2.png","type":"image"},{"src":"Projects/Zorra_3.mp4","type":"video"},{"src":"Projects/Zorra_4.mp4","type":"video"},{"src":"Projects/Zorra_5.mp4","type":"video"},{"src":"Projects/Zorra_6.mp4","type":"video"},{"src":"Projects/Zorra_7.mp4","type":"video"}]'>
+         data-images='[{"src": "Projects/Zorra_1.mp4", "type": "video", "desc": "A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."}, {"src": "Projects/Zorra_2.png", "type": "image", "desc": "Zorra approached me, asking for help to take their logo design for Zorra into motion."}, {"src": "Projects/Zorra_3.mp4", "type": "video", "desc": "To retain the charms of the original logo illustration, I went down the frame-by-frame route, starting with the fox's run cycle. I use basic shapes to plot the movements in Rough Animator."}, {"src": "Projects/Zorra_4.mp4", "type": "video", "desc": "A rough pass of the fox is made, establishing the movements of the animal."}, {"src": "Projects/Zorra_5.mp4", "type": "video", "desc": "I then move into After Effects to do similar for the human character. I create a rough puppet in Adobe Illustrator that I can then rig with Duik."}, {"src": "Projects/Zorra_6.mp4", "type": "video", "desc": "The AE export then goes back into Rough Animator to create a second rough pass, combining the fox with the human."}, {"src": "Projects/Zorra_7.mp4", "type": "video", "desc": "A clean pass is created, mimicing the inking of the original illustration. I add smear frames and whips to give the piece some athentic cartoon charm."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Zora.webp" alt="Zorra" />
         </div>
@@ -778,8 +777,8 @@
          data-client="Personal"
          data-type="Frame-by-Frame · Illustration"
          data-year="2025"
-         data-desc="A personal project exploring the small rituals and routines we can't seem to shake. Illustrated and animated frame-by-frame — leaning into the lo-fi charm that only hand-drawn motion can carry."
-         data-images='[{"src":"Projects/Bad_Habits_1.mp4","type":"video","desc":"Staying up too late — again. This short follows the familiar spiral of one more episode, one more scroll, one more reason not to sleep."},{"src":"Projects/Bad_Habits_2.mp4","type":"video","desc":"The snooze button: a daily negotiation. Frame-by-frame animation capturing that half-conscious battle between the alarm and the pillow."},{"src":"Projects/Bad_Habits_3.mp4","type":"video","desc":"Mindless snacking. The hand that reaches without thinking — illustrated with the kind of loose, instinctive energy the habit itself has."},{"src":"Projects/Bad_Habits_4.mp4","type":"video","desc":"Phone first, everything else second. A small portrait of the morning ritual nobody admits to but everyone recognises."},{"src":"Projects/Bad_Habits_5.mp4","type":"video","desc":"Putting it off until tomorrow. Again. The final scene in the series — drawn with the same warmth and self-awareness that runs through the whole project."},{"src":"Projects/Bad_Habits_6.mp4","type":"video","desc":"The full project, compiled — every habit laid out in sequence."},{"src":"Projects/Bad_Habits_7.mp4","type":"video","desc":"An extended look at the animation process and the frame-by-frame craft behind each scene."},{"src":"Projects/Bad_Habits_8.mp4","type":"video","desc":"Further scenes exploring the quiet absurdity of our everyday rituals."},{"src":"Projects/Bad_Habits_9.mp4","type":"video","desc":"Character studies and movement tests — the building blocks of the finished animations."},{"src":"Projects/Bad_Habits_10.mp4","type":"video","desc":"Behind the scenes: early sketches and development work from the Bad Habits series."}]'>
+         data-desc="An animated short. This series of animated vignettes expose the beautifully flawed, deeply human habits we all share. It celebrates the quiet foibles that feel intensely personal yet perhaps also are more universal than we care to admit."
+         data-images='[{"src": "Projects/Bad_Habits_1.mp4", "type": "video", "desc": "An animated short. This series of animated vignettes expose the beautifully flawed, deeply human habits we all share. It celebrates the quiet foibles that feel intensely personal yet perhaps also are more universal than we care to admit."}, {"src": "Projects/Bad_Habits_2.mp4", "type": "video", "desc": "Each piece was animated in frame-by-frame. They started off as an illustration, but with a small movement aiming to expose each habit to the viewer."}, {"src": "Projects/Bad_Habits_3.mp4", "type": "video", "desc": "Each vignette feels abstracted by the beauty of the illustration. The simplicity makes something dirty feel clean and pleasant to look at."}, {"src": "Projects/Bad_Habits_4.mp4", "type": "video", "desc": "Some light-hearted humour to each piece tunrs a hard truth on its head."}, {"src": "Projects/Bad_Habits_5.mp4", "type": "video", "desc": "The project began by brainstorming a series of bad habits that I pocessed myself, but felt like a universal part of life's struggle. I wanted to create a harmony across each image, minimising the colour palette acorss each composition, and aiming to compose each one with the viewpoint facing head-on."}, {"src": "Projects/Bad_Habits_6.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_7.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_8.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_9.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_10.mp4", "type": "video", "desc": "But the addition of subtle movements retains the viewer, as they pre-empt what coming. Their guilty conscience shining through. Which reminds me, I have some washing to do."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Bad_Habits.webp" alt="Bad Habits" />
         </div>
@@ -789,51 +788,63 @@
         </div>
       </a>
       <a href="#" class="masonry-item" data-project="3"
-         data-title="Breast Cancer Now Moving Forward"
-         data-client="Breast Cancer Now"
+         data-title="BCN Moving Forward"
+         data-client="BCN"
          data-type="Motion · Brand Animation"
          data-year="2025"
-         data-desc="A motion project for BCN's Moving Forward programme — bringing the brand's energy and momentum to life through a blend of animation, illustration and dynamic visual storytelling."
-         data-images='[{"src":"Projects/BCN_MovingForward_1.mp4","type":"video"},{"src":"Projects/BCN_MovingForward_2.webp","type":"image"},{"src":"Projects/BCN_MovingForward_3.webp","type":"image"},{"src":"Projects/BCN_MovingForward_4.webp","type":"image"},{"src":"Projects/BCN_MovingForward_5.webm","type":"video"},{"src":"Projects/BCN_MovingForward_6.webm","type":"video"},{"src":"Projects/BCN_MovingForward_7.webm","type":"video"},{"src":"Projects/BCN_MovingForward_8.webm","type":"video"}]'>
+         data-desc="Explainer Video for BCN's Moving Forward programme — supporting people after breast cancer treatment"
+         data-images='[{"src": "Projects/BCN_MovingForward_1.mp4", "type": "video", "desc": "Explainer Video for BCN's Moving Forward programme — supporting people after breast cancer treatment"}, {"src": "Projects/BCN_MovingForward_2.webp", "type": "image", "desc": "Working with the Moving Forward team, it was key to accurately capture the function of the Moving Forward programme so as to present it visually. This was achieved by storyboarding, and multiple discussions with their team."}, {"src": "Projects/BCN_MovingForward_3.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_4.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_5.webm", "type": "video", "desc": "I wanted to capture the overwhelming feeling that can come to those adapting to life after treatment. And given the digital nature of the Moving Forward programme, it seemed a very apt analogy to bring in the cluttered desktop, smattered with incomplete tasks and creating an image of the person behind the cancer treatment."}, {"src": "Projects/BCN_MovingForward_6.webm", "type": "video", "desc": "Part of Moving Forward is an online forum, where people are able to talk about what they're going through with people who can relate. It was key to keep this a representational, rather than instructional. I didn't want people to get bogged down in a how-to."}, {"src": "Projects/BCN_MovingForward_7.webm", "type": "video", "desc": "A wealth of information is offered by the charity, and it was important to show this."}, {"src": "Projects/BCN_MovingForward_8.webm", "type": "video", "desc": "The video comes full circle. What was cluttered and overwhelming becomes exciting and alluring."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_BCN_Moving Forward.webp" alt="BCN Moving Forward" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">BCN</p><p class="masonry-overlay-title">Moving Forward</p></div>
       </a>
-
       <a href="#" class="masonry-item" data-project="4"
-         data-title="Lay's MAX"
+         data-title="Lay's Max"
          data-client="Vidsy"
          data-type="Social Content · Motion"
          data-year="2025"
-         data-desc="Social video content created via Vidsy for Lay's — punchy, product-forward motion designed to perform across social platforms."
-         data-images='[{"src":"Projects/Vidsy_Walkers_1.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_2.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_3.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_4.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_5.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_6.mp4","type":"video"},{"src":"Projects/Vidsy_Walkers_7.mp4","type":"video"}]'>
+         data-desc="Social video content created via Vidsy for Lay's Max — a bold, high-energy campaign to launch the Heinz Tomato Ketchup flavour. Fast-cut motion designed to stop the scroll."
+         data-images='[{"src": "Projects/Thumbnail_Vidsy.webp", "type": "image"}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_Vidsy.webp" alt="Vidsy" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Lay's Max</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="5"
+         data-title="Walkers"
+         data-client="Vidsy"
+         data-type="Social Content · Motion"
+         data-year="2025"
+         data-desc="Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."
+         data-images='[{"src": "Projects/Vidsy_Walkers_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_2.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_3.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_4.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_5.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_6.mp4", "type": "video", "desc": "AI was utilised to create a ketchup asset that had not been provided. Full control of the output was ascertainable by creating the reference shape first."}, {"src": "Projects/Vidsy_Walkers_7.mp4", "type": "video", "desc": "The full campaign was well received by the client."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Vidsy_Walkers.png" alt="Walkers" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Walkers</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="5"
+      <a href="#" class="masonry-item" data-project="6"
          data-title="Mountain Dew"
          data-client="Vidsy"
          data-type="Social Content · Motion"
          data-year="2025"
          data-desc="Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."
-         data-images='[{"src":"Projects/Vidsy_MountainDew_1.mp4","type":"video"},{"src":"Projects/Vidsy_MountainDew_2.png","type":"image"},{"src":"Projects/Vidsy_MountainDew_3.png","type":"image"},{"src":"Projects/Vidsy_MountainDew_4.mp4","type":"video"},{"src":"Projects/Vidsy_MountainDew_5.png","type":"image"},{"src":"Projects/Vidsy_MountainDew_6.webp","type":"image"},{"src":"Projects/Vidsy_MountainDew_7.mp4","type":"video"},{"src":"Projects/Vidsy_MountainDew_8.mp4","type":"video"}]'>
+         data-images='[{"src": "Projects/Vidsy_MountainDew_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."}, {"src": "Projects/Vidsy_MountainDew_2.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to 'come alive'."}, {"src": "Projects/Vidsy_MountainDew_3.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to 'come alive'."}, {"src": "Projects/Vidsy_MountainDew_4.mp4", "type": "video", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to 'come alive'."}, {"src": "Projects/Vidsy_MountainDew_5.png", "type": "image", "desc": "A summary of the brief."}, {"src": "Projects/Vidsy_MountainDew_6.webp", "type": "image", "desc": "The narrative structure, developed by the Creative Lead gave a rough guidence on how the video was to be executed."}, {"src": "Projects/Vidsy_MountainDew_7.mp4", "type": "video", "desc": "The piece went on to be iterated in multipe ways, and localised for different markets, all off my original base asset"}, {"src": "Projects/Vidsy_MountainDew_8.mp4", "type": "video", "desc": "Ready, set, TASTE!"}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Vidsy_MountainDew.png" alt="Mountain Dew" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Mountain Dew</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="6"
+      <a href="#" class="masonry-item" data-project="7"
          data-title="TWSD"
          data-client="Personal"
          data-type="Illustration · Design"
          data-year="2025"
-         data-desc="A personal illustration and design project — a collection of hand-crafted visuals exploring the visual language and aesthetic of TWSD."
-         data-images='[{"src":"Projects/TWSD_1.jpg","type":"image"},{"src":"Projects/TWSD_2.jpg","type":"image"},{"src":"Projects/TWSD_3.png","type":"image"},{"src":"Projects/TWSD_4.jpg","type":"image"},{"src":"Projects/TWSD_5.jpg","type":"image"},{"src":"Projects/TWSD_6.jpg","type":"image"},{"src":"Projects/TWSD_7.png","type":"image"},{"src":"Projects/TWSD_8.png","type":"image"},{"src":"Projects/TWSD_9.png","type":"image"}]'>
+         data-desc="Technology Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."
+         data-images='[{"src": "Projects/TWSD_1.jpg", "type": "image", "desc": "Technology Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."}, {"src": "Projects/TWSD_2.jpg", "type": "image", "desc": "They had establised a recurring character \"Smorph\", who would go on various and curious adventures, all with a science theme."}, {"src": "Projects/TWSD_3.png", "type": "image", "desc": "In this issue, Smorph was to pay a visit to the Natural History Museum, to learn about fossils."}, {"src": "Projects/TWSD_4.jpg", "type": "image", "desc": "The story was provided, but I had creative freedom to illustrate in any style I wished."}, {"src": "Projects/TWSD_5.jpg", "type": "image", "desc": "The playful characters established inspired an equally playful style."}, {"src": "Projects/TWSD_6.jpg", "type": "image", "desc": "Typography played a key part, with narration in type, and the spoken passages all written out by hand."}, {"src": "Projects/TWSD_7.png", "type": "image", "desc": "Taking inspiration from the provided text, intial sketches offer a chance to think freely and create loosely without considering how it would sit on the page."}, {"src": "Projects/TWSD_8.png", "type": "image", "desc": "Carrying on from the initial sketches, these layout designs established how the illustrations would sit with the text of the provided story."}, {"src": "Projects/TWSD_9.png", "type": "image", "desc": "I grew quite attached to the pair!"}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_TWSD.png" alt="TWSD" />
         </div>
