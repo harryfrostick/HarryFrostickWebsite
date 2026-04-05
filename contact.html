@@ -340,6 +340,48 @@
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; }
     }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    .site-footer {
+      padding: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .footer-copy {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .footer-copy a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .footer-copy a:hover { opacity: 0.7; }
+    .footer-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-shrink: 0;
+    }
+    .footer-nav a {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-nav a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      .site-footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem 1.5rem; }
+    }
   </style>
 
 </head>
@@ -677,5 +719,18 @@
       });
     })();
   </script>
+  <footer>
+    <div class="site-footer">
+      <p class="footer-copy">© All rights reserved by Harry Frostick, 2026. Please get in touch.</p>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="contact.html">Get in touch</a></li>
+        <li><a href="Assets/Harry Frostick_CV.pdf" target="_blank" rel="noopener">CV</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>

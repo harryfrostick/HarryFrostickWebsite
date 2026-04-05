@@ -367,6 +367,25 @@
       text-transform: uppercase;
       color: var(--muted);
     }
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: auto;
+      padding-bottom: 1.2rem;
+    }
+    .modal-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
     /* Close button */
     .modal-close {
       position: fixed;
@@ -670,6 +689,48 @@
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; }
     }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    .site-footer {
+      padding: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .footer-copy {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .footer-copy a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .footer-copy a:hover { opacity: 0.7; }
+    .footer-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-shrink: 0;
+    }
+    .footer-nav a {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-nav a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      .site-footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -756,6 +817,7 @@
          data-client="Personal"
          data-type="Frame-by-Frame Animation"
          data-year="2024"
+         data-tags="Rough Animator,Procreate,Procreate Dreams"
          data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — with every frame, a new part of the story unfolds"
          data-images='[{"src": "Projects/Duck&Boy_1.mp4", "type": "video", "desc": "A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — with every frame, a new part of the story unfolds"}, {"src": "Projects/Duck&Boy_2.mp4", "type": "video", "desc": "An unlikely meeting. This pair appeared one evening while I doodled on my iPad."}, {"src": "Projects/Duck&Boy_3.mp4", "type": "video", "desc": "I wanted to develop my abilities in frame-by-frame animation, hoping for it to start to bleed into my commercial work. I decided to bring the doodle to life."}, {"src": "Projects/Duck&Boy_4.mp4", "type": "video", "desc": "A friend suggested to me that I should see what happens if I animated with a consistent character. I followed their advice and imagined them in different scenarios - often inspired by things that were happening in my life."}, {"src": "Projects/Duck&Boy_5.mp4", "type": "video", "desc": "It became a fun experiment, encouraging me to draw the pair in illustrations first, without worrying about the practicalities of animating them."}, {"src": "Projects/Duck&Boy_6.gif", "type": "image", "desc": "A story began to unfold. Looking intraspectively, I can see that what was unfolding was recreation of the same emotional journey that I was currently going through."}, {"src": "Projects/Duck&boy_7.mp4", "type": "video", "desc": "I had friends that were moving away, and moving abroad. And I was having to adjust to the change in my immediate social circles."}, {"src": "Projects/Duck&Boy_8.mp4", "type": "video", "desc": "I wasn’t noticeably unhappy, but the course of this project caused me to reflect on the change that was happening."}, {"src": "Projects/Duck&Boy_9.mp4", "type": "video", "desc": "It’s a sort of grieving, but the friends are still there. They just aren’t as immediately close as they once were."}, {"src": "Projects/Duck&Boy_10.mp4", "type": "video", "desc": "And you learn to apadt to the new circumstances. The mark of a good friend is that the distance doesn’t change anything."}]'>
         <div class="masonry-thumb">
@@ -768,6 +830,7 @@
          data-client="Personal"
          data-type="Logo Animation"
          data-year="2024"
+         data-tags="Rough Animator,Procreate,After Effects,Procreate Dreams"
          data-desc="A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
          data-images='[{"src": "Projects/Zorra_1.mp4", "type": "video", "desc": "A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."}, {"src": "Projects/Zorra_2.png", "type": "image", "desc": "Zorra approached me, asking for help to take their logo design for Zorra into motion."}, {"src": "Projects/Zorra_3.mp4", "type": "video", "desc": "To retain the charms of the original logo illustration, I went down the frame-by-frame route, starting with the fox’s run cycle. I use basic shapes to plot the movements in Rough Animator."}, {"src": "Projects/Zorra_4.mp4", "type": "video", "desc": "A rough pass of the fox is made, establishing the movements of the animal."}, {"src": "Projects/Zorra_5.mp4", "type": "video", "desc": "I then move into After Effects to do similar for the human character. I create a rough puppet in Adobe Illustrator that I can then rig with Duik."}, {"src": "Projects/Zorra_6.mp4", "type": "video", "desc": "The AE export then goes back into Rough Animator to create a second rough pass, combining the fox with the human."}, {"src": "Projects/Zorra_7.mp4", "type": "video", "desc": "A clean pass is created, mimicing the inking of the original illustration. I add smear frames and whips to give the piece some athentic cartoon charm."}]'>
         <div class="masonry-thumb">
@@ -780,6 +843,7 @@
          data-client="Personal"
          data-type="Frame-by-Frame · Illustration"
          data-year="2025"
+         data-tags="Procreate,Procreate Dreams,After Effects"
          data-desc="An animated short. This series of animated vignettes expose the beautifully flawed, deeply human habits we all share. It celebrates the quiet foibles that feel intensely personal yet perhaps also are more universal than we care to admit."
          data-images='[{"src": "Projects/Bad_Habits_1.mp4", "type": "video", "desc": "An animated short. This series of animated vignettes expose the beautifully flawed, deeply human habits we all share. It celebrates the quiet foibles that feel intensely personal yet perhaps also are more universal than we care to admit."}, {"src": "Projects/Bad_Habits_2.mp4", "type": "video", "desc": "Each piece was animated in frame-by-frame. They started off as an illustration, but with a small movement aiming to expose each habit to the viewer."}, {"src": "Projects/Bad_Habits_3.mp4", "type": "video", "desc": "Each vignette feels abstracted by the beauty of the illustration. The simplicity makes something dirty feel clean and pleasant to look at."}, {"src": "Projects/Bad_Habits_4.mp4", "type": "video", "desc": "Some light-hearted humour to each piece tunrs a hard truth on its head."}, {"src": "Projects/Bad_Habits_5.mp4", "type": "video", "desc": "The project began by brainstorming a series of bad habits that I pocessed myself, but felt like a universal part of life’s struggle. I wanted to create a harmony across each image, minimising the colour palette acorss each composition, and aiming to compose each one with the viewpoint facing head-on."}, {"src": "Projects/Bad_Habits_6.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_7.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_8.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_9.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_10.mp4", "type": "video", "desc": "But the addition of subtle movements retains the viewer, as they pre-empt what coming. Their guilty conscience shining through. Which reminds me, I have some washing to do."}]'>
         <div class="masonry-thumb">
@@ -795,6 +859,7 @@
          data-client="Breast Cancer Now"
          data-type="Motion · Brand Animation"
          data-year="2023"
+         data-tags="Scripting,Storyboarding,Styleboarding,After Effects"
          data-desc="Explainer Video for BCN's Moving Forward programme — supporting people after breast cancer treatment"
          data-images='[{"src": "Projects/BCN_MovingForward_1.mp4", "type": "video", "desc": "Explainer Video for BCN’s Moving Forward programme — supporting people after breast cancer treatment"}, {"src": "Projects/BCN_MovingForward_2.webp", "type": "image", "desc": "Working with the Moving Forward team, it was key to accurately capture the function of the Moving Forward programme so as to present it visually. This was achieved by storyboarding, and multiple discussions with their team."}, {"src": "Projects/BCN_MovingForward_3.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_4.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_5.webm", "type": "video", "desc": "I wanted to capture the overwhelming feeling that can come to those adapting to life after treatment. And given the digital nature of the Moving Forward programme, it seemed a very apt analogy to bring in the cluttered desktop, smattered with incomplete tasks and creating an image of the person behind the cancer treatment."}, {"src": "Projects/BCN_MovingForward_6.webm", "type": "video", "desc": "Part of Moving Forward is an online forum, where people are able to talk about what they’re going through with people who can relate. It was key to keep this a representational, rather than instructional. I didn’t want people to get bogged down in a how-to."}, {"src": "Projects/BCN_MovingForward_7.webm", "type": "video", "desc": "A wealth of information is offered by the charity, and it was important to show this."}, {"src": "Projects/BCN_MovingForward_8.webm", "type": "video", "desc": "The video comes full circle. What was cluttered and overwhelming becomes exciting and alluring."}]'>
         <div class="masonry-thumb">
@@ -808,6 +873,7 @@
          data-client="Vidsy"
          data-type="Social Content · Motion"
          data-year="2025"
+         data-tags="After Effects,Social Design"
          data-desc="Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."
          data-images='[{"src": "Projects/Vidsy_Walkers_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_2.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_3.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_4.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_5.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_6.mp4", "type": "video", "desc": "AI was utilised to create a ketchup asset that had not been provided. Full control of the output was ascertainable by creating the reference shape first."}, {"src": "Projects/Vidsy_Walkers_7.mp4", "type": "video", "desc": "The full campaign was well received by the client."}]'>
         <div class="masonry-thumb">
@@ -821,6 +887,7 @@
          data-client="Vidsy"
          data-type="Social Content · Motion"
          data-year="2025"
+         data-tags="After Effects,Social Design"
          data-desc="Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."
          data-images='[{"src": "Projects/Vidsy_MountainDew_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."}, {"src": "Projects/Vidsy_MountainDew_2.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_3.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_4.mp4", "type": "video", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_5.png", "type": "image", "desc": "A summary of the brief."}, {"src": "Projects/Vidsy_MountainDew_6.webp", "type": "image", "desc": "The narrative structure, developed by the Creative Lead gave a rough guidence on how the video was to be executed."}, {"src": "Projects/Vidsy_MountainDew_7.mp4", "type": "video", "desc": "The piece went on to be iterated in multipe ways, and localised for different markets, all off my original base asset"}, {"src": "Projects/Vidsy_MountainDew_8.mp4", "type": "video", "desc": "Ready, set, TASTE!"}]'>
         <div class="masonry-thumb">
@@ -834,6 +901,7 @@
          data-client="Tech Will Save Us"
          data-type="Illustration · Design"
          data-year="2023"
+         data-tags="Illustration,Character Design,Layout"
          data-desc="Tech Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."
          data-images='[{"src": "Projects/TWSD_1.jpg", "type": "image", "desc": "Tech Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."}, {"src": "Projects/TWSD_2.jpg", "type": "image", "desc": "They had establised a recurring character \"Smorph\", who would go on various and curious adventures, all with a science theme."}, {"src": "Projects/TWSD_3.png", "type": "image", "desc": "In this issue, Smorph was to pay a visit to the Natural History Museum, to learn about fossils."}, {"src": "Projects/TWSD_4.jpg", "type": "image", "desc": "The story was provided, but I had creative freedom to illustrate in any style I wished."}, {"src": "Projects/TWSD_5.jpg", "type": "image", "desc": "The playful characters established inspired an equally playful style."}, {"src": "Projects/TWSD_6.jpg", "type": "image", "desc": "Typography played a key part, with narration in type, and the spoken passages all written out by hand."}, {"src": "Projects/TWSD_7.png", "type": "image", "desc": "Taking inspiration from the provided text, intial sketches offer a chance to think freely and create loosely without considering how it would sit on the page."}, {"src": "Projects/TWSD_8.png", "type": "image", "desc": "Carrying on from the initial sketches, these layout designs established how the illustrations would sit with the text of the provided story."}, {"src": "Projects/TWSD_9.png", "type": "image", "desc": "I grew quite attached to the pair!"}]'>
         <div class="masonry-thumb">
@@ -847,6 +915,7 @@
          data-client="Personal"
          data-type="Motion · Illustration"
          data-year="2025"
+         data-tags="Procreate,Adobe Illustrator,Character Rigging,After Effects"
          data-desc="A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."
          data-images='[{"src": "Projects/Birdwatcher_1.mp4", "type": "video", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/Birdwatcher_2.png", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/BirdWatcher_3.png", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/BirdWatcher_4.jpg", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/Birdwatcher_5.mp4", "type": "video", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}]'>
         <div class="masonry-thumb">
@@ -860,6 +929,7 @@
          data-client="Breast Cancer Now"
          data-type="Social Content · Motion"
          data-year="2025"
+         data-tags="Storyboarding,After Effects"
          data-desc="Created for socials, this piece directed viewers to use the Breast Cancer Now help line, and also to a page of information on the charity's website."
          data-images='[{"src": "Projects/BCN_Reducing Anxiety_1.mp4", "type": "video", "desc": "Created for socials, this piece directed viewers to use the Breast Cancer Now help line, and also to a page of information on the charity\u2019s website."}, {"src": "Projects/BCN_Reducing Anxiety_2.png", "type": "image", "desc": "As always, it began with sketching. I knew that I wanted to take inspiration from Headspace\u2019s visual language, given that they have paved the way in the mindfulness sphere."}, {"src": "Projects/BCN_Reducing Anxiety_3.mp4", "type": "video", "desc": "I wanted to capture a stillness, in order to invoke the feeling of control and simplicity."}, {"src": "Projects/BCN_Reducing Anxiety_4.mp4", "type": "video", "desc": "Each vignette is described through just one or two items. I felt this provided a calm."}, {"src": "Projects/BCN_Reducing Anxiety_5.mp4", "type": "video", "desc": "They were created through a combination of frame-by-frame, and keyframing, using the matchcut to move from scene to scene."}, {"src": "Projects/BCN_Reducing Anxiety_6.mp4", "type": "video", "desc": "Breast Cancer Now offers lots of support to those experiencing breast cancer. And their nursing team is always on-hand to listen."}]'>
         <div class="masonry-thumb">
@@ -873,6 +943,7 @@
          data-client="Personal"
          data-type="Motion · Illustration"
          data-year="2025"
+         data-tags="Rough Animator,Procreate,Procreate Dreams"
          data-desc="A fun piece created in the run-up to Halloween."
          data-images='[{"src": "Projects/Halloween_1.mp4", "type": "video", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_2.gif", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_3.mp4", "type": "video", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_4.png", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_5.png", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}]'>
         <div class="masonry-thumb">
@@ -886,6 +957,7 @@
          data-client="Personal"
          data-type="Motion · Illustration"
          data-year="2025"
+         data-tags="Procreate,Procreate Dreams,After Effects"
          data-desc="Why be sad when life feels this good?"
          data-images='[{"src": "Projects/Sunshine Boy_1.mp4", "type": "video", "desc": "Why be sad when life feels this good?"}, {"src": "Projects/SunshineBoy_2.png", "type": "image", "desc": "Why be sad when life feels this good?"}, {"src": "Projects/SunshineBoy_3.mov", "type": "video", "desc": "Why be sad when life feels this good?"}]'>
         <div class="masonry-thumb">
@@ -936,6 +1008,7 @@
           <div class="modal-divider"></div>
           <p class="modal-desc" id="modalDesc"></p>
         </div>
+        <div class="modal-tags" id="modalTags"></div>
         <div class="modal-info-bottom">
           <span class="modal-meta" id="modalType"></span>
           <span class="modal-meta" id="modalYear"></span>
@@ -1189,6 +1262,7 @@
       const modalDesc    = document.getElementById('modalDesc');
       const modalType    = document.getElementById('modalType');
       const modalYear    = document.getElementById('modalYear');
+      const modalTags    = document.getElementById('modalTags');
 
       const projects = Array.from(document.querySelectorAll('.masonry-item[data-project]'));
       let projectIndex = 0, slideIndex = 0, slides = [];
@@ -1273,6 +1347,16 @@
           modalTitle.textContent  = item.dataset.title;
           modalType.textContent   = item.dataset.type;
           modalYear.textContent   = item.dataset.year;
+          // Render tag pills
+          modalTags.innerHTML = '';
+          if (item.dataset.tags) {
+            item.dataset.tags.split(',').forEach(tag => {
+              const pill = document.createElement('span');
+              pill.className = 'modal-tag';
+              pill.textContent = tag.trim();
+              modalTags.appendChild(pill);
+            });
+          }
           const firstDesc = (slides[0] && slides[0].desc) ? slides[0].desc : item.dataset.desc;
           modalDesc.textContent = firstDesc;
           [modalClient, modalTitle, modalDesc, modalType, modalYear].forEach((el, i) => {
@@ -1364,5 +1448,18 @@
     })();
   </script>
 
+  <footer>
+    <div class="site-footer">
+      <p class="footer-copy">© All rights reserved by Harry Frostick, 2026. Please get in touch.</p>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="https://www.instagram.com/harryfrostickdesigns" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="contact.html">Get in touch</a></li>
+        <li><a href="Assets/Harry Frostick_CV.pdf" target="_blank" rel="noopener">CV</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>
