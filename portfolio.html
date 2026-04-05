@@ -173,6 +173,9 @@
     .showreel-card:hover .play-icon { border-color: var(--accent) !important; background: rgba(229,78,119,0.4) !important; transform: translate(-50%,-50%) scale(1.12) !important; }
     .featured-card:hover .featured-media video { opacity: 1; }
     .featured-card:hover .featured-media .placeholder { opacity: 0; }
+    /* Keep video and hide placeholder for the full duration of playback */
+    .featured-card.video-playing .featured-media video { opacity: 1; }
+    .featured-card.video-playing .featured-media .placeholder { opacity: 0; }
 
     .featured-info { padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid var(--line); background: transparent; }
     .featured-client { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
@@ -831,12 +834,64 @@
          data-client="Tech Will Save Us"
          data-type="Illustration · Design"
          data-year="2023"
-         data-desc="Technology Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."
-         data-images='[{"src": "Projects/TWSD_1.jpg", "type": "image", "desc": "Technology Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."}, {"src": "Projects/TWSD_2.jpg", "type": "image", "desc": "They had establised a recurring character \"Smorph\", who would go on various and curious adventures, all with a science theme."}, {"src": "Projects/TWSD_3.png", "type": "image", "desc": "In this issue, Smorph was to pay a visit to the Natural History Museum, to learn about fossils."}, {"src": "Projects/TWSD_4.jpg", "type": "image", "desc": "The story was provided, but I had creative freedom to illustrate in any style I wished."}, {"src": "Projects/TWSD_5.jpg", "type": "image", "desc": "The playful characters established inspired an equally playful style."}, {"src": "Projects/TWSD_6.jpg", "type": "image", "desc": "Typography played a key part, with narration in type, and the spoken passages all written out by hand."}, {"src": "Projects/TWSD_7.png", "type": "image", "desc": "Taking inspiration from the provided text, intial sketches offer a chance to think freely and create loosely without considering how it would sit on the page."}, {"src": "Projects/TWSD_8.png", "type": "image", "desc": "Carrying on from the initial sketches, these layout designs established how the illustrations would sit with the text of the provided story."}, {"src": "Projects/TWSD_9.png", "type": "image", "desc": "I grew quite attached to the pair!"}]'>
+         data-desc="Tech Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."
+         data-images='[{"src": "Projects/TWSD_1.jpg", "type": "image", "desc": "Tech Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."}, {"src": "Projects/TWSD_2.jpg", "type": "image", "desc": "They had establised a recurring character \"Smorph\", who would go on various and curious adventures, all with a science theme."}, {"src": "Projects/TWSD_3.png", "type": "image", "desc": "In this issue, Smorph was to pay a visit to the Natural History Museum, to learn about fossils."}, {"src": "Projects/TWSD_4.jpg", "type": "image", "desc": "The story was provided, but I had creative freedom to illustrate in any style I wished."}, {"src": "Projects/TWSD_5.jpg", "type": "image", "desc": "The playful characters established inspired an equally playful style."}, {"src": "Projects/TWSD_6.jpg", "type": "image", "desc": "Typography played a key part, with narration in type, and the spoken passages all written out by hand."}, {"src": "Projects/TWSD_7.png", "type": "image", "desc": "Taking inspiration from the provided text, intial sketches offer a chance to think freely and create loosely without considering how it would sit on the page."}, {"src": "Projects/TWSD_8.png", "type": "image", "desc": "Carrying on from the initial sketches, these layout designs established how the illustrations would sit with the text of the provided story."}, {"src": "Projects/TWSD_9.png", "type": "image", "desc": "I grew quite attached to the pair!"}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_TWSD.png" alt="TWSD" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Tech Will Save Us</p><p class="masonry-overlay-title">Smorph</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="8"
+         data-title="Birdwatcher"
+         data-client="Personal"
+         data-type="Motion · Illustration"
+         data-year="2025"
+         data-desc="A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."
+         data-images='[{"src": "Projects/Birdwatcher_1.mp4", "type": "video", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/Birdwatcher_2.png", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/BirdWatcher_3.png", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/BirdWatcher_4.jpg", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/Birdwatcher_5.mp4", "type": "video", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_Birdwatcher.png" alt="Birdwatcher" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Birdwatcher</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="9"
+         data-title="Reducing Anxiety"
+         data-client="Breast Cancer Now"
+         data-type="Social Content · Motion"
+         data-year="2025"
+         data-desc="Created for socials, this piece directed viewers to use the Breast Cancer Now help line, and also to a page of information on the charity's website."
+         data-images='[{"src": "Projects/BCN_Reducing Anxiety_1.mp4", "type": "video", "desc": "Created for socials, this piece directed viewers to use the Breast Cancer Now help line, and also to a page of information on the charity\u2019s website."}, {"src": "Projects/BCN_Reducing Anxiety_2.png", "type": "image", "desc": "As always, it began with sketching. I knew that I wanted to take inspiration from Headspace\u2019s visual language, given that they have paved the way in the mindfulness sphere."}, {"src": "Projects/BCN_Reducing Anxiety_3.mp4", "type": "video", "desc": "I wanted to capture a stillness, in order to invoke the feeling of control and simplicity."}, {"src": "Projects/BCN_Reducing Anxiety_4.mp4", "type": "video", "desc": "Each vignette is described through just one or two items. I felt this provided a calm."}, {"src": "Projects/BCN_Reducing Anxiety_5.mp4", "type": "video", "desc": "They were created through a combination of frame-by-frame, and keyframing, using the matchcut to move from scene to scene."}, {"src": "Projects/BCN_Reducing Anxiety_6.mp4", "type": "video", "desc": "Breast Cancer Now offers lots of support to those experiencing breast cancer. And their nursing team is always on-hand to listen."}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_BCN_Reducing Anxiety.png" alt="BCN Reducing Anxiety" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Breast Cancer Now</p><p class="masonry-overlay-title">Reducing Anxiety</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="10"
+         data-title="Halloween"
+         data-client="Personal"
+         data-type="Motion · Illustration"
+         data-year="2025"
+         data-desc="A fun piece created in the run-up to Halloween."
+         data-images='[{"src": "Projects/Halloween_1.mp4", "type": "video", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_2.gif", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_3.mp4", "type": "video", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_4.png", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_5.png", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_Halloween.png" alt="Halloween" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Halloween</p></div>
+      </a>
+
+      <a href="#" class="masonry-item" data-project="11"
+         data-title="Sunshine Boy"
+         data-client="Personal"
+         data-type="Motion · Illustration"
+         data-year="2025"
+         data-desc="Why be sad when life feels this good?"
+         data-images='[{"src": "Projects/Sunshine Boy_1.mp4", "type": "video", "desc": "Why be sad when life feels this good?"}, {"src": "Projects/SunshineBoy_2.png", "type": "image", "desc": "Why be sad when life feels this good?"}, {"src": "Projects/SunshineBoy_3.mov", "type": "video", "desc": "Why be sad when life feels this good?"}]'>
+        <div class="masonry-thumb">
+          <img src="Projects/Thumbnail_Sunshine Boy.png" alt="Sunshine Boy" />
+        </div>
+        <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Sunshine Boy</p></div>
       </a>
 
     </div>
@@ -962,6 +1017,32 @@
       requestAnimationFrame(tick);
     })();
 
+
+    // ── Featured card videos: stay visible for full playback duration ──
+    document.querySelectorAll('.featured-card').forEach(card => {
+      const video = card.querySelector('video');
+      if (!video) return;
+
+      card.addEventListener('mouseenter', () => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      });
+
+      video.addEventListener('play', () => {
+        card.classList.add('video-playing');
+      });
+
+      video.addEventListener('ended', () => {
+        card.classList.remove('video-playing');
+      });
+
+      video.addEventListener('pause', () => {
+        // Only remove the class if the video has genuinely stopped (not just buffering)
+        if (video.ended || video.currentTime === 0) {
+          card.classList.remove('video-playing');
+        }
+      });
+    });
 
     // Nav scrolled state
     window.addEventListener('scroll', () => {
