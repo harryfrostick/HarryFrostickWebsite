@@ -44,46 +44,19 @@
       opacity: 0.45;
     }
 
-
     /* Nav */
     nav {
       position: fixed;
       z-index: 100;
       top: 0; left: 0; right: 0;
-      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 2rem 3rem;
+      /* Visibility Amends */
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+      transition: background 0.3s ease;
     }
-    nav::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      height: 120px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-      mix-blend-mode: difference;
-    }
-    .nav-links a:hover { opacity: 1; }
-
-
 
     /* Ticker */
     .ticker {
@@ -96,6 +69,9 @@
       overflow: hidden;
       white-space: nowrap;
       mix-blend-mode: difference;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.08);
     }
     .ticker-inner {
       display: inline-flex;
@@ -128,12 +104,6 @@
 
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      .nav-links a { font-size: 0.65rem; }
-
-    }
-    @media (max-width: 500px) {
-      .nav-links { display: none; }
     }
     @media (hover: none) and (pointer: coarse) {
       body { cursor: auto; }
@@ -178,15 +148,9 @@
     .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.3s; mix-blend-mode: difference; }
     .nav-logo:hover { opacity: 1; }
     .nav-logo-lottie { width: 49px; height: 66px; display: block; mix-blend-mode: difference; }
-    @media (max-width: 768px) { .nav-logo-lottie { mix-blend-mode: normal; filter: invert(1); } }
 
     .cursor { position: fixed; width: 12.7px; height: 12.7px; background: #ffffff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: multiply; }
     .cursor-echo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
-    .nav-links a span { display: inline-block; transition: transform 0.1s linear; pointer-events: none; }
-    nav.scrolled .nav-links a { color: var(--accent); opacity: 0.7; }
-    nav.scrolled .nav-links a:hover { opacity: 1; }
-    nav { transition: none; }
-    .nav-links a { transition: opacity 0.3s, color 0.4s; }
 
     /* Hamburger */
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
@@ -194,12 +158,10 @@
     .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; cursor: none; color: var(--fg); display: flex; align-items: center; justify-content: center; padding: 0.5rem; transition: color 0.2s, transform 0.3s; }
-    .mobile-menu-close:hover { color: var(--accent); transform: rotate(90deg); }
+    
     .mobile-menu { display: none; position: fixed; inset: 0; background: #1a1a1a; z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,16vw,7rem); color: #fff; text-decoration: none; letter-spacing: -0.05em; line-height: 0.85; transition: color 0.2s; }
-    .mobile-menu a:hover { color: var(--accent); }
     @media (max-width: 768px) {
       .nav-hamburger { display: flex; }
     }
@@ -230,23 +192,21 @@
     .prox-links.expanded li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.22s; }
     .prox-links.expanded li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.34s; }
     .prox-links.expanded li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.46s; }
-    .prox-links:not(.expanded) li:nth-child(1) { transition-delay: 0s; }
-    .prox-links:not(.expanded) li:nth-child(2) { transition-delay: 0.08s; }
-    .prox-links:not(.expanded) li:nth-child(3) { transition-delay: 0.16s; }
-    .prox-links:not(.expanded) li:nth-child(4) { transition-delay: 0.24s; }
+    
     .prox-links a {
       color: var(--fg);
       text-decoration: none;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      opacity: 0.5;
+      opacity: 0.8;
       transition: opacity 0.3s, color 0.4s;
       mix-blend-mode: difference;
     }
     .prox-links a:hover,
-    .prox-links a.active { opacity: 1; }
+    .prox-links a.active { opacity: 1.0; }
     .prox-links a span { display: inline-block; transition: transform 0.1s linear; }
+    
     .prox-burger {
       display: flex;
       flex-direction: column;
@@ -264,39 +224,20 @@
       width: 22px;
       height: 1.5px;
       background: #ffffff;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
-                  opacity 0.25s ease,
-                  width 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease, width 0.3s ease;
       transform-origin: center;
     }
     .prox-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .prox-burger.open span:nth-child(2) { opacity: 0; width: 0; }
     .prox-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .nav-links { display: none !important; }
-    .nav-hamburger { display: none !important; }
+
     @media (max-width: 768px) {
       .prox-nav { display: none; }
-      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: none; padding: 4px; z-index: 200; background: none; border: none; }
-    }
-
-    /* ── Title wave animation ──────────────────────────────────────── */
-    .wave-title { display: flex; flex-wrap: wrap; }
-    .wave-letter {
-      display: inline-block;
-      animation: waveBob 3s ease-in-out infinite;
-      animation-delay: calc(var(--i) * 0.18s);
-    }
-    @keyframes waveBob {
-      0%   { transform: translateY(0); }
-      25%  { transform: translateY(-0.03em); }
-      50%  { transform: translateY(0); }
-      75%  { transform: translateY(0.03em); }
-      100% { transform: translateY(0); }
+      .nav-hamburger { display: flex !important; }
     }
   </style>
 </head>
 <body>
-
 
   <a href="portfolio.html" class="bg-video-link">
     <video class="bg-video" autoplay loop muted playsinline>
@@ -309,7 +250,6 @@
     <a href="index.html" class="nav-logo" id="navLogo">
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
-    <!-- Proximity nav — desktop only -->
     <div class="prox-nav" id="proxNav">
       <ul class="prox-links" id="proxLinks">
         <li><a href="about.html"><span>About</span></a></li>
@@ -322,17 +262,12 @@
       </button>
     </div>
 
-    <!-- Mobile menu button -->
     <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
+
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M3 3l16 16M19 3L3 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
-    </button>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="portfolio.html">Work</a>
@@ -361,9 +296,9 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <script>
     const cursor = document.getElementById('cursor');
-
     const TRAIL_COUNT = 90;
     const echoes = [];
     for (let i = 0; i < TRAIL_COUNT; i++) {
@@ -375,7 +310,6 @@
 
     let mouseX = 0, mouseY = 0;
     let prevX = 0, prevY = 0;
-    let speed = 0;
 
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
@@ -387,10 +321,9 @@
     (function tick() {
       const dx = mouseX - prevX;
       const dy = mouseY - prevY;
-      speed = Math.sqrt(dx * dx + dy * dy);
+      const speed = Math.sqrt(dx * dx + dy * dy);
       prevX = mouseX;
       prevY = mouseY;
-
       const activeCount = Math.min(TRAIL_COUNT, Math.max(1, Math.floor(speed * 3.0)));
 
       for (let i = 0; i < TRAIL_COUNT; i++) {
@@ -401,32 +334,20 @@
 
         if (i < activeCount) {
           const t = i / (activeCount - 1 || 1);
-          const size = 12.7 * (1 - t * 0.1);
-          const opacity = 0.55 * (1 - t);
-
           echo.el.style.display = 'block';
-          echo.el.style.width  = size + 'px';
-          echo.el.style.height = size + 'px';
+          echo.el.style.width  = (12.7 * (1 - t * 0.1)) + 'px';
+          echo.el.style.height = (12.7 * (1 - t * 0.1)) + 'px';
           echo.el.style.left   = echo.x + 'px';
           echo.el.style.top    = echo.y + 'px';
-          echo.el.style.opacity = opacity;
+          echo.el.style.opacity = 0.55 * (1 - t);
           echo.el.style.background = '#ffffff';
         } else {
           echo.el.style.display = 'none';
         }
       }
-
       requestAnimationFrame(tick);
     })();
 
-
-    // Nav scrolled state
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-
-    // Hamburger menu
     const hamburger = document.getElementById('navHamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     if (hamburger && mobileMenu) {
@@ -434,61 +355,8 @@
         hamburger.classList.toggle('open');
         mobileMenu.classList.toggle('open');
       });
-      mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          hamburger.classList.remove('open');
-          mobileMenu.classList.remove('open');
-        });
-      });
-      const mobileClose = document.getElementById('mobileClose');
-      if (mobileClose) {
-        mobileClose.addEventListener('click', () => {
-          hamburger.classList.remove('open');
-          mobileMenu.classList.remove('open');
-        });
-      }
     }
 
-    // Nav magnetic float + cursor scale
-    (function() {
-      const navLinks = document.querySelectorAll('.nav-links a');
-
-      const animateit = function(e) {
-        const span = this.querySelector('span');
-        if (!span) return;
-        const { offsetX: x, offsetY: y } = e,
-              { offsetWidth: w, offsetHeight: h } = this,
-              move = 4,
-              xMove = x / w * (move * 2) - move,
-              yMove = y / h * (move * 2) - move;
-        span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
-        if (e.type === 'mouseleave') span.style.transform = '';
-      };
-
-      navLinks.forEach(a => {
-        // Wrap text in span if not already
-        if (!a.querySelector('span')) {
-          a.innerHTML = '<span>' + a.innerHTML + '</span>';
-        }
-        a.addEventListener('mousemove', animateit);
-        a.addEventListener('mouseleave', animateit);
-        a.addEventListener('mouseenter', () => {
-          cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
-          cursor.style.mixBlendMode = 'difference';
-          cursor.style.transition = 'transform 0.3s ease';
-        });
-        a.addEventListener('mouseleave', () => {
-          cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-          cursor.style.mixBlendMode = 'multiply';
-          cursor.style.transition = 'transform 0.3s ease';
-        });
-      });
-    })();
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-  <script>
-    // ── Proximity nav ──────────────────────────────────────────────
     (function() {
       const proxLinks  = document.getElementById('proxLinks');
       const proxBurger = document.getElementById('proxBurger');
@@ -520,29 +388,21 @@
         } else if (isExpanded) {
           const navEl = document.getElementById('mainNav');
           const rect  = navEl.getBoundingClientRect();
-          const overNav = e.clientX >= rect.left && e.clientX <= rect.right &&
-                          e.clientY >= rect.top  && e.clientY <= rect.bottom;
+          const overNav = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top  && e.clientY <= rect.bottom;
           if (!overNav) collapse();
           else clearTimeout(collapseTimer);
         }
       });
-      document.getElementById('mainNav').addEventListener('mouseleave', () => {
-        if (isExpanded) collapse();
-      });
+      document.getElementById('mainNav').addEventListener('mouseleave', () => { if (isExpanded) collapse(); });
+
       const proxAnchors = document.querySelectorAll('.prox-links a');
       proxAnchors.forEach(a => {
-        if (!a.querySelector('span')) {
-          a.innerHTML = '<span>' + a.innerHTML + '</span>';
-        }
+        if (!a.querySelector('span')) { a.innerHTML = '<span>' + a.innerHTML + '</span>'; }
         const animateit = function(e) {
           const span = this.querySelector('span');
           if (!span) return;
-          const { offsetX: x, offsetY: y } = e,
-                { offsetWidth: w, offsetHeight: h } = this,
-                move = 4,
-                xMove = x / w * (move * 2) - move,
-                yMove = y / h * (move * 2) - move;
-          span.style.transform = 'translate(' + xMove + 'px, ' + yMove + 'px)';
+          const { offsetX: x, offsetY: y } = e, { offsetWidth: w, offsetHeight: h } = this, move = 4;
+          span.style.transform = `translate(${(x/w*move*2)-move}px, ${(y/h*move*2)-move}px)`;
           if (e.type === 'mouseleave') span.style.transform = '';
         };
         a.addEventListener('mousemove', animateit);
@@ -550,34 +410,23 @@
         a.addEventListener('mouseenter', () => {
           cursor.style.transform = 'translate(-50%,-50%) scale(4.5)';
           cursor.style.mixBlendMode = 'difference';
-          cursor.style.transition = 'transform 0.3s ease';
         });
         a.addEventListener('mouseleave', () => {
           cursor.style.transform = 'translate(-50%,-50%) scale(1)';
           cursor.style.mixBlendMode = 'multiply';
-          cursor.style.transition = 'transform 0.3s ease';
         });
       });
     })();
+
     (function() {
       var logo = document.getElementById('navLogo');
       var container = document.getElementById('navLottie');
       var anim = lottie.loadAnimation({
-        container: container,
-        renderer: 'svg',
-        loop: true,
-        autoplay: false,
-        path: 'Assets/HF_Ident.json'
+        container: container, renderer: 'svg', loop: true, autoplay: false, path: 'Assets/HF_Ident.json'
       });
-      anim.addEventListener('DOMLoaded', function() {
-        anim.goToAndStop(0, true);
-      });
-      logo.addEventListener('mouseenter', function() {
-        anim.goToAndPlay(0, true);
-      });
-      logo.addEventListener('mouseleave', function() {
-        anim.goToAndStop(0, true);
-      });
+      anim.addEventListener('DOMLoaded', () => anim.goToAndStop(0, true));
+      logo.addEventListener('mouseenter', () => anim.goToAndPlay(0, true));
+      logo.addEventListener('mouseleave', () => anim.goToAndStop(0, true));
     })();
   </script>
 </body>
