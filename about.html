@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Harry Frostick</title>
+  <title>About - Harry Frostick</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -104,73 +104,6 @@
       }
     }
 
-    @keyframes statFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes drawPath {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-
-    @keyframes wordFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: none;
-    }
-
-    .scroll-reveal.visible {
-      animation: statFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .stat-infinity {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-
-    .accent-plus {
-      color: var(--accent);
-    }
-
-    #infinityPath {
-      stroke-dasharray: 480;
-      stroke-dashoffset: 480;
-    }
-
-    #infinityPath.draw {
-      animation: drawPath 1.4s ease forwards;
-    }
-
-    .list-word {
-      opacity: 0;
-      display: inline-block;
-    }
-
-    .list-word.visible {
-      animation: wordFadeUp 0.4s ease forwards;
-    }
 
     .page {
       padding: 11rem 3rem 8rem;
@@ -235,6 +168,7 @@
       font-size: clamp(5rem, 16vw, 18rem);
       line-height: 0.88;
       letter-spacing: -0.01em;
+      margin-bottom: 3rem;
       opacity: 0;
       transform: translateY(40px);
       animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
@@ -257,7 +191,7 @@
     .about-intro {
       font-family: 'Montserrat', sans-serif;
       font-style: normal;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.88rem;
       line-height: 1.9;
       letter-spacing: 0.08em;
@@ -272,68 +206,7 @@
       color: rgba(15, 15, 15, 0.55);
       line-height: 1.9;
       max-width: 420px;
-    }
-
-    /* Divider */
-    .section-divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to right, var(--accent), transparent);
-      margin: 4rem 0;
-    }
-
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      margin-bottom: 4rem;
-    }
-
-    .stat {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 200px;
-      transition: background 0.3s;
-    }
-
-    .stat:hover {
-      background: rgba(229, 78, 119, 0.05);
-    }
-
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4.5rem, 8vw, 9rem);
-      line-height: 1;
-      color: var(--fg);
-      flex: 1;
-      display: flex;
-      align-items: center;
-    }
-
-    .stat-num .accent-plus {
-      color: var(--accent);
-    }
-
-    .stat-list {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
-      line-height: 1.05;
-      color: var(--fg);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 1rem;
+      font-weight: 400;
     }
 
     /* Clients */
@@ -352,37 +225,151 @@
       margin-bottom: 2rem;
     }
 
-    .clients-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 1px;
+    .brand-ticker {
+      width: 100%;
+      overflow: hidden;
+      background: transparent;
     }
 
-    .client {
-      padding: 2rem 1.5rem;
+    .ticker-track {
+      display: flex;
+      gap: 4rem;
+      animation: scroll-left 15s linear infinite;
+      padding: 3rem 0;
+    }
+
+    @keyframes scroll-left {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .ticker-item {
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
+      min-width: max-content;
       transition: opacity 0.3s;
     }
 
-    .client:hover {
+    .ticker-item:hover {
       opacity: 0.6;
     }
 
-    .client-logo {
-      max-height: 32px;
-      max-width: 100%;
+    .ticker-item img {
+      max-height: 80px;
+      max-width: 200px;
       width: auto;
+      height: auto;
       display: block;
-      opacity: .9;
+      opacity: 0.85;
       transition: opacity 0.3s;
     }
 
-    .client:hover .client-logo {
-      opacity: 0.4;
+    .ticker-item:hover img {
+      opacity: 0.5;
     }
 
+    /* Page Divider */
+    .page-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      margin: 4rem 0;
+    }
+
+    /* AI-Creative Section */
+    .ai-creative-section {
+      margin: 6rem 0;
+      padding: 0;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.55s forwards;
+    }
+
+    .ai-creative-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .ai-creative-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ai-creative-philosophy {
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.88rem;
+      line-height: 1.9;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      opacity: 0.85;
+    }
+
+    .ai-creative-intro {
+      font-size: 0.88rem;
+      color: rgba(15, 15, 15, 0.55);
+      line-height: 1.9;
+      font-weight: 400;
+    }
+
+    .canvas-workflow {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin: 3rem 0 2rem 0;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    @media (max-width: 768px) {
+      .canvas-workflow {
+        margin: 2rem 0 1.5rem 0;
+      }
+
+      .page-divider {
+        margin: 3rem 0;
+      }
+    }
+
+    /* Experience types */
+    .experience-types {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4rem 0;
+      width: 100%;
+      padding: 0;
+    }
+
+    .experience-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--fg);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .experience-types {
+        margin: 2rem 0;
+      }
+    }
 
     /* What's next */
     .looking-section {
@@ -397,6 +384,7 @@
       font-size: clamp(4rem, 6.5vw, 7.5rem);
       line-height: 0.88;
       color: #0f0f0f;
+      font-weight: 700;
       position: sticky;
       top: 2rem;
       opacity: 0;
@@ -419,7 +407,7 @@
     }
 
     .looking-body {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.88rem;
       line-height: 1.9;
       letter-spacing: 0.08em;
@@ -468,7 +456,7 @@
 
     .cta-text {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.88rem;
       line-height: 1.9;
       letter-spacing: 0.08em;
@@ -566,29 +554,9 @@
         max-width: 100%;
       }
 
-      .stats {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .stat {
-        padding: 1.5rem;
-        min-height: 140px;
-      }
-
-      .stat-num {
-        font-size: clamp(3rem, 12vw, 5rem);
-      }
-
-      .stat-list {
-        font-size: clamp(1.2rem, 5vw, 2rem);
-      }
-
-      .clients-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .client {
-        padding: 1.2rem 0.5rem;
+      .ticker-item img {
+        max-height: 40px;
+        max-width: 100px;
       }
 
       .looking-section {
@@ -611,16 +579,9 @@
         gap: 1.5rem;
       }
 
-      .section-divider {
-        margin: 2.5rem 0;
-      }
     }
 
     @media (max-width: 480px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
       .clients-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1015,7 +976,7 @@
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
 
-    <!-- Proximity nav — desktop only -->
+    <!-- Proximity nav - desktop only -->
     <div class="prox-nav" id="proxNav">
       <ul class="prox-links" id="proxLinks">
         <li><a href="about.html" class="active"><span>About</span></a></li>
@@ -1054,14 +1015,9 @@
         <div class="about-hero-content">
           <p class="eyebrow">About me</p>
           <h1 class="about-headline">Harry<br>Frostick.</h1>
-          <div class="about-divider"></div>
           <div class="about-bottom">
-            <p class="about-intro">The best work lives at the intersection of craft, curiosity, and genuine
-              storytelling.</p>
-            <p class="about-body">With 7 years of experience across freelance, in-house, and agency environments, I have
-              had the privilege of creating motion and video work for some of the world's most recognised commercial
-              brands. I bring the same level of care to a five-second social loop as I do to a full brand campaign,
-              because the details always matter.</p>
+            <p class="about-intro">Working at the intersection of craft, curiosity, and genuine storytelling.</p>
+            <p class="about-body">With 7 years of experience across freelance, in-house, and agency environments, I have had the privilege of creating motion and video work for some of the world's most recognised commercial brands. I bring the same level of care to a five-second social loop as I do to a full brand campaign, because the details always matter.</p>
           </div>
         </div>
         <div class="about-portrait">
@@ -1070,52 +1026,57 @@
       </div>
     </div>
 
-    <div class="stats">
-      <div class="stat scroll-reveal">
-        <p class="stat-num"><span id="counterNum">7</span>+</p>
-        <p class="stat-label">Years of experience</p>
-      </div>
-      <div class="stat scroll-reveal">
-        <p class="stat-list">
-          <span class="list-word" id="word0">In-House</span>
-          <span class="list-word" id="word1">Agency</span>
-          <span class="list-word" id="word2">Freelance</span>
-        </p>
-        <p class="stat-label">Worked in</p>
-      </div>
-      <div class="stat scroll-reveal">
-        <svg id="infinitySvg" class="stat-num" viewBox="0 0 184.28 78.88" fill="none" xmlns="http://www.w3.org/2000/svg"
-          style="flex:1;width:100%;max-width:65px;overflow:visible;">
-          <path id="infinityPath"
-            d="M35.87,5.5C18.52,5.5,5.31,22.47,5.5,39.44c.19,16.97,13.77,33.94,30.37,33.94,54.61,0,56.32-67.88,112.63-67.88,16.74,0,30.04,16.97,30.28,33.94s-12.59,33.94-30.28,33.94c-56.32,0-56.32-67.88-112.63-67.88Z"
-            stroke="var(--fg)" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <p class="stat-label">Frames drawn by hand</p>
-      </div>
-    </div>
-
     <div class="clients-section">
-      <p class="section-label">Creating for</p>
-      <div class="clients-grid">
-        <div class="client"><img class="client-logo" src="assets/logo-pepsi.webp" alt="Pepsi" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-sky.webp" alt="Sky" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-mars.webp" alt="Mars" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-bt.webp" alt="BT" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-waitrose.webp" alt="Waitrose" /></div>
-        <div class="client"><img class="client-logo" src="assets/logo-monzo.webp" alt="Monzo" /></div>
+      <p class="section-label">Creating for the world's biggest brands</p>
+      <div class="brand-ticker">
+        <div class="ticker-track">
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_1.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_2.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_3.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_4.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_5.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_6.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_7.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_8.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_9.png" alt="Brand" /></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_1.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_2.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_3.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_4.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_5.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_6.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_7.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_8.png" alt="Brand" /></div>
+          <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_9.png" alt="Brand" /></div>
+        </div>
       </div>
     </div>
 
+    <div class="ai-creative-section">
+      <div class="ai-creative-label">AI-Creative</div>
+      <div class="ai-creative-content">
+        <p class="ai-creative-philosophy">I identify as a creative technologist-blending motion design craft with technical problem-solving to create innovative workflows and experiences.</p>
+
+        <p class="ai-creative-intro">I use AI tools to enhance creativity, accelerate ideation, and speed up workflow-so the emphasis can be placed where it belongs: in the craft.</p>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <div class="experience-types">
+      <div class="experience-item">Freelance</div>
+      <div class="experience-item">In-House</div>
+      <div class="experience-item">Agency</div>
+    </div>
+
+    <div class="page-divider"></div>
 
     <div class="looking-section">
-      <div class="looking-label">What's<br>next.</div>
+      <div class="looking-label">What's<br>next?</div>
       <div class="looking-body-wrap">
-        <p class="looking-body">After years of honing my craft on commercial projects, I am carving out more space for
-          personal work.</p>
-        <p class="about-body" style="margin-bottom:1.5rem;">I am drawn to character design, frame-by-frame animation,
-          and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent
-          commission, or something in between — if it lets me push the boundaries of what motion can feel like, I am
-          interested.</p>
+        <p class="looking-body">After 7 years of honing my craft on commercial projects, I am carving out more space for personal work.</p>
+        <p class="about-body" style="margin-bottom:1.5rem;">I am drawn to character design, frame-by-frame animation, and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent commission, or something in between - if it lets me push the boundaries of what motion can feel like, I am interested.</p>
         <div class="looking-tags">
           <span class="tag">Drawing</span>
           <span class="tag">Character Design</span>
@@ -1201,70 +1162,6 @@
       requestAnimationFrame(tick);
     })();
 
-
-    // ── Scroll reveal ──────────────────────────────────────────────
-    const revealEls = document.querySelectorAll('.scroll-reveal');
-    let statsTriggered = false;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.dataset.delay || 0;
-          setTimeout(() => el.classList.add('visible'), delay);
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    revealEls.forEach((el, i) => {
-      el.dataset.delay = i * 120;
-      observer.observe(el);
-    });
-
-    // Add scroll-reveal to non-stats sections too
-    document.querySelectorAll('.clients-section, .about-cta, .section-divider').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateX(30px)';
-      el.style.transition = 'none';
-      el.classList.add('scroll-reveal');
-      el.dataset.delay = i * 100;
-      observer.observe(el);
-    });
-
-    // ── Stats section observer ──────────────────────────────────────
-    const statsSection = document.querySelector('.stats');
-    const statsObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !statsTriggered) {
-        statsTriggered = true;
-        statsObserver.unobserve(statsSection);
-
-        // Counter: 5 → 6 → 7
-        const counterEl = document.getElementById('counterNum');
-        const sequence = [5, 6, 7];
-        let step = 0;
-        const tick = () => {
-          counterEl.textContent = sequence[step];
-          step++;
-          if (step < sequence.length) setTimeout(tick, 220);
-        };
-        setTimeout(tick, 200);
-
-        // Words one-by-one
-        ['word0', 'word1', 'word2'].forEach((id, i) => {
-          setTimeout(() => {
-            document.getElementById(id).classList.add('visible');
-          }, 200 + i * 200);
-        });
-
-        // Infinity path draw
-        setTimeout(() => {
-          document.getElementById('infinityPath').classList.add('draw');
-        }, 300);
-      }
-    }, { threshold: 0.3 });
-
-    statsObserver.observe(statsSection);
 
     // ── What's Next scroll reveal ───────────────────────────────────
     const lookingLabel = document.querySelector('.looking-label');

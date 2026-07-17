@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work — Harry Frostick</title>
+  <title>Work - Harry Frostick</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -71,13 +71,13 @@
       transition: opacity 0.45s ease, transform 0.45s ease;
     }
 
-    /* Expand — rightmost link first, stagger toward left */
+    /* Expand - rightmost link first, stagger toward left */
     .prox-links.expanded li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
     .prox-links.expanded li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.22s; }
     .prox-links.expanded li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.34s; }
     .prox-links.expanded li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.46s; }
 
-    /* Collapse — leftmost fades first */
+    /* Collapse - leftmost fades first */
     .prox-links:not(.expanded) li:nth-child(1) { transition-delay: 0s; }
     .prox-links:not(.expanded) li:nth-child(2) { transition-delay: 0.08s; }
     .prox-links:not(.expanded) li:nth-child(3) { transition-delay: 0.16s; }
@@ -97,7 +97,7 @@
     .prox-links a.active { opacity: 1; }
     .prox-links a span { display: inline-block; transition: transform 0.1s linear; }
 
-    /* Burger — always visible */
+    /* Burger - always visible */
     .prox-burger {
       display: flex;
       flex-direction: column;
@@ -157,7 +157,7 @@
     .featured-card:hover { border-color: rgba(15,15,15,0.25); }
 
     .featured-media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: rgba(244,184,196,0.4); }
-    .featured-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s; pointer-events: none; will-change: opacity; }
+    .featured-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s; pointer-events: none; will-change: opacity; transform: translate3d(0, 0, 0); backface-visibility: hidden; }
     .featured-media .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s; }
     .placeholder-inner { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(15,15,15,0.07); }
     .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 52px; height: 52px; border: 1px solid rgba(15,15,15,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s, transform 0.3s; z-index: 2; }
@@ -551,12 +551,18 @@
       inset: 0;
       display: flex;
       transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      z-index: 1;
+      width: 100%;
+      height: 100%;
     }
     .carousel-slide {
       position: relative;
       min-width: 100%;
       height: 100%;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .carousel-slide img,
     .carousel-slide video {
@@ -572,10 +578,14 @@
       pointer-events: none;
       will-change: opacity;
       background: #000;
+      min-height: 100%;
+      min-width: 100%;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
     }
     .carousel-slide video::-webkit-media-controls { opacity: 0; transition: opacity 0.2s; }
     .carousel-slide:hover video::-webkit-media-controls { opacity: 1; }
-    /* Carousel arrows — sit on left/right of media */
+    /* Carousel arrows - sit on left/right of media */
     .carousel-nav {
       position: absolute;
       top: 50%;
@@ -747,7 +757,7 @@
       <div class="nav-logo-lottie" id="navLottie"></div>
     </a>
 
-    <!-- Proximity nav — desktop only -->
+    <!-- Proximity nav - desktop only -->
     <div class="prox-nav" id="proxNav">
       <ul class="prox-links" id="proxLinks">
         <li><a href="about.html"><span>About</span></a></li>
@@ -823,8 +833,8 @@
          data-type="Frame-by-Frame Animation"
          data-year="2024"
          data-tags="Rough Animator,Procreate,Procreate Dreams"
-         data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — with every frame, a new part of the story unfolds"
-         data-images='[{"src": "Projects/Duck&Boy_1.mp4", "type": "video", "desc": "A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated — with every frame, a new part of the story unfolds"}, {"src": "Projects/Duck&Boy_2.mp4", "type": "video", "desc": "An unlikely meeting. This pair appeared one evening while I doodled on my iPad."}, {"src": "Projects/Duck&Boy_3.mp4", "type": "video", "desc": "I wanted to develop my abilities in frame-by-frame animation, hoping for it to start to bleed into my commercial work. I decided to bring the doodle to life."}, {"src": "Projects/Duck&Boy_4.mp4", "type": "video", "desc": "A friend suggested to me that I should see what happens if I animated with a consistent character. I followed their advice and imagined them in different scenarios - often inspired by things that were happening in my life."}, {"src": "Projects/Duck&Boy_5.mp4", "type": "video", "desc": "It became a fun experiment, encouraging me to draw the pair in illustrations first, without worrying about the practicalities of animating them."}, {"src": "Projects/Duck&Boy_6.gif", "type": "image", "desc": "A story began to unfold. Looking intraspectively, I can see that what was unfolding was recreation of the same emotional journey that I was currently going through."}, {"src": "Projects/Duck&boy_7.mp4", "type": "video", "desc": "I had friends that were moving away, and moving abroad. And I was having to adjust to the change in my immediate social circles."}, {"src": "Projects/Duck&Boy_8.mp4", "type": "video", "desc": "I wasn’t noticeably unhappy, but the course of this project caused me to reflect on the change that was happening."}, {"src": "Projects/Duck&Boy_9.mp4", "type": "video", "desc": "It’s a sort of grieving, but the friends are still there. They just aren’t as immediately close as they once were."}, {"src": "Projects/Duck&Boy_10.mp4", "type": "video", "desc": "And you learn to apadt to the new circumstances. The mark of a good friend is that the distance doesn’t change anything."}]'>
+         data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated - with every frame, a new part of the story unfolds"
+         data-images='[{"src": "Projects/Duck&Boy_1.mp4", "type": "video", "desc": "A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated - with every frame, a new part of the story unfolds"}, {"src": "Projects/Duck&Boy_2.mp4", "type": "video", "desc": "An unlikely meeting. This pair appeared one evening while I doodled on my iPad."}, {"src": "Projects/Duck&Boy_3.mp4", "type": "video", "desc": "I wanted to develop my abilities in frame-by-frame animation, hoping for it to start to bleed into my commercial work. I decided to bring the doodle to life."}, {"src": "Projects/Duck&Boy_4.mp4", "type": "video", "desc": "A friend suggested to me that I should see what happens if I animated with a consistent character. I followed their advice and imagined them in different scenarios - often inspired by things that were happening in my life."}, {"src": "Projects/Duck&Boy_5.mp4", "type": "video", "desc": "It became a fun experiment, encouraging me to draw the pair in illustrations first, without worrying about the practicalities of animating them."}, {"src": "Projects/Duck&Boy_6.gif", "type": "image", "desc": "A story began to unfold. Looking intraspectively, I can see that what was unfolding was recreation of the same emotional journey that I was currently going through."}, {"src": "Projects/Duck&boy_7.mp4", "type": "video", "desc": "I had friends that were moving away, and moving abroad. And I was having to adjust to the change in my immediate social circles."}, {"src": "Projects/Duck&Boy_8.mp4", "type": "video", "desc": "I wasn’t noticeably unhappy, but the course of this project caused me to reflect on the change that was happening."}, {"src": "Projects/Duck&Boy_9.mp4", "type": "video", "desc": "It’s a sort of grieving, but the friends are still there. They just aren’t as immediately close as they once were."}, {"src": "Projects/Duck&Boy_10.mp4", "type": "video", "desc": "And you learn to apadt to the new circumstances. The mark of a good friend is that the distance doesn’t change anything."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Duck & Boy.webp" alt="Duck &amp; Boy" />
         </div>
@@ -836,8 +846,8 @@
          data-type="Logo Animation"
          data-year="2024"
          data-tags="Rough Animator,Procreate,After Effects,Procreate Dreams"
-         data-desc="A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
-         data-images='[{"src": "Projects/Zorra_1.mp4", "type": "video", "desc": "A logo animation for Zorra — bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."}, {"src": "Projects/Zorra_2.png", "type": "image", "desc": "Zorra approached me, asking for help to take their logo design for Zorra into motion."}, {"src": "Projects/Zorra_3.mp4", "type": "video", "desc": "To retain the charms of the original logo illustration, I went down the frame-by-frame route, starting with the fox’s run cycle. I use basic shapes to plot the movements in Rough Animator."}, {"src": "Projects/Zorra_4.mp4", "type": "video", "desc": "A rough pass of the fox is made, establishing the movements of the animal."}, {"src": "Projects/Zorra_5.mp4", "type": "video", "desc": "I then move into After Effects to do similar for the human character. I create a rough puppet in Adobe Illustrator that I can then rig with Duik."}, {"src": "Projects/Zorra_6.mp4", "type": "video", "desc": "The AE export then goes back into Rough Animator to create a second rough pass, combining the fox with the human."}, {"src": "Projects/Zorra_7.mp4", "type": "video", "desc": "A clean pass is created, mimicing the inking of the original illustration. I add smear frames and whips to give the piece some athentic cartoon charm."}]'>
+         data-desc="A logo animation for Zorra - bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
+         data-images='[{"src": "Projects/Zorra_1.mp4", "type": "video", "desc": "A logo animation for Zorra - bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."}, {"src": "Projects/Zorra_2.png", "type": "image", "desc": "Zorra approached me, asking for help to take their logo design for Zorra into motion."}, {"src": "Projects/Zorra_3.mp4", "type": "video", "desc": "To retain the charms of the original logo illustration, I went down the frame-by-frame route, starting with the fox’s run cycle. I use basic shapes to plot the movements in Rough Animator."}, {"src": "Projects/Zorra_4.mp4", "type": "video", "desc": "A rough pass of the fox is made, establishing the movements of the animal."}, {"src": "Projects/Zorra_5.mp4", "type": "video", "desc": "I then move into After Effects to do similar for the human character. I create a rough puppet in Adobe Illustrator that I can then rig with Duik."}, {"src": "Projects/Zorra_6.mp4", "type": "video", "desc": "The AE export then goes back into Rough Animator to create a second rough pass, combining the fox with the human."}, {"src": "Projects/Zorra_7.mp4", "type": "video", "desc": "A clean pass is created, mimicing the inking of the original illustration. I add smear frames and whips to give the piece some athentic cartoon charm."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Zora.webp" alt="Zorra" />
         </div>
@@ -865,8 +875,8 @@
          data-type="Motion · Brand Animation"
          data-year="2023"
          data-tags="Scripting,Storyboarding,Styleboarding,After Effects"
-         data-desc="Explainer Video for BCN's Moving Forward programme — supporting people after breast cancer treatment"
-         data-images='[{"src": "Projects/BCN_MovingForward_1.mp4", "type": "video", "desc": "Explainer Video for BCN’s Moving Forward programme — supporting people after breast cancer treatment"}, {"src": "Projects/BCN_MovingForward_2.webp", "type": "image", "desc": "Working with the Moving Forward team, it was key to accurately capture the function of the Moving Forward programme so as to present it visually. This was achieved by storyboarding, and multiple discussions with their team."}, {"src": "Projects/BCN_MovingForward_3.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_4.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_5.webm", "type": "video", "desc": "I wanted to capture the overwhelming feeling that can come to those adapting to life after treatment. And given the digital nature of the Moving Forward programme, it seemed a very apt analogy to bring in the cluttered desktop, smattered with incomplete tasks and creating an image of the person behind the cancer treatment."}, {"src": "Projects/BCN_MovingForward_6.webm", "type": "video", "desc": "Part of Moving Forward is an online forum, where people are able to talk about what they’re going through with people who can relate. It was key to keep this a representational, rather than instructional. I didn’t want people to get bogged down in a how-to."}, {"src": "Projects/BCN_MovingForward_7.webm", "type": "video", "desc": "A wealth of information is offered by the charity, and it was important to show this."}, {"src": "Projects/BCN_MovingForward_8.webm", "type": "video", "desc": "The video comes full circle. What was cluttered and overwhelming becomes exciting and alluring."}]'>
+         data-desc="Explainer Video for BCN's Moving Forward programme - supporting people after breast cancer treatment"
+         data-images='[{"src": "Projects/BCN_MovingForward_1.mp4", "type": "video", "desc": "Explainer Video for BCN’s Moving Forward programme - supporting people after breast cancer treatment"}, {"src": "Projects/BCN_MovingForward_2.webp", "type": "image", "desc": "Working with the Moving Forward team, it was key to accurately capture the function of the Moving Forward programme so as to present it visually. This was achieved by storyboarding, and multiple discussions with their team."}, {"src": "Projects/BCN_MovingForward_3.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_4.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_5.webm", "type": "video", "desc": "I wanted to capture the overwhelming feeling that can come to those adapting to life after treatment. And given the digital nature of the Moving Forward programme, it seemed a very apt analogy to bring in the cluttered desktop, smattered with incomplete tasks and creating an image of the person behind the cancer treatment."}, {"src": "Projects/BCN_MovingForward_6.webm", "type": "video", "desc": "Part of Moving Forward is an online forum, where people are able to talk about what they’re going through with people who can relate. It was key to keep this a representational, rather than instructional. I didn’t want people to get bogged down in a how-to."}, {"src": "Projects/BCN_MovingForward_7.webm", "type": "video", "desc": "A wealth of information is offered by the charity, and it was important to show this."}, {"src": "Projects/BCN_MovingForward_8.webm", "type": "video", "desc": "The video comes full circle. What was cluttered and overwhelming becomes exciting and alluring."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_BCN_Moving Forward.webp" alt="BCN Moving Forward" />
         </div>
@@ -879,8 +889,8 @@
          data-type="Social Content · Motion"
          data-year="2025"
          data-tags="After Effects,Social Design"
-         data-desc="Social video content created via Vidsy for Lay's MAX — punchy, product-forward motion designed to perform across social platforms."
-         data-images='[{"src": "Projects/Vidsy_Walkers_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_2.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_3.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_4.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_5.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX — punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_6.mp4", "type": "video", "desc": "AI was utilised to create a ketchup asset that had not been provided. Full control of the output was ascertainable by creating the reference shape first."}, {"src": "Projects/Vidsy_Walkers_7.mp4", "type": "video", "desc": "The full campaign was well received by the client."}]'>
+         data-desc="Social video content created via Vidsy for Lay's MAX - punchy, product-forward motion designed to perform across social platforms."
+         data-images='[{"src": "Projects/Vidsy_Walkers_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_2.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_3.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_4.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_5.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_6.mp4", "type": "video", "desc": "AI was utilised to create a ketchup asset that had not been provided. Full control of the output was ascertainable by creating the reference shape first."}, {"src": "Projects/Vidsy_Walkers_7.mp4", "type": "video", "desc": "The full campaign was well received by the client."}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Vidsy_Walkers.png" alt="Walkers" />
         </div>
@@ -893,8 +903,8 @@
          data-type="Social Content · Motion"
          data-year="2025"
          data-tags="After Effects,Social Design"
-         data-desc="Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."
-         data-images='[{"src": "Projects/Vidsy_MountainDew_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Mountain Dew — high-energy motion and bold visual language built for maximum impact in the feed."}, {"src": "Projects/Vidsy_MountainDew_2.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_3.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_4.mp4", "type": "video", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_5.png", "type": "image", "desc": "A summary of the brief."}, {"src": "Projects/Vidsy_MountainDew_6.webp", "type": "image", "desc": "The narrative structure, developed by the Creative Lead gave a rough guidence on how the video was to be executed."}, {"src": "Projects/Vidsy_MountainDew_7.mp4", "type": "video", "desc": "The piece went on to be iterated in multipe ways, and localised for different markets, all off my original base asset"}, {"src": "Projects/Vidsy_MountainDew_8.mp4", "type": "video", "desc": "Ready, set, TASTE!"}]'>
+         data-desc="Social video content created via Vidsy for Mountain Dew - high-energy motion and bold visual language built for maximum impact in the feed."
+         data-images='[{"src": "Projects/Vidsy_MountainDew_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Mountain Dew - high-energy motion and bold visual language built for maximum impact in the feed."}, {"src": "Projects/Vidsy_MountainDew_2.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_3.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_4.mp4", "type": "video", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_5.png", "type": "image", "desc": "A summary of the brief."}, {"src": "Projects/Vidsy_MountainDew_6.webp", "type": "image", "desc": "The narrative structure, developed by the Creative Lead gave a rough guidence on how the video was to be executed."}, {"src": "Projects/Vidsy_MountainDew_7.mp4", "type": "video", "desc": "The piece went on to be iterated in multipe ways, and localised for different markets, all off my original base asset"}, {"src": "Projects/Vidsy_MountainDew_8.mp4", "type": "video", "desc": "Ready, set, TASTE!"}]'>
         <div class="masonry-thumb">
           <img src="Projects/Thumbnail_Vidsy_MountainDew.png" alt="Mountain Dew" />
         </div>
@@ -1022,7 +1032,7 @@
     </div>
   </div>
 
-  <!-- Theatre modal — showreel fullscreen -->
+  <!-- Theatre modal - showreel fullscreen -->
   <div class="theatre-backdrop" id="theatreBackdrop">
     <button class="theatre-close" id="theatreClose" aria-label="Close">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -1335,9 +1345,18 @@
           slide.className = 'carousel-slide';
           if (s.type === 'video') {
             const vid = document.createElement('video');
-            vid.src = s.src; vid.controls = true; vid.loop = true;
-            vid.playsInline = true; vid.muted = false; vid.preload = 'auto';
+            vid.src = s.src;
+            vid.controls = true;
+            vid.loop = true;
+            vid.playsInline = true;
+            vid.muted = false;
+            vid.preload = 'auto';
             vid.style.backgroundColor = '#000';
+            vid.style.width = '100%';
+            vid.style.height = '100%';
+            vid.onerror = () => {
+              console.error('Video failed to load:', s.src);
+            };
             slide.appendChild(vid);
           } else {
             const img = document.createElement('img');
@@ -1448,7 +1467,7 @@
   </script>
 
   <script>
-    // ── Theatre modal — showreel ───────────────────────────────────
+    // ── Theatre modal - showreel ───────────────────────────────────
     (function() {
       const card     = document.getElementById('showreelCard');
       const backdrop = document.getElementById('theatreBackdrop');
