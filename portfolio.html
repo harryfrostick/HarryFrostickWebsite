@@ -567,7 +567,12 @@
       object-fit: contain;
       display: block;
     }
-    .carousel-slide video { opacity: 1 !important; }
+    .carousel-slide video {
+      opacity: 1 !important;
+      pointer-events: none;
+      will-change: opacity;
+      background: #000;
+    }
     .carousel-slide video::-webkit-media-controls { opacity: 0; transition: opacity 0.2s; }
     .carousel-slide:hover video::-webkit-media-controls { opacity: 1; }
     /* Carousel arrows — sit on left/right of media */
@@ -1300,7 +1305,14 @@
         const newSlide = carouselTrack.children[slideIndex];
         if (newSlide) {
           const vid = newSlide.querySelector('video');
-          if (vid) { vid.muted = mutedState; vid.currentTime = 0; vid.play().catch(() => {}); }
+          if (vid) {
+            vid.muted = mutedState;
+            vid.currentTime = 0;
+            // Use setTimeout to ensure video is ready to play
+            setTimeout(() => {
+              vid.play().catch(() => {});
+            }, 100);
+          }
         }
       }
 
@@ -1324,7 +1336,8 @@
           if (s.type === 'video') {
             const vid = document.createElement('video');
             vid.src = s.src; vid.controls = true; vid.loop = true;
-            vid.playsInline = true; vid.muted = false;
+            vid.playsInline = true; vid.muted = false; vid.preload = 'auto';
+            vid.style.backgroundColor = '#000';
             slide.appendChild(vid);
           } else {
             const img = document.createElement('img');
@@ -1345,7 +1358,13 @@
         const firstSlide = carouselTrack.children[0];
         if (firstSlide) {
           const firstVid = firstSlide.querySelector('video');
-          if (firstVid) firstVid.play().catch(() => {});
+          if (firstVid) {
+            // Ensure video is ready before playing
+            firstVid.currentTime = 0;
+            setTimeout(() => {
+              firstVid.play().catch(() => {});
+            }, 100);
+          }
         }
 
         [modalClient, modalTitle, modalType, modalYear].forEach(el => {
