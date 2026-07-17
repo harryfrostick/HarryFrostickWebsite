@@ -157,7 +157,7 @@
     .featured-card:hover { border-color: rgba(15,15,15,0.25); }
 
     .featured-media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: rgba(244,184,196,0.4); }
-    .featured-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s; }
+    .featured-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s; pointer-events: none; will-change: opacity; }
     .featured-media .placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s; }
     .placeholder-inner { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(15,15,15,0.07); }
     .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 52px; height: 52px; border: 1px solid rgba(15,15,15,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, background 0.3s, transform 0.3s; z-index: 2; }
@@ -1105,6 +1105,10 @@
         card.classList.add('video-playing');
       });
 
+      video.addEventListener('playing', () => {
+        card.classList.add('video-playing');
+      });
+
       video.addEventListener('ended', () => {
         card.classList.remove('video-playing');
       });
@@ -1114,6 +1118,12 @@
         if (video.ended || video.currentTime === 0) {
           card.classList.remove('video-playing');
         }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+        card.classList.remove('video-playing');
       });
     });
 
