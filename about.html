@@ -300,6 +300,19 @@
       margin-bottom: 2rem;
     }
 
+    .ai-creative-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .ai-creative-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
     .ai-creative-content {
       display: flex;
       flex-direction: column;
@@ -325,13 +338,18 @@
       font-weight: 400;
     }
 
-    .canvas-workflow {
-      width: 100%;
-      max-width: 800px;
-      height: auto;
-      margin: 3rem 0 2rem 0;
+    .ai-diagram-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
       opacity: 0;
       animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    .ai-diagram-image {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     @media (max-width: 768px) {
@@ -363,11 +381,22 @@
       color: var(--fg);
       white-space: nowrap;
       flex-shrink: 0;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .experience-item:hover {
+      color: var(--accent);
     }
 
     @media (max-width: 768px) {
       .experience-types {
         margin: 2rem 0;
+      }
+
+      .ai-creative-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
     }
 
@@ -1054,11 +1083,19 @@
     </div>
 
     <div class="ai-creative-section">
-      <div class="ai-creative-label">AI-Creative</div>
-      <div class="ai-creative-content">
-        <p class="ai-creative-philosophy">I identify as a creative technologist-blending motion design craft with technical problem-solving to create innovative workflows and experiences.</p>
+      <div class="ai-creative-layout">
+        <div class="ai-creative-left">
+          <div class="ai-creative-label">AI-Creative</div>
+          <div class="ai-creative-content">
+            <p class="ai-creative-philosophy">AI tools enhance creativity, accelerate ideation, and speed up workflow so that the emphasis can be placed where the artist chooses.</p>
 
-        <p class="ai-creative-intro">I use AI tools to enhance creativity, accelerate ideation, and speed up workflow-so the emphasis can be placed where it belongs: in the craft.</p>
+            <p class="ai-creative-intro">I've begun identifying with the term 'creative technologist' as I blend more skills in motion design with technical problem-solving. I use AI to create innovative workflows so that I can focus on the areas which I care about most like the way in which the subject moves, or story I'm trying to tell. Motion design already taught me to become a generalist; AI becomes yet another string to my bow.</p>
+          </div>
+        </div>
+
+        <div class="ai-diagram-container">
+          <img src="Assets/AI Diagram.png" alt="AI Workflow Diagram" class="ai-diagram-image" />
+        </div>
       </div>
     </div>
 
