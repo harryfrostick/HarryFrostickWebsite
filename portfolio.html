@@ -230,6 +230,25 @@
     }
     .bh-label { font-size: 3rem; opacity: 0.12; margin-top: 0.5rem; }
 
+    .wave-char {
+      display: inline-block;
+      animation: wave 2.5s ease-in-out var(--wave-delay) infinite;
+    }
+
+    .headline-nowrap {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--muted); }
@@ -793,8 +812,7 @@
 
     <div class="page-header">
       <p class="eyebrow">Selected work</p>
-      <h1 class="page-headline">Work.</h1>
-      <div class="page-divider"></div>
+      <h1 class="page-headline"><span class="wave-char" style="--wave-delay: 0s;">W</span><span class="wave-char" style="--wave-delay: 0.1s;">o</span><span class="wave-char" style="--wave-delay: 0.2s;">r</span><span class="wave-char" style="--wave-delay: 0.3s;">k</span><span class="wave-char" style="--wave-delay: 0.4s;">.</span></h1>
     </div>
 
     <div class="featured">
@@ -809,7 +827,7 @@
         </div>
         <div class="featured-info">
           <div>
-            <h2 class="featured-title showreel-title">Showreel</h2>
+            <h2 class="featured-title showreel-title">Full Showreel</h2>
             <p class="featured-desc showreel-desc">A curated selection of my motion design work, displaying a versatility across styles, project types, and creative challenges.</p>
           </div>
           <div class="featured-info-bottom showreel-info-bottom">

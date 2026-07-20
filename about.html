@@ -92,6 +92,15 @@
       }
     }
 
+    @keyframes gentleFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
     @keyframes fadeSlideRight {
       from {
         opacity: 0;
@@ -172,6 +181,27 @@
       opacity: 0;
       transform: translateY(40px);
       animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .wave-char {
+      display: inline-block;
+      animation: wave 2.5s ease-in-out var(--wave-delay) infinite;
+    }
+
+    .headline-nowrap {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
     .about-divider {
@@ -1043,7 +1073,11 @@
       <div class="about-hero-container">
         <div class="about-hero-content">
           <p class="eyebrow">About me</p>
-          <h1 class="about-headline">Harry<br>Frostick.</h1>
+          <h1 class="about-headline">
+            <span class="wave-char" style="--wave-delay: 0s;">H</span><span class="wave-char" style="--wave-delay: 0.1s;">a</span><span class="wave-char" style="--wave-delay: 0.2s;">r</span><span class="wave-char" style="--wave-delay: 0.3s;">r</span><span class="wave-char" style="--wave-delay: 0.4s;">y</span>
+            <br>
+            <span class="headline-nowrap"><span class="wave-char" style="--wave-delay: 0.5s;">F</span><span class="wave-char" style="--wave-delay: 0.6s;">r</span><span class="wave-char" style="--wave-delay: 0.7s;">o</span><span class="wave-char" style="--wave-delay: 0.8s;">s</span><span class="wave-char" style="--wave-delay: 0.9s;">t</span><span class="wave-char" style="--wave-delay: 1s;">i</span><span class="wave-char" style="--wave-delay: 1.1s;">c</span><span class="wave-char" style="--wave-delay: 1.2s;">k</span><span class="wave-char" style="--wave-delay: 1.3s;">.</span></span>
+          </h1>
           <div class="about-bottom">
             <p class="about-intro">Working at the intersection of craft, curiosity, and genuine storytelling.</p>
             <p class="about-body">With 7 years of experience across freelance, in-house, and agency environments, I have had the privilege of creating motion and video work for some of the world's most recognised commercial brands. I bring the same level of care to a five-second social loop as I do to a full brand campaign, because the details always matter.</p>
