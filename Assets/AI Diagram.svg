@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 855 594.8" width="855" height="594.8">
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109), animation added by hand -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+        stroke: rgba(20,20,20,0.4);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .st1 {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .st2 {
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: 700;
+      }
+
+      .st2, .st3 {
+        font-size: 14px;
+        isolation: isolate;
+      }
+
+      .st3 {
+        font-family: Montserrat-Regular, Montserrat;
+      }
+
+      /* ---------- animation ---------- */
+      .sparkle { transform-box: fill-box; transform-origin: center; }
+      .sparkle-a { animation: twinkle 2.6s ease-in-out infinite; }
+      .sparkle-b { animation: twinkle 3.2s ease-in-out infinite; animation-delay: -1s; }
+      .sparkle-c { animation: twinkle 2.9s ease-in-out infinite; animation-delay: -2s; }
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.25; transform: scale(0.75) rotate(0deg); }
+        50%      { opacity: 1;    transform: scale(1.05) rotate(8deg); }
+      }
+
+      /* static transforms (box rotation etc.) live on child elements, never on the
+         same element as these animation classes, so the two don't clobber each other */
+      .box { transform-box: fill-box; transform-origin: center; }
+      .box-import   { animation: floatA 5.5s ease-in-out infinite; }
+      .box-imagegen { animation: floatB 6.5s ease-in-out infinite; animation-delay: -1.2s; }
+      .box-videogen { animation: floatA 6s ease-in-out infinite; animation-delay: -2.4s; }
+      .box-text     { animation: floatB 7s ease-in-out infinite; animation-delay: -3s; }
+      @keyframes floatA {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-7px); }
+      }
+      @keyframes floatB {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(6px); }
+      }
+
+      .icon-pulse { transform-box: fill-box; transform-origin: center; animation: iconPulse 4.5s ease-in-out infinite; }
+      @keyframes iconPulse {
+        0%, 100% { opacity: 0.7; }
+        50%      { opacity: 1; }
+      }
+
+      .cursor-group { transform-box: fill-box; transform-origin: center; animation: cursorDrift 6s ease-in-out infinite; }
+      @keyframes cursorDrift {
+        0%, 100% { transform: translate(0, 0); }
+        30%      { transform: translate(5px, -4px); }
+        65%      { transform: translate(-3px, 3px); }
+      }
+    </style>
+  </defs>
+
+  <!-- ===================== CONNECTOR LINES ===================== -->
+  <g>
+    <path class="st0" d="M224,169c35,0,40,27,70,29"/>
+    <path class="st0" d="M504,236c35,0,40-77,70-85"/>
+    <path class="st0" d="M241.3,408.9c34.7-.8,61.5-28.4,48-64.7-13-35-51.4-35.6-49.7-71.2s25.4-39,53.6-39.5"/>
+    <circle cx="224" cy="169" r="3.5"/>
+    <circle cx="294" cy="198" r="3.5"/>
+    <circle cx="294" cy="234" r="3.5"/>
+    <circle cx="504" cy="236" r="3.5"/>
+    <circle cx="574" cy="151" r="3.5"/>
+    <circle cx="241.5" cy="409" r="3.5"/>
+  </g>
+
+  <!-- ===================== SPARKLES ===================== -->
+  <g>
+    <path class="sparkle sparkle-a" d="M549,0l4,12,12,4-12,4-4,12-4-12-12-4,12-4,4-12Z"/>
+    <path class="sparkle sparkle-b" d="M12,305l3,9,9,3-9,3-3,9-3-9-9-3,9-3,3-9Z"/>
+    <path class="sparkle sparkle-c" d="M839,240l4,12,12,4-12,4-4,12-4-12-12-4,12-4,4-12Z"/>
+  </g>
+
+  <!-- ===================== IMPORT BOX ===================== -->
+  <g class="box box-import">
+    <rect class="st0" x="52" y="63" width="13" height="13" rx="2" ry="2"/>
+    <text class="st3" transform="translate(74 74)"><tspan x="0" y="0">Import</tspan></text>
+    <rect class="st0" x="44" y="101" width="180" height="180" rx="22" ry="22"/>
+    <g class="icon-pulse">
+      <line class="st0" x1="134" y1="164.7" x2="134" y2="203.4"/>
+      <polyline class="st0" points="121 177 134 164 147 177"/>
+      <line class="st0" x1="113" y1="212.6" x2="155" y2="212.6"/>
+    </g>
+  </g>
+
+  <!-- ===================== IMAGE GENERATOR BOX ===================== -->
+  <g class="box box-imagegen">
+    <rect class="st0" x="309" y="91" width="13" height="13" rx="2" ry="2"/>
+    <text class="st3" transform="translate(331 102)"><tspan x="0" y="0">Image Generator</tspan></text>
+    <rect class="st0" x="294" y="131" width="210" height="210" rx="22" ry="22"/>
+    <g class="icon-pulse">
+      <rect class="st0" x="389" y="202" width="22" height="12" rx="3" ry="3"/>
+      <rect class="st0" x="362" y="214" width="74" height="52" rx="9" ry="9"/>
+      <circle class="st0" cx="399" cy="241" r="16"/>
+    </g>
+  </g>
+
+  <!-- ===================== VIDEO GENERATOR BOX ===================== -->
+  <g class="box box-videogen">
+    <rect class="st0" x="589" y="13" width="13" height="13" rx="2" ry="2"/>
+    <text class="st3" transform="translate(611 24)"><tspan x="0" y="0">Video Generator</tspan></text>
+    <rect class="st0" x="574" y="51" width="190" height="190" rx="22" ry="22"/>
+    <g class="icon-pulse">
+      <rect class="st0" x="637" y="126" width="48" height="40" rx="6" ry="6"/>
+      <path class="st0" d="M685,137l23-10v38l-23-10v-18Z"/>
+    </g>
+  </g>
+
+  <!-- ===================== TEXT BOX ===================== -->
+  <g class="box box-text">
+    <rect class="st0" x="44" y="341" width="200" height="250" rx="24" ry="24" transform="translate(-24.2 8.2) rotate(-3)"/>
+    <path d="M66,383l148.8-7.8c2.5-.1,4.6,1.8,4.7,4.3h0c.1,2.5-1.8,4.6-4.3,4.7l-148.8,7.8c-2.5.1-4.6-1.8-4.7-4.3h0c-.1-2.5,1.8-4.6,4.3-4.7Z"/>
+    <path d="M67.5,410.9l148.8-7.8c2.5-.1,4.6,1.8,4.7,4.3h0c.1,2.5-1.8,4.6-4.3,4.7l-148.8,7.8c-2.5.1-4.6-1.8-4.7-4.3h0c-.1-2.5,1.8-4.6,4.3-4.7Z"/>
+    <path d="M69,438.9l148.8-7.8c2.5-.1,4.6,1.8,4.7,4.3h0c.1,2.5-1.8,4.6-4.3,4.7l-148.8,7.8c-2.5.1-4.6-1.8-4.7-4.3h0c-.1-2.5,1.8-4.6,4.3-4.7Z"/>
+    <path d="M70.4,466.9l140.8-7.4c2.5-.1,4.6,1.8,4.7,4.3h0c.1,2.5-1.8,4.6-4.3,4.7l-140.8,7.4c-2.5.1-4.6-1.8-4.7-4.3h0c-.1-2.5,1.8-4.6,4.3-4.7Z"/>
+    <path d="M71.9,494.8l130.8-6.9c2.5-.1,4.6,1.8,4.7,4.3h0c.1,2.5-1.8,4.6-4.3,4.7l-130.8,6.9c-2.5.1-4.6-1.8-4.7-4.3h0c-.1-2.5,1.8-4.6,4.3-4.7Z"/>
+    <path d="M73.4,522.8l78.9-4.1c2.5-.1,4.6,1.8,4.7,4.3h0c.1,2.5-1.8,4.6-4.3,4.7l-78.9,4.1c-2.5.1-4.6-1.8-4.7-4.3h0c-.1-2.5,1.8-4.6,4.3-4.7Z"/>
+  </g>
+  <g>
+    <text class="st2" transform="translate(41.5 326.2) rotate(-3)"><tspan x="0" y="0">T</tspan></text>
+    <text class="st3" transform="translate(56.5 325.4) rotate(-3)"><tspan x="0" y="0">Text</tspan></text>
+  </g>
+
+  <!-- ===================== CURSOR ===================== -->
+  <!-- transparent fill, nudged down into open space so it doesn't sit on top of any box -->
+  <g class="cursor-group">
+    <path class="st1" transform="translate(40,90)" d="M334.2,338.8l9.7,45.6c.2,1.1,1.6,1.4,2.3.5l7.1-16.6c.6-1.4,1.9-2.4,3.5-2.5l17.7-1.2c1.1-.2,1.4-1.7.4-2.3l-38.5-25c-1-.7-2.4.2-2.1,1.5Z"/>
+  </g>
+</svg>
