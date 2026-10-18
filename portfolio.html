@@ -214,6 +214,7 @@
     .masonry-item:hover::after { border-color: rgba(15,15,15,0.15); }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .gsap-ready .page-header, .gsap-ready .featured { opacity: 1; animation: none !important; }
 
     /* Bad Habits placeholder */
     .bad-habits-placeholder { flex-direction: column; gap: 0.5rem; background: rgba(229,78,119,0.06); }
@@ -301,13 +302,16 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s ease;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      transition: opacity 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
     }
     .modal-backdrop.open {
       opacity: 1;
       pointer-events: all;
+      transition: opacity 0.4s ease, backdrop-filter 0.45s ease, -webkit-backdrop-filter 0.45s ease;
+      backdrop-filter: blur(6px);         /* the material arrives, rather than just fading in */
+      -webkit-backdrop-filter: blur(6px);
     }
     .modal-frame {
       display: grid;
@@ -316,12 +320,15 @@
       height: min(88vh, 720px);
       background: #faf6f3;
       overflow: hidden;
-      transform: translateY(24px) scale(0.97);
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.7,0,0.84,0);          /* closing: mirror of the opening curve */
     }
     .modal-backdrop.open .modal-frame {
-      transform: translateY(0) scale(1);
+      transform: scale(1);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
     }
+    .modal-media { touch-action: pan-y; }
+    .carousel-track img { -webkit-user-drag: none; user-select: none; }
     .modal-media {
       position: relative;
       overflow: hidden;
@@ -533,10 +540,10 @@
       width: min(96vw, 1400px);
       aspect-ratio: 16/9;
       background: #000;
-      transform: scale(0.97);
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.7,0,0.84,0);
     }
-    .theatre-backdrop.open .theatre-inner { transform: scale(1); }
+    .theatre-backdrop.open .theatre-inner { transform: scale(1); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1); }
     .theatre-inner video {
       width: 100%;
       height: 100%;
@@ -766,6 +773,8 @@
       .site-footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem 1.5rem; }
     }
   </style>
+  <link rel="stylesheet" href="motion.css" />
+  <script>document.documentElement.classList.add('gsap-ready');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('gsap-ready')},3000);</script>
 </head>
 <body>
 
@@ -808,16 +817,16 @@
     <a href="contact.html">Get in touch</a>
   </div>
 
-  <div class="page">
+  <div class="page" data-m-group="hero">
 
     <div class="page-header">
-      <p class="eyebrow">Selected work</p>
-      <h1 class="page-headline"><span class="wave-char" style="--wave-delay: 0s;">W</span><span class="wave-char" style="--wave-delay: 0.1s;">o</span><span class="wave-char" style="--wave-delay: 0.2s;">r</span><span class="wave-char" style="--wave-delay: 0.3s;">k</span><span class="wave-char" style="--wave-delay: 0.4s;">.</span></h1>
+      <p class="eyebrow" data-m>Selected work</p>
+      <h1 class="page-headline" data-m-headline><span class="wave-char" style="--wave-delay: 0s;">W</span><span class="wave-char" style="--wave-delay: 0.1s;">o</span><span class="wave-char" style="--wave-delay: 0.2s;">r</span><span class="wave-char" style="--wave-delay: 0.3s;">k</span><span class="wave-char" style="--wave-delay: 0.4s;">.</span></h1>
     </div>
 
     <div class="featured">
-      <div class="featured-card showreel-card" id="showreelCard">
-        <div class="featured-media showreel-media">
+      <div class="featured-card showreel-card" id="showreelCard" data-m-cursor>
+        <div class="featured-media showreel-media" data-m="fade">
           <img src="Projects/00 HARRY FROSTICK_Showreel_Thumbnail.webp" alt="Showreel" class="showreel-thumb" />
           <div class="play-icon" id="showreelPlay">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -827,10 +836,10 @@
         </div>
         <div class="featured-info">
           <div>
-            <h2 class="featured-title showreel-title">Full Showreel</h2>
-            <p class="featured-desc showreel-desc">A curated selection of my motion design work, displaying a versatility across styles, project types, and creative challenges.</p>
+            <h2 class="featured-title showreel-title" data-m>Full Showreel</h2>
+            <p class="featured-desc showreel-desc" data-m>A curated selection of my motion design work, displaying a versatility across styles, project types, and creative challenges.</p>
           </div>
-          <div class="featured-info-bottom showreel-info-bottom">
+          <div class="featured-info-bottom showreel-info-bottom" data-m>
             <span class="featured-meta showreel-meta">Motion · Design · Illustration</span>
             <div class="featured-arrow">
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -842,10 +851,10 @@
       </div>
     </div>
 
-    <p class="grid-label">All projects</p>
-    <div class="masonry">
+    <p class="grid-label" data-m>All projects</p>
+    <div class="masonry" data-m-group data-m-batch>
 
-      <a href="#" class="masonry-item" data-project="0"
+      <a href="#" class="masonry-item" data-m-cursor data-project="0"
          data-title="Duck &amp; Boy"
          data-client="Personal"
          data-type="Frame-by-Frame Animation"
@@ -853,12 +862,12 @@
          data-tags="Rough Animator,Procreate,Procreate Dreams"
          data-desc="A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated - with every frame, a new part of the story unfolds"
          data-images='[{"src": "Projects/Duck&Boy_1.mp4", "type": "video", "desc": "A personal frame-by-frame animation exploring the unlikely friendship between a duck and a boy. Hand-drawn and hand-animated - with every frame, a new part of the story unfolds"}, {"src": "Projects/Duck&Boy_2.mp4", "type": "video", "desc": "An unlikely meeting. This pair appeared one evening while I doodled on my iPad."}, {"src": "Projects/Duck&Boy_3.mp4", "type": "video", "desc": "I wanted to develop my abilities in frame-by-frame animation, hoping for it to start to bleed into my commercial work. I decided to bring the doodle to life."}, {"src": "Projects/Duck&Boy_4.mp4", "type": "video", "desc": "A friend suggested to me that I should see what happens if I animated with a consistent character. I followed their advice and imagined them in different scenarios - often inspired by things that were happening in my life."}, {"src": "Projects/Duck&Boy_5.mp4", "type": "video", "desc": "It became a fun experiment, encouraging me to draw the pair in illustrations first, without worrying about the practicalities of animating them."}, {"src": "Projects/Duck&Boy_6.gif", "type": "image", "desc": "A story began to unfold. Looking intraspectively, I can see that what was unfolding was recreation of the same emotional journey that I was currently going through."}, {"src": "Projects/Duck&boy_7.mp4", "type": "video", "desc": "I had friends that were moving away, and moving abroad. And I was having to adjust to the change in my immediate social circles."}, {"src": "Projects/Duck&Boy_8.mp4", "type": "video", "desc": "I wasn’t noticeably unhappy, but the course of this project caused me to reflect on the change that was happening."}, {"src": "Projects/Duck&Boy_9.mp4", "type": "video", "desc": "It’s a sort of grieving, but the friends are still there. They just aren’t as immediately close as they once were."}, {"src": "Projects/Duck&Boy_10.mp4", "type": "video", "desc": "And you learn to apadt to the new circumstances. The mark of a good friend is that the distance doesn’t change anything."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Duck & Boy.webp" alt="Duck &amp; Boy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Duck &amp; Boy</p></div>
       </a>
-      <a href="#" class="masonry-item" data-project="1"
+      <a href="#" class="masonry-item" data-m-cursor data-project="1"
          data-title="Zorra"
          data-client="Personal"
          data-type="Logo Animation"
@@ -866,12 +875,12 @@
          data-tags="Rough Animator,Procreate,After Effects,Procreate Dreams"
          data-desc="A logo animation for Zorra - bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."
          data-images='[{"src": "Projects/Zorra_1.mp4", "type": "video", "desc": "A logo animation for Zorra - bringing the brand mark to life through fluid, expressive motion. Designed to feel hand-crafted while remaining bold and ownable as a brand asset."}, {"src": "Projects/Zorra_2.png", "type": "image", "desc": "Zorra approached me, asking for help to take their logo design for Zorra into motion."}, {"src": "Projects/Zorra_3.mp4", "type": "video", "desc": "To retain the charms of the original logo illustration, I went down the frame-by-frame route, starting with the fox’s run cycle. I use basic shapes to plot the movements in Rough Animator."}, {"src": "Projects/Zorra_4.mp4", "type": "video", "desc": "A rough pass of the fox is made, establishing the movements of the animal."}, {"src": "Projects/Zorra_5.mp4", "type": "video", "desc": "I then move into After Effects to do similar for the human character. I create a rough puppet in Adobe Illustrator that I can then rig with Duik."}, {"src": "Projects/Zorra_6.mp4", "type": "video", "desc": "The AE export then goes back into Rough Animator to create a second rough pass, combining the fox with the human."}, {"src": "Projects/Zorra_7.mp4", "type": "video", "desc": "A clean pass is created, mimicing the inking of the original illustration. I add smear frames and whips to give the piece some athentic cartoon charm."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Zora.webp" alt="Zorra" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Logo Animation</p><p class="masonry-overlay-title">Zorra</p></div>
       </a>
-      <a href="#" class="masonry-item masonry-item--bad-habits" data-project="2"
+      <a href="#" class="masonry-item masonry-item--bad-habits" data-m-cursor data-project="2"
          data-title="Bad Habits"
          data-client="Personal"
          data-type="Frame-by-Frame · Illustration"
@@ -879,7 +888,7 @@
          data-tags="Procreate,Procreate Dreams,After Effects"
          data-desc="An animated short. This series of animated vignettes expose the beautifully flawed, deeply human habits we all share. It celebrates the quiet foibles that feel intensely personal yet perhaps also are more universal than we care to admit."
          data-images='[{"src": "Projects/Bad_Habits_1.mp4", "type": "video", "desc": "An animated short. This series of animated vignettes expose the beautifully flawed, deeply human habits we all share. It celebrates the quiet foibles that feel intensely personal yet perhaps also are more universal than we care to admit."}, {"src": "Projects/Bad_Habits_2.mp4", "type": "video", "desc": "Each piece was animated in frame-by-frame. They started off as an illustration, but with a small movement aiming to expose each habit to the viewer."}, {"src": "Projects/Bad_Habits_3.mp4", "type": "video", "desc": "Each vignette feels abstracted by the beauty of the illustration. The simplicity makes something dirty feel clean and pleasant to look at."}, {"src": "Projects/Bad_Habits_4.mp4", "type": "video", "desc": "Some light-hearted humour to each piece tunrs a hard truth on its head."}, {"src": "Projects/Bad_Habits_5.mp4", "type": "video", "desc": "The project began by brainstorming a series of bad habits that I pocessed myself, but felt like a universal part of life’s struggle. I wanted to create a harmony across each image, minimising the colour palette acorss each composition, and aiming to compose each one with the viewpoint facing head-on."}, {"src": "Projects/Bad_Habits_6.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_7.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_8.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_9.mp4", "type": "video", "desc": "The series worked as illustrations in their own right."}, {"src": "Projects/Bad_Habits_10.mp4", "type": "video", "desc": "But the addition of subtle movements retains the viewer, as they pre-empt what coming. Their guilty conscience shining through. Which reminds me, I have some washing to do."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Bad_Habits.webp" alt="Bad Habits" />
         </div>
         <div class="masonry-overlay">
@@ -887,7 +896,7 @@
           <p class="masonry-overlay-title">Bad Habits</p>
         </div>
       </a>
-      <a href="#" class="masonry-item" data-project="3"
+      <a href="#" class="masonry-item" data-m-cursor data-project="3"
          data-title="BCN Moving Forward"
          data-client="Breast Cancer Now"
          data-type="Motion · Brand Animation"
@@ -895,13 +904,13 @@
          data-tags="Scripting,Storyboarding,Styleboarding,After Effects"
          data-desc="Explainer Video for BCN's Moving Forward programme - supporting people after breast cancer treatment"
          data-images='[{"src": "Projects/BCN_MovingForward_1.mp4", "type": "video", "desc": "Explainer Video for BCN’s Moving Forward programme - supporting people after breast cancer treatment"}, {"src": "Projects/BCN_MovingForward_2.webp", "type": "image", "desc": "Working with the Moving Forward team, it was key to accurately capture the function of the Moving Forward programme so as to present it visually. This was achieved by storyboarding, and multiple discussions with their team."}, {"src": "Projects/BCN_MovingForward_3.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_4.webp", "type": "image", "desc": "It was then key to present the styleboards, so that the client was clear on what they were to receive."}, {"src": "Projects/BCN_MovingForward_5.webm", "type": "video", "desc": "I wanted to capture the overwhelming feeling that can come to those adapting to life after treatment. And given the digital nature of the Moving Forward programme, it seemed a very apt analogy to bring in the cluttered desktop, smattered with incomplete tasks and creating an image of the person behind the cancer treatment."}, {"src": "Projects/BCN_MovingForward_6.webm", "type": "video", "desc": "Part of Moving Forward is an online forum, where people are able to talk about what they’re going through with people who can relate. It was key to keep this a representational, rather than instructional. I didn’t want people to get bogged down in a how-to."}, {"src": "Projects/BCN_MovingForward_7.webm", "type": "video", "desc": "A wealth of information is offered by the charity, and it was important to show this."}, {"src": "Projects/BCN_MovingForward_8.webm", "type": "video", "desc": "The video comes full circle. What was cluttered and overwhelming becomes exciting and alluring."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_BCN_Moving Forward.webp" alt="BCN Moving Forward" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Breast Cancer Now</p><p class="masonry-overlay-title">Moving Forward</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="5"
+      <a href="#" class="masonry-item" data-m-cursor data-project="5"
          data-title="Lay's MAX"
          data-client="Vidsy"
          data-type="Social Content · Motion"
@@ -909,13 +918,13 @@
          data-tags="After Effects,Social Design"
          data-desc="Social video content created via Vidsy for Lay's MAX - punchy, product-forward motion designed to perform across social platforms."
          data-images='[{"src": "Projects/Vidsy_Walkers_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_2.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_3.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_4.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_5.mp4", "type": "video", "desc": "Social video content created via Vidsy for Lay’s MAX - punchy, product-forward motion designed to perform across social platforms."}, {"src": "Projects/Vidsy_Walkers_6.mp4", "type": "video", "desc": "AI was utilised to create a ketchup asset that had not been provided. Full control of the output was ascertainable by creating the reference shape first."}, {"src": "Projects/Vidsy_Walkers_7.mp4", "type": "video", "desc": "The full campaign was well received by the client."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Vidsy_Walkers.png" alt="Walkers" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Lay's MAX</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="6"
+      <a href="#" class="masonry-item" data-m-cursor data-project="6"
          data-title="Mountain Dew"
          data-client="Vidsy"
          data-type="Social Content · Motion"
@@ -923,13 +932,13 @@
          data-tags="After Effects,Social Design"
          data-desc="Social video content created via Vidsy for Mountain Dew - high-energy motion and bold visual language built for maximum impact in the feed."
          data-images='[{"src": "Projects/Vidsy_MountainDew_1.mp4", "type": "video", "desc": "Social video content created via Vidsy for Mountain Dew - high-energy motion and bold visual language built for maximum impact in the feed."}, {"src": "Projects/Vidsy_MountainDew_2.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_3.png", "type": "image", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_4.mp4", "type": "video", "desc": "Inspiration was given in the form of the Key Visual. The client wanted the product to ’come alive’."}, {"src": "Projects/Vidsy_MountainDew_5.png", "type": "image", "desc": "A summary of the brief."}, {"src": "Projects/Vidsy_MountainDew_6.webp", "type": "image", "desc": "The narrative structure, developed by the Creative Lead gave a rough guidence on how the video was to be executed."}, {"src": "Projects/Vidsy_MountainDew_7.mp4", "type": "video", "desc": "The piece went on to be iterated in multipe ways, and localised for different markets, all off my original base asset"}, {"src": "Projects/Vidsy_MountainDew_8.mp4", "type": "video", "desc": "Ready, set, TASTE!"}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Vidsy_MountainDew.png" alt="Mountain Dew" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Vidsy</p><p class="masonry-overlay-title">Mountain Dew</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="7"
+      <a href="#" class="masonry-item" data-m-cursor data-project="7"
          data-title="Smorph"
          data-client="Tech Will Save Us"
          data-type="Illustration · Design"
@@ -937,13 +946,13 @@
          data-tags="Illustration,Character Design,Layout"
          data-desc="Tech Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."
          data-images='[{"src": "Projects/TWSD_1.jpg", "type": "image", "desc": "Tech Will Save Us - a company making DIY gadget kits for kids. As part of its monthly subscription scheme, the company approached me to design a 12 page booklet as part of its deliverables for subscribers."}, {"src": "Projects/TWSD_2.jpg", "type": "image", "desc": "They had establised a recurring character \"Smorph\", who would go on various and curious adventures, all with a science theme."}, {"src": "Projects/TWSD_3.png", "type": "image", "desc": "In this issue, Smorph was to pay a visit to the Natural History Museum, to learn about fossils."}, {"src": "Projects/TWSD_4.jpg", "type": "image", "desc": "The story was provided, but I had creative freedom to illustrate in any style I wished."}, {"src": "Projects/TWSD_5.jpg", "type": "image", "desc": "The playful characters established inspired an equally playful style."}, {"src": "Projects/TWSD_6.jpg", "type": "image", "desc": "Typography played a key part, with narration in type, and the spoken passages all written out by hand."}, {"src": "Projects/TWSD_7.png", "type": "image", "desc": "Taking inspiration from the provided text, intial sketches offer a chance to think freely and create loosely without considering how it would sit on the page."}, {"src": "Projects/TWSD_8.png", "type": "image", "desc": "Carrying on from the initial sketches, these layout designs established how the illustrations would sit with the text of the provided story."}, {"src": "Projects/TWSD_9.png", "type": "image", "desc": "I grew quite attached to the pair!"}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_TWSD.png" alt="TWSD" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Tech Will Save Us</p><p class="masonry-overlay-title">Smorph</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="8"
+      <a href="#" class="masonry-item" data-m-cursor data-project="8"
          data-title="Birdwatcher"
          data-client="Personal"
          data-type="Motion · Illustration"
@@ -951,13 +960,13 @@
          data-tags="Procreate,Adobe Illustrator,Character Rigging,After Effects"
          data-desc="A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."
          data-images='[{"src": "Projects/Birdwatcher_1.mp4", "type": "video", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/Birdwatcher_2.png", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/BirdWatcher_3.png", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/BirdWatcher_4.jpg", "type": "image", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}, {"src": "Projects/Birdwatcher_5.mp4", "type": "video", "desc": "A celebration of patience and perspective. Finding the universal charm in the simple act of looking up and waiting."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Birdwatcher.png" alt="Birdwatcher" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Birdwatcher</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="9"
+      <a href="#" class="masonry-item" data-m-cursor data-project="9"
          data-title="Reducing Anxiety"
          data-client="Breast Cancer Now"
          data-type="Social Content · Motion"
@@ -965,13 +974,13 @@
          data-tags="Storyboarding,After Effects"
          data-desc="Created for socials, this piece directed viewers to use the Breast Cancer Now help line, and also to a page of information on the charity's website."
          data-images='[{"src": "Projects/BCN_Reducing Anxiety_1.mp4", "type": "video", "desc": "Created for socials, this piece directed viewers to use the Breast Cancer Now help line, and also to a page of information on the charity\u2019s website."}, {"src": "Projects/BCN_Reducing Anxiety_2.png", "type": "image", "desc": "As always, it began with sketching. I knew that I wanted to take inspiration from Headspace\u2019s visual language, given that they have paved the way in the mindfulness sphere."}, {"src": "Projects/BCN_Reducing Anxiety_3.mp4", "type": "video", "desc": "I wanted to capture a stillness, in order to invoke the feeling of control and simplicity."}, {"src": "Projects/BCN_Reducing Anxiety_4.mp4", "type": "video", "desc": "Each vignette is described through just one or two items. I felt this provided a calm."}, {"src": "Projects/BCN_Reducing Anxiety_5.mp4", "type": "video", "desc": "They were created through a combination of frame-by-frame, and keyframing, using the matchcut to move from scene to scene."}, {"src": "Projects/BCN_Reducing Anxiety_6.mp4", "type": "video", "desc": "Breast Cancer Now offers lots of support to those experiencing breast cancer. And their nursing team is always on-hand to listen."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_BCN_Reducing Anxiety.png" alt="BCN Reducing Anxiety" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Breast Cancer Now</p><p class="masonry-overlay-title">Reducing Anxiety</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="10"
+      <a href="#" class="masonry-item" data-m-cursor data-project="10"
          data-title="Halloween"
          data-client="Personal"
          data-type="Motion · Illustration"
@@ -979,13 +988,13 @@
          data-tags="Rough Animator,Procreate,Procreate Dreams"
          data-desc="A fun piece created in the run-up to Halloween."
          data-images='[{"src": "Projects/Halloween_1.mp4", "type": "video", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_2.gif", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_3.mp4", "type": "video", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_4.png", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}, {"src": "Projects/Halloween_5.png", "type": "image", "desc": "A fun piece created in the run-up to Halloween."}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Halloween.png" alt="Halloween" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Halloween</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-project="11"
+      <a href="#" class="masonry-item" data-m-cursor data-project="11"
          data-title="Sunshine Boy"
          data-client="Personal"
          data-type="Motion · Illustration"
@@ -993,7 +1002,7 @@
          data-tags="Procreate,Procreate Dreams,After Effects"
          data-desc="Why be sad when life feels this good?"
          data-images='[{"src": "Projects/Sunshine Boy_1.mp4", "type": "video", "desc": "Why be sad when life feels this good?"}, {"src": "Projects/SunshineBoy_2.png", "type": "image", "desc": "Why be sad when life feels this good?"}, {"src": "Projects/SunshineBoy_3.mov", "type": "video", "desc": "Why be sad when life feels this good?"}]'>
-        <div class="masonry-thumb">
+        <div class="masonry-thumb" data-m="fade">
           <img src="Projects/Thumbnail_Sunshine Boy.png" alt="Sunshine Boy" />
         </div>
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Sunshine Boy</p></div>
@@ -1473,14 +1482,7 @@
         if (e.key === 'ArrowRight') goToSlide(slideIndex + 1);
       });
 
-      let touchStartX = 0;
-      modalMedia.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-      modalMedia.addEventListener('touchend', e => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) < 40) return;
-        if (diff > 0) goToSlide(slideIndex + 1);
-        if (diff < 0) goToSlide(slideIndex - 1);
-      });
+      // swipe handled by the fluid carousel script below
     })();
   </script>
 
@@ -1515,9 +1517,9 @@
   </script>
 
   <footer>
-    <div class="site-footer">
-      <p class="footer-copy">© All rights reserved by Harry Frostick, 2026. Please get in touch.</p>
-      <ul class="footer-nav">
+    <div class="site-footer" data-m-group>
+      <p class="footer-copy" data-m>© All rights reserved by Harry Frostick, 2026. Please get in touch.</p>
+      <ul class="footer-nav" data-m="list">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="portfolio.html">Work</a></li>
@@ -1527,5 +1529,135 @@
       </ul>
     </div>
   </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" onerror="document.documentElement.classList.remove('gsap-ready')"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="motion.js"></script>
+  <script>
+    /* Fluid interaction for the project windows (apple-design skill):
+       windows open from the tile you clicked and close back into it,
+       and the carousel follows your finger or mouse 1:1, then settles with a spring. */
+    (function () {
+      if (!window.Motion) return;
+      const backdrop = document.getElementById('modalBackdrop');
+      const frame    = document.getElementById('modalFrame');
+      const media    = document.getElementById('modalMedia');
+      const track    = document.getElementById('carouselTrack');
+      const nextBtn  = document.getElementById('carouselNext');
+      const prevBtn  = document.getElementById('carouselPrev');
+      const theatre  = document.getElementById('theatreBackdrop');
+      const theatreInner = theatre && theatre.querySelector('.theatre-inner');
+      const card     = document.getElementById('showreelCard');
+      const tiles    = Array.from(document.querySelectorAll('.masonry-item[data-project]'));
+      let current = 0;
+
+      // ── Spatial consistency: anchor each window to the thing that opened it ──
+      function anchor(win, source) {
+        if (!win || !source) return;
+        const r = source.getBoundingClientRect();
+        const cx = Math.min(Math.max(r.left + r.width / 2, 0), innerWidth);
+        const cy = Math.min(Math.max(r.top + r.height / 2, 0), innerHeight);
+        win.style.transformOrigin = (cx - win.offsetLeft) + 'px ' + (cy - win.offsetTop) + 'px';
+      }
+      tiles.forEach((t, i) => t.addEventListener('click', () => { current = i; anchor(frame, t); }, true));
+      document.getElementById('modalPrev').addEventListener('click', () => { current = (current - 1 + tiles.length) % tiles.length; });
+      document.getElementById('modalNext').addEventListener('click', () => { current = (current + 1) % tiles.length; });
+      // closing returns to the tile of the project now showing
+      new MutationObserver(() => {
+        if (!backdrop.classList.contains('open')) anchor(frame, tiles[current]);
+      }).observe(backdrop, { attributes: true, attributeFilter: ['class'] });
+      if (card && theatreInner) card.addEventListener('click', () => anchor(theatreInner, card), true);
+
+      // ── Carousel: 1:1 drag, rubber-band edges, momentum, spring settle ──
+      const liveX = () => new DOMMatrixReadOnly(getComputedStyle(track).transform).m41;  // presentation value
+      const settleCSS = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+      let W = 1, base = 0, startIdx = 0, start = null, dragging = false, hist = [], swallowClick = false;
+      const sp = Motion.spring(x => { track.style.transform = 'translateX(' + x + 'px)'; },
+                               { damping: 1, response: 0.38, precision: 50 });
+
+      function count() { return track.children.length; }
+
+      media.addEventListener('pointerdown', e => {
+        if (count() < 2 || e.button > 0) return;
+        if (e.target.closest('.carousel-nav')) return;
+        const r = media.getBoundingClientRect();
+        if (e.target.tagName === 'VIDEO' && e.clientY > r.bottom - 56) return;   // leave the video's controls alone
+        W = r.width;
+        sp.stop();
+        base = liveX();                                   // grab it where it is, even mid-flight
+        track.style.transition = 'none';
+        sp.jump(base);
+        startIdx = Math.round(-base / W);
+        start = { x: e.clientX, y: e.clientY, id: e.pointerId };
+        hist = [{ x: e.clientX, t: e.timeStamp }];
+        dragging = false;
+      });
+
+      media.addEventListener('pointermove', e => {
+        if (!start || e.pointerId !== start.id) return;
+        const dx = e.clientX - start.x, dy = e.clientY - start.y;
+        if (!dragging) {
+          if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;     // hysteresis before committing
+          if (Math.abs(dy) > Math.abs(dx)) { start = null; settle(0); return; }   // it was a vertical move
+          dragging = true;
+          start.x = e.clientX;                              // no jump when tracking starts
+          media.setPointerCapture(e.pointerId);
+          media.classList.add('dragging');
+        }
+        hist.push({ x: e.clientX, t: e.timeStamp });
+        while (hist.length > 2 && e.timeStamp - hist[0].t > 100) hist.shift();
+        const min = -(count() - 1) * W;
+        let x = base + (e.clientX - start.x);
+        if (x > 0) x = Motion.rubberband(x, W);
+        if (x < min) x = min + Motion.rubberband(x - min, W);
+        sp.jump(x);
+      });
+
+      function velocity() {
+        if (hist.length < 2) return 0;
+        const a = hist[0], b = hist[hist.length - 1];
+        const dt = (b.t - a.t) / 1000;
+        return dt > 0 ? (b.x - a.x) / dt : 0;
+      }
+
+      function settle(v) {
+        const n = count(); if (!n) return;
+        const x = sp.value;
+        const projected = x + Motion.project(v);                 // where the flick is heading (Apple's normal rate)
+        let idx = Math.round(-projected / W);
+        idx = Math.max(startIdx - 1, Math.min(startIdx + 1, idx));   // one slide per flick
+        idx = Math.max(0, Math.min(n - 1, idx));
+        if (idx > startIdx) nextBtn.click();                     // the page's own slide logic (videos, counter, text)
+        if (idx < startIdx) prevBtn.click();
+        track.style.transition = 'none';
+        sp.jump(x);
+        const momentum = Math.abs(v) > 600;                     // a little give only after a real flick
+        const s = Motion.spring(px => { track.style.transform = 'translateX(' + px + 'px)'; },
+                                { from: x, damping: momentum && !Motion.reduce ? 0.85 : 1, response: 0.38, precision: 50 });
+        s.to(-idx * W, v, () => {
+          track.style.transform = 'translateX(-' + idx * 100 + '%)';
+          requestAnimationFrame(() => { track.style.transition = settleCSS; });
+        });
+        activeSettle = s;
+      }
+      let activeSettle = null;
+      media.addEventListener('pointerdown', () => { if (activeSettle) { activeSettle.stop(); activeSettle = null; } }, true);
+
+      function end(e) {
+        if (!start || e.pointerId !== start.id) return;
+        const v = dragging ? velocity() : 0;
+        swallowClick = dragging;
+        media.classList.remove('dragging');
+        start = null; dragging = false;
+        settle(v);
+      }
+      track.addEventListener('dragstart', e => e.preventDefault());   // native image drag would cancel the pointer
+      media.addEventListener('pointerup', end);
+      media.addEventListener('pointercancel', end);
+      media.addEventListener('click', e => {               // a drag is not a click
+        if (e.target.closest('.carousel-nav')) return;
+        if (swallowClick) { e.stopPropagation(); e.preventDefault(); swallowClick = false; }
+      }, true);
+    })();
+  </script>
 </body>
 </html>

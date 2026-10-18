@@ -553,6 +553,8 @@
       transform: translateX(4px);
     }
 
+    .gsap-ready .looking-body-wrap { opacity: 1; transform: none; animation: none !important; }
+
     /* Scrollbar */
     ::-webkit-scrollbar {
       width: 3px;
@@ -1024,6 +1026,8 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="motion.css" />
+  <script>document.documentElement.classList.add('gsap-ready');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('gsap-ready')},3000);</script>
 </head>
 
 <body>
@@ -1069,30 +1073,30 @@
 
   <div class="page">
 
-    <div class="about-hero">
+    <div class="about-hero" data-m-group="hero">
       <div class="about-hero-container">
         <div class="about-hero-content">
-          <p class="eyebrow">About me</p>
-          <h1 class="about-headline">
+          <p class="eyebrow" data-m>About me</p>
+          <h1 class="about-headline" data-m-headline>
             <span class="wave-char" style="--wave-delay: 0s;">H</span><span class="wave-char" style="--wave-delay: 0.1s;">a</span><span class="wave-char" style="--wave-delay: 0.2s;">r</span><span class="wave-char" style="--wave-delay: 0.3s;">r</span><span class="wave-char" style="--wave-delay: 0.4s;">y</span>
             <br>
             <span class="headline-nowrap"><span class="wave-char" style="--wave-delay: 0.5s;">F</span><span class="wave-char" style="--wave-delay: 0.6s;">r</span><span class="wave-char" style="--wave-delay: 0.7s;">o</span><span class="wave-char" style="--wave-delay: 0.8s;">s</span><span class="wave-char" style="--wave-delay: 0.9s;">t</span><span class="wave-char" style="--wave-delay: 1s;">i</span><span class="wave-char" style="--wave-delay: 1.1s;">c</span><span class="wave-char" style="--wave-delay: 1.2s;">k</span><span class="wave-char" style="--wave-delay: 1.3s;">.</span></span>
           </h1>
           <div class="about-bottom">
-            <p class="about-intro">Working at the intersection of craft, curiosity, and genuine storytelling.</p>
-            <p class="about-body">With 7 years of experience across freelance, in-house, and agency environments, I have had the privilege of creating motion and video work for some of the world's most recognised commercial brands. I bring the same level of care to a five-second social loop as I do to a full brand campaign, because the details always matter.</p>
+            <p class="about-intro" data-m>Working at the intersection of craft, curiosity, and genuine storytelling.</p>
+            <p class="about-body" data-m>With 7 years of experience across freelance, in-house, and agency environments, I have had the privilege of creating motion and video work for some of the world's most recognised commercial brands. I bring the same level of care to a five-second social loop as I do to a full brand campaign, because the details always matter.</p>
           </div>
         </div>
-        <div class="about-portrait">
+        <div class="about-portrait" data-m="fade">
           <img src="Assets/Portrait.png" alt="Harry Frostick Portrait" />
         </div>
       </div>
     </div>
 
-    <div class="clients-section">
-      <p class="section-label">Creating for the world's biggest brands</p>
-      <div class="brand-ticker">
-        <div class="ticker-track">
+    <div class="clients-section" data-m-group>
+      <p class="section-label" data-m>Creating for the world's biggest brands</p>
+      <div class="brand-ticker" data-m="fade">
+        <div class="ticker-track" data-m-marquee="15">
           <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_1.png" alt="Brand" /></div>
           <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_2.png" alt="Brand" /></div>
           <div class="ticker-item"><img src="Assets/Brand Ticker/Logo_3.png" alt="Brand" /></div>
@@ -1116,39 +1120,39 @@
       </div>
     </div>
 
-    <div class="ai-creative-section">
+    <div class="ai-creative-section" data-m-group>
       <div class="ai-creative-layout">
         <div class="ai-creative-left">
-          <div class="ai-creative-label">AI-Creative</div>
+          <div class="ai-creative-label" data-m>AI-Creative</div>
           <div class="ai-creative-content">
-            <p class="ai-creative-philosophy">AI tools enhance creativity, accelerate ideation, and speed up workflow so that the emphasis can be placed where the artist chooses.</p>
+            <p class="ai-creative-philosophy" data-m>AI tools enhance creativity, accelerate ideation, and speed up workflow so that the emphasis can be placed where the artist chooses.</p>
 
-            <p class="ai-creative-intro">I've begun identifying with the term 'creative technologist' as I blend more skills in motion design with technical problem-solving. I use AI to create innovative workflows so that I can focus on the areas which I care about most like the way in which the subject moves, or story I'm trying to tell. Motion design already taught me to become a generalist; AI becomes yet another string to my bow.</p>
+            <p class="ai-creative-intro" data-m>I've begun identifying with the term 'creative technologist' as I blend more skills in motion design with technical problem-solving. I use AI to create innovative workflows so that I can focus on the areas which I care about most like the way in which the subject moves, or story I'm trying to tell. Motion design already taught me to become a generalist; AI becomes yet another string to my bow.</p>
           </div>
         </div>
 
-        <div class="ai-diagram-container">
+        <div class="ai-diagram-container" data-m="fade">
           <img src="Assets/AI Diagram.png" alt="AI Workflow Diagram" class="ai-diagram-image" />
         </div>
       </div>
     </div>
 
-    <div class="page-divider"></div>
+    <div class="page-divider" data-m="line"></div>
 
-    <div class="experience-types">
+    <div class="experience-types" data-m="list">
       <div class="experience-item">Freelance</div>
       <div class="experience-item">In-House</div>
       <div class="experience-item">Agency</div>
     </div>
 
-    <div class="page-divider"></div>
+    <div class="page-divider" data-m="line"></div>
 
-    <div class="looking-section">
-      <div class="looking-label">What's<br>next?</div>
+    <div class="looking-section" data-m-group>
+      <div class="looking-label" data-m>What's<br>next?</div>
       <div class="looking-body-wrap">
-        <p class="looking-body">After 7 years of honing my craft on commercial projects, I am carving out more space for personal work.</p>
-        <p class="about-body" style="margin-bottom:1.5rem;">I am drawn to character design, frame-by-frame animation, and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent commission, or something in between - if it lets me push the boundaries of what motion can feel like, I am interested.</p>
-        <div class="looking-tags">
+        <p class="looking-body" data-m>After 7 years of honing my craft on commercial projects, I am carving out more space for personal work.</p>
+        <p class="about-body" data-m style="margin-bottom:1.5rem;">I am drawn to character design, frame-by-frame animation, and the warmth that only hand-crafted motion can carry. Whether it is a passion project, an independent commission, or something in between - if it lets me push the boundaries of what motion can feel like, I am interested.</p>
+        <div class="looking-tags" data-m="list">
           <span class="tag">Drawing</span>
           <span class="tag">Character Design</span>
           <span class="tag">Frame-by-Frame</span>
@@ -1161,9 +1165,9 @@
       </div>
     </div>
 
-    <div class="about-cta">
-      <p class="cta-text">Want to make something together?</p>
-      <a href="contact.html" class="cta-btn">
+    <div class="about-cta" data-m-group>
+      <p class="cta-text" data-m>Want to make something together?</p>
+      <a href="contact.html" class="cta-btn" data-m data-m-magnet>
         Get in touch
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
@@ -1386,9 +1390,9 @@
     })();
   </script>
   <footer>
-    <div class="site-footer">
-      <p class="footer-copy">© All rights reserved by Harry Frostick, 2026. Please get in touch.</p>
-      <ul class="footer-nav">
+    <div class="site-footer" data-m-group>
+      <p class="footer-copy" data-m>© All rights reserved by Harry Frostick, 2026. Please get in touch.</p>
+      <ul class="footer-nav" data-m="list">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="portfolio.html">Work</a></li>
@@ -1398,6 +1402,9 @@
       </ul>
     </div>
   </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" onerror="document.documentElement.classList.remove('gsap-ready')"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="motion.js"></script>
 </body>
 
 </html>

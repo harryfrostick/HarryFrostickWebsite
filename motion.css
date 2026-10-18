@@ -1,0 +1,83 @@
+/* motion.css: shared GSAP motion layer for harryfrostick.com
+   Everything here only applies under html.gsap-ready, which is removed if GSAP fails to load,
+   so the pages fall back to their original CSS animations and nothing is ever left hidden. */
+
+/* Hold animated elements until GSAP reveals them */
+.gsap-ready [data-m],
+.gsap-ready [data-m-headline] { visibility: hidden; }
+
+/* GSAP owns these now: switch off the old CSS entrance animations */
+.gsap-ready [data-m],
+.gsap-ready [data-m-group],
+.gsap-ready [data-m-headline] { animation: none !important; opacity: 1; }
+.gsap-ready [data-m]:not(video),
+.gsap-ready [data-m-group],
+.gsap-ready [data-m-headline] { transform: none; }   /* videos keep their own (mobile centring) */
+.gsap-ready .wave-char { animation: none; }
+.gsap-ready [data-m-marquee] { animation: none !important; opacity: 1 !important; }
+
+/* Headline letters rise from behind their own baseline.
+   clip-path clips only above and below; the sides are left wide open
+   because Bebas Neue glyphs overhang their own box (overflow: hidden cut them). */
+.m-mask {
+  display: inline-block;
+  clip-path: inset(-0.15em -0.5em -0.1em -0.5em);   /* top room for the wave */
+}
+
+/* Visually hidden, still read by screen readers and search engines */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── Mobile menu: grows from the burger, returns to it on close (same path both ways).
+   CSS transitions start from the current value, so a quick re-tap reverses it mid-flight. ── */
+.mobile-menu {
+  display: flex !important;
+  visibility: hidden;
+  opacity: 0;
+  scale: 0.96;
+  transform-origin: calc(100% - 3.4rem) 3.6rem;   /* the burger */
+  pointer-events: none;
+  transition: opacity 0.22s cubic-bezier(0.7, 0, 0.84, 0),
+              scale 0.22s cubic-bezier(0.7, 0, 0.84, 0),
+              visibility 0s linear 0.22s;
+}
+.mobile-menu.open {
+  visibility: visible;
+  opacity: 1;
+  scale: 1;
+  pointer-events: auto;
+  transition: opacity 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+              scale 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s;
+}
+@media (max-width: 768px) {
+  .mobile-menu { transform-origin: calc(100% - 2.4rem) 3.2rem; }
+}
+
+/* ── Nav as a material: content blurs softly as it passes under the bar,
+   fading out at the edge instead of a hard band (pink pages only). ── */
+nav::before {
+  background: linear-gradient(to bottom, rgba(250, 230, 235, 0.72) 0%, rgba(250, 230, 235, 0) 100%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+}
+
+/* ── Accessibility preferences ── */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu, .mobile-menu.open { scale: 1; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  nav::before {
+    background: linear-gradient(to bottom, #fae6eb 0%, #fae6eb 50%, transparent 100%);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    -webkit-mask-image: none; mask-image: none;
+  }
+  .modal-backdrop, .modal-backdrop.open { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(10, 10, 10, 0.96) !important; }
+}
+@media (prefers-contrast: more) {
+  nav::before { background: #fae6eb; -webkit-mask-image: none; mask-image: none; }
+}
