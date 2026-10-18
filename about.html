@@ -397,6 +397,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      column-gap: 1rem;            /* never let the words touch */
       margin: 4rem 0;
       width: 100%;
       padding: 0;
@@ -404,7 +405,7 @@
 
     .experience-item {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(1.6rem, 7.5vw, 4rem);   /* scales down on phones so the gaps survive */
       font-weight: 700;
       letter-spacing: 0;
       text-transform: uppercase;
@@ -555,31 +556,42 @@
 
     .gsap-ready .looking-body-wrap { opacity: 1; transform: none; animation: none !important; }
 
-    /* ── AI workflow diagram (live) ── */
+    /* ── AI workflow diagram (live), drawn in the same frosted material as the tags ── */
     .ai-flow { width: 100%; }
     .af-svg { display: block; width: 100%; height: auto; overflow: visible; font-family: 'Montserrat', sans-serif; }
-    .af-outer { fill: rgba(255, 255, 255, 0.3); stroke: rgba(130, 104, 108, 0.55); stroke-width: 2; transition: stroke 0.3s ease, fill 0.3s ease; }
-    .af-inner { fill: none; stroke: rgba(130, 104, 108, 0.38); stroke-width: 1.5; transition: stroke 0.3s ease; }
-    .af-icon * { fill: none; stroke: #82686c; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-    .af-icon .af-bar { fill: rgba(255, 255, 255, 0.55); stroke: rgba(130, 104, 108, 0.6); stroke-width: 1.5; }
-    .af-icon .af-rec { fill: #c7345e; stroke: none; opacity: 0; }
+
+    /* Frosted parts: soft white fill, lit along the top edge, no dark outline */
+    .af-outer, .af-icon .af-bar, .af-cursor path {
+      stroke: url(#af-edge); stroke-width: 1.5;
+      transition: fill 0.35s ease, stroke 0.3s ease;
+    }
+    .af-outer { fill: rgba(255, 255, 255, 0.28); }                 /* waiting: faint */
+    .af-node.is-active .af-outer { fill: rgba(255, 255, 255, 0.6); stroke: #c7345e; stroke-width: 2; }
+    .af-node.is-done .af-outer { fill: rgba(255, 255, 255, 0.5); }  /* done: full tag strength */
+
     .af-label { font-size: 15px; font-weight: 500; fill: #82686c; }
     .af-t { font-size: 17px; font-weight: 700; fill: #82686c; }
     .af-check { fill: rgba(255, 255, 255, 0.55); stroke: #82686c; stroke-width: 1.5; transition: fill 0.25s ease, stroke 0.25s ease; }
     .af-tick { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
                stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.1s; }
+    .af-node.is-done .af-check { fill: #c7345e; stroke: #c7345e; }
+    .af-node.is-done .af-tick { stroke-dashoffset: 0; }
+
+    .af-icon * { fill: none; stroke: #82686c; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .af-icon .af-bar { fill: rgba(255, 255, 255, 0.6); }
+    .af-icon .af-rec { fill: #c7345e; stroke: none; opacity: 0; }
+
     .af-wire { fill: none; stroke: rgba(130, 104, 108, 0.55); stroke-width: 2; }
     .af-ports circle { fill: #82686c; }
     .af-pulse { fill: #c7345e; opacity: 0; }
-    .af-spark path { fill: #82686c; stroke: none; }
-    .af-spark { opacity: 0.15; }
-    .af-cursor path { fill: rgba(255, 255, 255, 0.55); stroke: #82686c; stroke-width: 2; stroke-linejoin: round; }
+    .af-spark path { fill: #fff; stroke: none; }
+    .af-spark { opacity: 0.1; }
+    .af-cursor path { fill: #fff; stroke-linejoin: round; }   /* frosted like the panels */
 
-    .af-node.is-active .af-outer { stroke: #c7345e; fill: rgba(255, 255, 255, 0.5); }
-    .af-node.is-active .af-inner { stroke: rgba(199, 52, 94, 0.45); }
-    .af-node.is-done .af-outer { stroke: #82686c; fill: rgba(255, 255, 255, 0.42); }
-    .af-node.is-done .af-check { fill: #c7345e; stroke: #c7345e; }
-    .af-node.is-done .af-tick { stroke-dashoffset: 0; }
+    @media (max-width: 768px) {
+      .af-label { font-size: 22px; }   /* phones: the drawing shrinks a lot, keep labels legible */
+      .af-t { font-size: 25px; }
+    }
 
     .af-run {
       display: inline-flex; align-items: center; gap: 0.55rem;
@@ -1174,7 +1186,7 @@
           <div class="ai-creative-content">
             <p class="ai-creative-philosophy" data-m>AI tools enhance creativity, accelerate ideation, and speed up workflow so that the emphasis can be placed where the artist chooses.</p>
 
-            <p class="ai-creative-intro" data-m>I've begun identifying with the term 'creative technologist' as I blend more skills in motion design with technical problem-solving. I use AI to create innovative workflows so that I can focus on the areas which I care about most like the way in which the subject moves, or story I'm trying to tell. Motion design already taught me to become a generalist; AI becomes yet another string to my bow.</p>
+            <p class="ai-creative-intro" data-m>I've begun identifying with the term 'creative technologist' as I blend more skills in motion design with technical problem-solving. I use AI to create innovative workflows so that I can focus on the areas which I care about most - like the way in which the subject moves, or story I'm trying to tell. Motion design already taught me to become a generalist; AI becomes yet another string to my bow.</p>
           </div>
         </div>
 
@@ -1182,6 +1194,12 @@
           <div class="ai-flow">
     <svg class="af-svg" viewBox="20 0 1100 830" role="img" aria-labelledby="af-title af-desc">
       <title id="af-title">My AI-assisted workflow</title>
+      <defs>
+        <linearGradient id="af-edge" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0.95"/>
+          <stop offset="0.3" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
       <desc id="af-desc">An imported asset and a text prompt both feed an image generator, whose output feeds a video generator.</desc>
       <g class="af-wires">
         <path class="af-wire" id="af-w1" d="M349.8 232.9 C404.8 232.9 395.0 285.0 450.0 285.0"/>
@@ -1192,28 +1210,24 @@
     <g class="af-node" id="af-import" transform="translate(70 80) rotate(1.2 140.0 140.0)">
       <rect class="af-check" x="26" y="-36" width="16" height="16" rx="3"/><path class="af-tick" d="M29.6 -28.2 l3.2 3.2 l6 -6.4" pathLength="1"/><text class="af-label" x="50" y="-23">Import</text>
       <rect class="af-outer" width="280" height="280" rx="36"/>
-      <rect class="af-inner" x="11" y="11" width="258" height="258" rx="27"/>
       <g class="af-icon"><path d="M140 92 V152 M116 116 L140 92 L164 116"/><path d="M104 172 H176"/></g>
     </g>
       
     <g class="af-node" id="af-text" transform="translate(90 440) rotate(-5 145.0 180.0)">
       <text class="af-t" x="26" y="-22">T</text><text class="af-label" x="45" y="-23">Text</text>
       <rect class="af-outer" width="290" height="360" rx="36"/>
-      <rect class="af-inner" x="11" y="11" width="268" height="338" rx="27"/>
-      <g class="af-icon"><rect class="af-bar" x="40" y="62" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="106" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="150" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="194" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="238" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="282" width="100" height="13" rx="2"/></g>
+      <g class="af-icon"><rect class="af-bar" x="40" y="60" width="210" height="16" rx="8"/><rect class="af-bar" x="40" y="104" width="210" height="16" rx="8"/><rect class="af-bar" x="40" y="148" width="210" height="16" rx="8"/><rect class="af-bar" x="40" y="192" width="210" height="16" rx="8"/><rect class="af-bar" x="40" y="236" width="210" height="16" rx="8"/><rect class="af-bar" x="40" y="280" width="100" height="16" rx="8"/></g>
     </g>
       
     <g class="af-node" id="af-image" transform="translate(450 150) rotate(0 140.0 140.0)">
       <rect class="af-check" x="26" y="-36" width="16" height="16" rx="3"/><path class="af-tick" d="M29.6 -28.2 l3.2 3.2 l6 -6.4" pathLength="1"/><text class="af-label" x="50" y="-23">Image Generator</text>
       <rect class="af-outer" width="280" height="280" rx="36"/>
-      <rect class="af-inner" x="11" y="11" width="258" height="258" rx="27"/>
       <g class="af-icon"><g transform="translate(-10 -9)"><path d="M100 120 h24 l10 -14 h32 l10 14 h24 a8 8 0 0 1 8 8 v56 a8 8 0 0 1 -8 8 h-100 a8 8 0 0 1 -8 -8 v-56 a8 8 0 0 1 8 -8z"/><circle cx="150" cy="154" r="22"/><circle class="af-lens" cx="150" cy="154" r="15"/><circle cx="183" cy="134" r="5"/></g></g>
     </g>
       
     <g class="af-node" id="af-video" transform="translate(810 70) rotate(-1.6 140.0 140.0)">
       <rect class="af-check" x="26" y="-36" width="16" height="16" rx="3"/><path class="af-tick" d="M29.6 -28.2 l3.2 3.2 l6 -6.4" pathLength="1"/><text class="af-label" x="50" y="-23">Video Generator</text>
       <rect class="af-outer" width="280" height="280" rx="36"/>
-      <rect class="af-inner" x="11" y="11" width="258" height="258" rx="27"/>
       <g class="af-icon"><rect x="96" y="112" width="70" height="56" rx="8"/><path d="M166 132 L190 118 V162 L166 148 Z"/><circle class="af-rec" cx="112" cy="127" r="5"/></g>
     </g>
       <g class="af-ports"><circle cx="349.8" cy="232.9" r="5.5"/><circle cx="377.3" cy="582.5" r="5.5"/><circle cx="450.0" cy="285.0" r="5.5"/><circle cx="450.0" cy="315.0" r="5.5"/><circle cx="730.0" cy="290.0" r="5.5"/><circle cx="810.3" cy="223.9" r="5.5"/></g>
@@ -1502,7 +1516,8 @@
     /* AI workflow diagram: runs the workflow it describes, once as it scrolls into view. */
     (function () {
       const root = document.querySelector('.ai-flow');
-      if (!root || !window.gsap) return;
+      if (!root) return;
+      if (!window.gsap) return;
       const reduce = window.Motion ? Motion.reduce : matchMedia('(prefers-reduced-motion: reduce)').matches;
       const q = s => root.querySelector(s);
       const nodes = { imp: q('#af-import'), txt: q('#af-text'), img: q('#af-image'), vid: q('#af-video') };
