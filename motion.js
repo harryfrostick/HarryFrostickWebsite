@@ -238,16 +238,30 @@
     cursor.style.transition = 'transform 0.3s ease';
   }
   if (fine) {
-    gsap.utils.toArray('[data-m-cursor], [data-m-magnet]').forEach(function (el) {
+    gsap.utils.toArray('[data-m-cursor]').forEach(function (el) {   // buttons respond themselves
       el.addEventListener('mouseenter', function () { cursorState(true); });
       el.addEventListener('mouseleave', function () { cursorState(false); });
     });
   }
 
+  // ── Button arrows: a second arrow waits off to the left so hover can loop it through ──
+  gsap.utils.toArray('.cta-btn, .submit-btn').forEach(function (btn) {
+    var svg = btn.querySelector('svg');
+    if (!svg || svg.parentNode.classList.contains('btn-arrow')) return;
+    var wrap = document.createElement('span');
+    wrap.className = 'btn-arrow';
+    wrap.setAttribute('aria-hidden', 'true');
+    svg.parentNode.insertBefore(wrap, svg);
+    wrap.appendChild(svg);
+    var next = svg.cloneNode(true);
+    next.classList.add('btn-arrow-next');
+    wrap.appendChild(next);
+  });
+
   // ── Press feedback: on pointer-down, instantly, for every control ──
   // Uses the individual `scale` property so it composes with any existing transform.
-  var PRESSABLE = 'button, .submit-btn, .cta-btn, .masonry-item, .featured-card, .tag, ' +
-                  '.footer-nav a, .prox-links a, .mobile-menu a, .success-msg a, .nav-logo';
+  var PRESSABLE = 'button, .submit-btn, .cta-btn, .masonry-item, .featured-card, ' +
+                  '.footer-nav a, .prox-links a, .mobile-menu a, .success-msg a';
   gsap.utils.toArray(PRESSABLE).forEach(function (el) {
     var big = el.offsetWidth > 240;                 // large surfaces give less
     var down = big ? 0.985 : 0.96;
