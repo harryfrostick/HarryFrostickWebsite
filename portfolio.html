@@ -772,6 +772,102 @@
     @media (max-width: 600px) {
       .site-footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 2rem 1.5rem; }
     }
+
+    /* ── Project + showreel windows, in the site's newer language:
+       pink frosted backdrop, rounded window, pink letterboxing, frosted round controls, no hairlines ── */
+    .modal-backdrop, .theatre-backdrop {
+      background: rgba(247, 228, 232, 0.6);
+    }
+    .modal-backdrop.open, .theatre-backdrop.open {
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+    }
+    .theatre-backdrop { transition: opacity 0.35s ease, backdrop-filter 0.45s ease, -webkit-backdrop-filter 0.45s ease; }
+
+    .modal-frame {
+      border-radius: 24px;
+      background: #fdf5f7;
+      box-shadow: 0 50px 120px -40px rgba(130, 104, 108, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      isolation: isolate;
+    }
+    .modal-media,
+    .carousel-slide video { background: #f0d8de; }          /* letterbox in a deeper pink, not black */
+    .modal-info {
+      border-left: none;
+      background: #fdf5f7;
+      padding: 2.75rem 2.25rem 2.25rem;
+    }
+    .modal-client { color: #c7345e; font-weight: 600; letter-spacing: 0.2em; }
+    .modal-title { margin-bottom: 1.1rem; }
+    .modal-divider { display: none; }
+    .modal-desc { color: var(--muted); }
+    .modal-info-bottom { border-top: none; padding-top: 0; margin-top: 1.5rem; }
+    .modal-meta { color: #82686c; font-weight: 600; }
+
+    /* Round frosted controls: ink icon, filling with ink on hover like the site's buttons */
+    .modal-close, .modal-nav, .theatre-close, .carousel-nav {
+      border: none;
+      border-radius: 50%;
+      color: #0f0f0f;
+      background: rgba(255, 255, 255, 0.62);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      backdrop-filter: blur(12px) saturate(150%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px -10px rgba(130, 104, 108, 0.45);
+      transition: background-color 0.18s ease, color 0.18s ease, opacity 0.2s ease;
+    }
+    .modal-close, .theatre-close { width: 48px; height: 48px; }
+    .modal-nav { width: 52px; height: 52px; }
+    .carousel-nav { width: 40px; height: 40px; }
+    .modal-close:hover, .theatre-close:hover { transform: none; }
+    @media (hover: hover) and (pointer: fine) {
+      .modal-close:hover, .modal-nav:hover, .theatre-close:hover, .carousel-nav:hover {
+        background: #0f0f0f; color: #fdf1f4; border: none;
+      }
+    }
+    .modal-close:focus-visible, .modal-nav:focus-visible, .theatre-close:focus-visible, .carousel-nav:focus-visible {
+      outline: 2px solid #c7345e; outline-offset: 3px;
+    }
+
+    .slide-counter {
+      bottom: 1rem;
+      border-radius: 999px;
+      color: #0f0f0f;
+      background: rgba(255, 255, 255, 0.7);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      padding: 0.42rem 0.85rem;
+      letter-spacing: 0.14em;
+    }
+
+    .theatre-inner {
+      width: min(88vw, 1400px, calc((100vh - 9rem) * 16 / 9));   /* room for the close button */
+      border-radius: 24px;
+      overflow: hidden;
+      background: #0f0f0f;
+      box-shadow: 0 50px 120px -40px rgba(130, 104, 108, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .modal-frame { border-radius: 18px; }
+      .modal-info { border-top: none; padding: 1.5rem; }
+      .theatre-inner { border-radius: 14px; }
+      .modal-nav { width: 44px; height: 44px; }
+      /* phones: project arrows sit as a pair under the window, clear of the text */
+      .modal-frame { height: calc(100vh - 8.5rem); height: calc(100dvh - 8.5rem); margin-bottom: 3.25rem; }
+      .modal-nav { top: auto; bottom: max(1rem, env(safe-area-inset-bottom)); transform: none; }
+      .modal-nav--prev { left: calc(50% - 52px); }
+      .modal-nav--next { right: calc(50% - 52px); }
+      .modal-nav--prev:hover, .modal-nav--next:hover { transform: none; }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .modal-backdrop, .modal-backdrop.open, .theatre-backdrop, .theatre-backdrop.open {
+        background: #f3dbe1 !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+      }
+      .modal-close, .modal-nav, .theatre-close, .carousel-nav, .slide-counter {
+        background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none;
+      }
+    }
   </style>
   <link rel="stylesheet" href="motion.css" />
   <script>document.documentElement.classList.add('gsap-ready');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('gsap-ready')},3000);</script>
@@ -1378,7 +1474,7 @@
             vid.playsInline = true;
             vid.muted = false;
             vid.preload = 'auto';
-            vid.style.backgroundColor = '#000';
+            // background comes from the stylesheet (pink letterbox)
             vid.style.width = '100%';
             vid.style.height = '100%';
             vid.onerror = () => {
