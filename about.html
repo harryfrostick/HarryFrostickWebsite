@@ -555,7 +555,54 @@
 
     .gsap-ready .looking-body-wrap { opacity: 1; transform: none; animation: none !important; }
 
+    /* ── AI workflow diagram (live) ── */
+    .ai-flow { width: 100%; }
+    .af-svg { display: block; width: 100%; height: auto; overflow: visible; font-family: 'Montserrat', sans-serif; }
+    .af-outer { fill: rgba(255, 255, 255, 0.3); stroke: rgba(130, 104, 108, 0.55); stroke-width: 2; transition: stroke 0.3s ease, fill 0.3s ease; }
+    .af-inner { fill: none; stroke: rgba(130, 104, 108, 0.38); stroke-width: 1.5; transition: stroke 0.3s ease; }
+    .af-icon * { fill: none; stroke: #82686c; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .af-icon .af-bar { fill: rgba(255, 255, 255, 0.55); stroke: rgba(130, 104, 108, 0.6); stroke-width: 1.5; }
+    .af-icon .af-rec { fill: #c7345e; stroke: none; opacity: 0; }
+    .af-label { font-size: 15px; font-weight: 500; fill: #82686c; }
+    .af-t { font-size: 17px; font-weight: 700; fill: #82686c; }
+    .af-check { fill: rgba(255, 255, 255, 0.55); stroke: #82686c; stroke-width: 1.5; transition: fill 0.25s ease, stroke 0.25s ease; }
+    .af-tick { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+               stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.1s; }
+    .af-wire { fill: none; stroke: rgba(130, 104, 108, 0.55); stroke-width: 2; }
+    .af-ports circle { fill: #82686c; }
+    .af-pulse { fill: #c7345e; opacity: 0; }
+    .af-spark path { fill: #82686c; stroke: none; }
+    .af-spark { opacity: 0.15; }
+    .af-cursor path { fill: rgba(255, 255, 255, 0.55); stroke: #82686c; stroke-width: 2; stroke-linejoin: round; }
+
+    .af-node.is-active .af-outer { stroke: #c7345e; fill: rgba(255, 255, 255, 0.5); }
+    .af-node.is-active .af-inner { stroke: rgba(199, 52, 94, 0.45); }
+    .af-node.is-done .af-outer { stroke: #82686c; fill: rgba(255, 255, 255, 0.42); }
+    .af-node.is-done .af-check { fill: #c7345e; stroke: #c7345e; }
+    .af-node.is-done .af-tick { stroke-dashoffset: 0; }
+
+    .af-run {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      margin-top: 1rem; padding: 0.6rem 0;
+      background: none; border: none; cursor: none;
+      font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      transition: color 0.18s ease, opacity 0.3s ease;
+    }
+    .af-run svg { transition: rotate 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    @media (hover: hover) and (pointer: fine) {
+      .af-run:hover { color: #c7345e; }
+      .af-run:hover svg { rotate: -180deg; }
+    }
+    .af-run:focus-visible { outline: 2px solid #c7345e; outline-offset: 4px; }
+    .ai-flow:not(.has-run) .af-run { opacity: 0; pointer-events: none; }
+    @media (max-width: 768px) {
+      .af-label { font-size: 22px; }   /* phones: the drawing shrinks a lot, keep labels legible */
+      .af-t { font-size: 25px; }
+    }
+
     /* Scrollbar */
+
     ::-webkit-scrollbar {
       width: 3px;
     }
@@ -1132,7 +1179,53 @@
         </div>
 
         <div class="ai-diagram-container" data-m="fade">
-          <img src="Assets/AI Diagram.png" alt="AI Workflow Diagram" class="ai-diagram-image" />
+          <div class="ai-flow">
+    <svg class="af-svg" viewBox="20 0 1100 830" role="img" aria-labelledby="af-title af-desc">
+      <title id="af-title">My AI-assisted workflow</title>
+      <desc id="af-desc">An imported asset and a text prompt both feed an image generator, whose output feeds a video generator.</desc>
+      <g class="af-wires">
+        <path class="af-wire" id="af-w1" d="M349.8 232.9 C404.8 232.9 395.0 285.0 450.0 285.0"/>
+        <path class="af-wire" id="af-w2" d="M377.3 582.5 C447.3 582.5 380.0 315.0 450.0 315.0"/>
+        <path class="af-wire" id="af-w3" d="M730.0 290.0 C775.0 290.0 765.3 223.9 810.3 223.9"/>
+      </g>
+      
+    <g class="af-node" id="af-import" transform="translate(70 80) rotate(1.2 140.0 140.0)">
+      <rect class="af-check" x="26" y="-36" width="16" height="16" rx="3"/><path class="af-tick" d="M29.6 -28.2 l3.2 3.2 l6 -6.4" pathLength="1"/><text class="af-label" x="50" y="-23">Import</text>
+      <rect class="af-outer" width="280" height="280" rx="36"/>
+      <rect class="af-inner" x="11" y="11" width="258" height="258" rx="27"/>
+      <g class="af-icon"><path d="M140 92 V152 M116 116 L140 92 L164 116"/><path d="M104 172 H176"/></g>
+    </g>
+      
+    <g class="af-node" id="af-text" transform="translate(90 440) rotate(-5 145.0 180.0)">
+      <text class="af-t" x="26" y="-22">T</text><text class="af-label" x="45" y="-23">Text</text>
+      <rect class="af-outer" width="290" height="360" rx="36"/>
+      <rect class="af-inner" x="11" y="11" width="268" height="338" rx="27"/>
+      <g class="af-icon"><rect class="af-bar" x="40" y="62" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="106" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="150" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="194" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="238" width="210" height="13" rx="2"/><rect class="af-bar" x="40" y="282" width="100" height="13" rx="2"/></g>
+    </g>
+      
+    <g class="af-node" id="af-image" transform="translate(450 150) rotate(0 140.0 140.0)">
+      <rect class="af-check" x="26" y="-36" width="16" height="16" rx="3"/><path class="af-tick" d="M29.6 -28.2 l3.2 3.2 l6 -6.4" pathLength="1"/><text class="af-label" x="50" y="-23">Image Generator</text>
+      <rect class="af-outer" width="280" height="280" rx="36"/>
+      <rect class="af-inner" x="11" y="11" width="258" height="258" rx="27"/>
+      <g class="af-icon"><g transform="translate(-10 -9)"><path d="M100 120 h24 l10 -14 h32 l10 14 h24 a8 8 0 0 1 8 8 v56 a8 8 0 0 1 -8 8 h-100 a8 8 0 0 1 -8 -8 v-56 a8 8 0 0 1 8 -8z"/><circle cx="150" cy="154" r="22"/><circle class="af-lens" cx="150" cy="154" r="15"/><circle cx="183" cy="134" r="5"/></g></g>
+    </g>
+      
+    <g class="af-node" id="af-video" transform="translate(810 70) rotate(-1.6 140.0 140.0)">
+      <rect class="af-check" x="26" y="-36" width="16" height="16" rx="3"/><path class="af-tick" d="M29.6 -28.2 l3.2 3.2 l6 -6.4" pathLength="1"/><text class="af-label" x="50" y="-23">Video Generator</text>
+      <rect class="af-outer" width="280" height="280" rx="36"/>
+      <rect class="af-inner" x="11" y="11" width="258" height="258" rx="27"/>
+      <g class="af-icon"><rect x="96" y="112" width="70" height="56" rx="8"/><path d="M166 132 L190 118 V162 L166 148 Z"/><circle class="af-rec" cx="112" cy="127" r="5"/></g>
+    </g>
+      <g class="af-ports"><circle cx="349.8" cy="232.9" r="5.5"/><circle cx="377.3" cy="582.5" r="5.5"/><circle cx="450.0" cy="285.0" r="5.5"/><circle cx="450.0" cy="315.0" r="5.5"/><circle cx="730.0" cy="290.0" r="5.5"/><circle cx="810.3" cy="223.9" r="5.5"/></g>
+      <circle class="af-pulse" id="af-p1" r="8"/><circle class="af-pulse" id="af-p2" r="8"/><circle class="af-pulse" id="af-p3" r="8"/>
+      <g class="af-spark af-s1" transform="translate(56 470) scale(1)"><path d="M0 -24 C3 -6 6 -3 24 0 C6 3 3 6 0 24 C-3 6 -6 3 -24 0 C-6 -3 -3 -6 0 -24Z"/><path transform="translate(26 -22) scale(0.32)" d="M0 -24 C3 -6 6 -3 24 0 C6 3 3 6 0 24 C-3 6 -6 3 -24 0 C-6 -3 -3 -6 0 -24Z"/></g><g class="af-spark af-s2" transform="translate(762 92) scale(1.1)"><path d="M0 -24 C3 -6 6 -3 24 0 C6 3 3 6 0 24 C-3 6 -6 3 -24 0 C-6 -3 -3 -6 0 -24Z"/><path transform="translate(26 -22) scale(0.32)" d="M0 -24 C3 -6 6 -3 24 0 C6 3 3 6 0 24 C-3 6 -6 3 -24 0 C-6 -3 -3 -6 0 -24Z"/></g><g class="af-spark af-s3" transform="translate(1090 410) scale(0.9)"><path d="M0 -24 C3 -6 6 -3 24 0 C6 3 3 6 0 24 C-3 6 -6 3 -24 0 C-6 -3 -3 -6 0 -24Z"/><path transform="translate(26 -22) scale(0.32)" d="M0 -24 C3 -6 6 -3 24 0 C6 3 3 6 0 24 C-3 6 -6 3 -24 0 C-6 -3 -3 -6 0 -24Z"/></g>
+      <g class="af-cursor" id="af-cursor" transform="translate(560 560)"><path d="M2.5 8.6 Q0 0 8.3 3.5 L87.7 36.5 Q96 40 87.1 41.4 L54.9 46.6 Q46 48 42.8 56.4 L31.2 87.6 Q28 96 25.5 87.4 Z"/></g>
+    </svg>
+            <button type="button" class="af-run" aria-label="Run the workflow again">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12 7a5 5 0 1 1-1.6-3.7M12 2v3.2H8.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Run it again
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1405,6 +1498,90 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" onerror="document.documentElement.classList.remove('gsap-ready')"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="motion.js"></script>
+  <script>
+    /* AI workflow diagram: runs the workflow it describes, once as it scrolls into view. */
+    (function () {
+      const root = document.querySelector('.ai-flow');
+      if (!root || !window.gsap) return;
+      const reduce = window.Motion ? Motion.reduce : matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const q = s => root.querySelector(s);
+      const nodes = { imp: q('#af-import'), txt: q('#af-text'), img: q('#af-image'), vid: q('#af-video') };
+      const wires = [1, 2, 3].map(i => q('#af-w' + i));
+      const pulses = [1, 2, 3].map(i => q('#af-p' + i));
+      const cursor = q('#af-cursor'), lens = q('.af-lens'), rec = q('.af-rec');
+      const bars = root.querySelectorAll('.af-bar');
+      const runBtn = root.querySelector('.af-run');
+      const IDLE = 'rgba(130,104,108,0.55)', LIVE = '#c7345e', DONE = '#82686c';
+      let tl = null;
+
+      const state = (n, s) => { n.classList.remove('is-active', 'is-done'); if (s) n.classList.add(s); };
+
+      function travel(pulse, wire, dur) {
+        const len = wire.getTotalLength(), o = { t: 0 };
+        const place = () => { const p = wire.getPointAtLength(o.t * len); pulse.setAttribute('cx', p.x); pulse.setAttribute('cy', p.y); };
+        return gsap.timeline()
+          .add(place)
+          .set(pulse, { opacity: 1 })
+          .to(wire, { stroke: LIVE, duration: 0.25 }, 0)
+          .to(o, { t: 1, duration: dur, ease: 'power1.inOut', onUpdate: place }, 0)
+          .to(pulse, { opacity: 0, duration: 0.2 })
+          .to(wire, { stroke: DONE, duration: 0.5 }, '<');
+      }
+
+      function reset() {
+        if (tl) tl.kill();
+        Object.values(nodes).forEach(n => state(n, null));
+        gsap.set(wires, { stroke: IDLE });
+        gsap.set(pulses, { opacity: 0 });
+        gsap.set(bars, { opacity: 0.25 });
+        gsap.set(rec, { opacity: 0 });
+        gsap.set(lens, { scale: 1, transformOrigin: '50% 50%' });
+        gsap.set(cursor, { x: 560, y: 560, scale: 1 });
+      }
+
+      function finished() {
+        Object.values(nodes).forEach(n => state(n, 'is-done'));
+        gsap.set(wires, { stroke: DONE });
+        gsap.set(bars, { opacity: 1 });
+        root.classList.add('has-run');
+      }
+
+      function run() {
+        reset();
+        if (reduce) { finished(); return; }
+        tl = gsap.timeline({ onComplete: finished })
+          // the cursor clicks Import
+          .to(cursor, { x: 240, y: 250, duration: 1, ease: 'power3.inOut' })
+          .to(cursor, { scale: 0.86, svgOrigin: '0 0', duration: 0.1, ease: 'power2.out' })
+          .add(() => state(nodes.imp, 'is-active'))
+          .to(cursor, { scale: 1, duration: 0.25, ease: 'power2.out' })
+          .add(() => state(nodes.imp, 'is-done'), '+=0.25')
+          // the prompt is written
+          .add(() => state(nodes.txt, 'is-active'), '<')
+          .to(bars, { opacity: 1, duration: 0.25, stagger: 0.1 }, '<')
+          .add(() => state(nodes.txt, 'is-done'))
+          .to(cursor, { x: 560, y: 560, duration: 1.2, ease: 'power3.inOut' }, '<')
+          // both feed the image generator
+          .add(travel(pulses[0], wires[0], 0.9), '<')
+          .add(travel(pulses[1], wires[1], 1.1), '<')
+          .add(() => state(nodes.img, 'is-active'))
+          .to(lens, { scale: 0.6, duration: 0.4, ease: 'sine.inOut', yoyo: true, repeat: 3 })
+          .add(() => state(nodes.img, 'is-done'))
+          // its output feeds the video generator
+          .add(travel(pulses[2], wires[2], 0.8), '-=0.3')
+          .add(() => state(nodes.vid, 'is-active'))
+          .to(rec, { opacity: 1, duration: 0.22, yoyo: true, repeat: 3, ease: 'power1.inOut' })
+          .add(() => state(nodes.vid, 'is-done'));
+      }
+
+      runBtn.addEventListener('click', run);
+      if (window.ScrollTrigger) {
+        ScrollTrigger.create({ trigger: root, start: 'clamp(top 75%)', once: true, onEnter: run });
+      } else {
+        run();
+      }
+    })();
+  </script>
 </body>
 
 </html>
