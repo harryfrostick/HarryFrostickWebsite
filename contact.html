@@ -104,7 +104,7 @@
     }
 
 
-    .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #c7345e; margin-bottom: 1.2rem; }
 
     .contact-heading {
       font-family: 'Bebas Neue', sans-serif;
@@ -118,29 +118,30 @@
 
     label {
       display: block;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      font-weight: 600;            /* matches the site's buttons and tags */
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.7rem;
+      color: var(--fg);
+      margin-bottom: 0.6rem;
     }
 
     input, textarea {
       width: 100%;
       background: transparent;
       border: none;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(15,15,15,0.32);   /* the field edge is visible before you click */
       color: var(--fg);
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
-      font-size: 0.88rem;
+      font-size: 1rem;             /* 16px: easier to read, and stops iPhones zooming in on focus */
       padding: 0.7rem 0;
       outline: none;
       transition: border-color 0.3s;
       caret-color: var(--accent);
     }
     input:focus, textarea:focus { border-bottom-color: var(--accent); }
-    input::placeholder, textarea::placeholder { color: rgba(15,15,15,0.3); }
+    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.85; }
     textarea { resize: none; height: 110px; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
@@ -287,17 +288,17 @@
 
     /* ── GSAP motion ─────────────────────────────────────────── */
     /* .gsap-ready is added only when GSAP loads; without it the page keeps its original CSS animations */
-    .gsap-ready input:focus, .gsap-ready textarea:focus { border-bottom-color: var(--line); }
+    .gsap-ready input:focus, .gsap-ready textarea:focus { border-bottom-color: rgba(15,15,15,0.32); }
     input, textarea { display: block; }
     .form-group { position: relative; }
     .form-group label { transition: color 0.3s; }
-    .form-group:focus-within label { color: var(--accent); }
+    .form-group:focus-within label { color: var(--fg); }   /* titles stay black; the rose underline shows focus */
     .field-line {
       position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
       background: var(--accent); transform: scaleX(0); pointer-events: none;
     }
     .submit-btn:disabled { cursor: none; opacity: 0.8; }
-    .field-error { font-size: 0.75rem; line-height: 1.4; color: #b8284f; margin-top: 0.55rem; min-height: 0; }
+    .field-error { font-size: 0.8rem; font-weight: 500; line-height: 1.45; color: #b8284f; margin-top: 0.55rem; min-height: 0; }
     .field-error:empty { display: none; }
     .form-group.has-error label { color: #b8284f; }
     .form-group.has-error input, .form-group.has-error textarea { border-bottom-color: #b8284f; }
