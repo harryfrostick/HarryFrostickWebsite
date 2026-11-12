@@ -420,6 +420,36 @@
       color: var(--accent);
     }
 
+    /* Hover "explode": project thumbnails burst out from the header (desktop only) */
+    .experience-types { position: relative; z-index: 20; }
+    .experience-item { position: relative; }
+    .experience-item:hover { z-index: 30; }
+    .exp-fan {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .exp-fan img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 170px;
+      height: 212px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 14px 34px rgba(60, 10, 25, 0.22);
+      pointer-events: none;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    @media (max-width: 768px), (hover: none) {
+      .exp-fan { display: none !important; }
+    }
+
     @media (max-width: 768px) {
       .experience-types {
         margin: 2rem 0;
@@ -1494,6 +1524,74 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="motion.js"></script>
   <script>
+    /* Experience headers: project thumbnails explode out on hover, retract on leave (desktop only). */
+    (function () {
+      if (!window.gsap) return;
+      const desktop = matchMedia('(min-width: 769px) and (hover: hover)');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+      // Swap images/positions here. x, y = offset from the header's centre (px), r = rotation (deg).
+      const FANS = {
+        Freelance: [
+          { src: 'Projects/Thumbnail_Duck & Boy.webp', x: -120, y: -175, r: -9 },
+          { src: 'Projects/Thumbnail_Zora.webp',       x:   65, y: -200, r:  7 },
+          { src: 'Projects/Thumbnail_TWSD.png',        x: -130, y:   85, r: -12 },
+          { src: 'Projects/Thumbnail_Birdwatcher.png', x:  205, y:  -30, r:  10 }
+        ],
+        'In-House': [
+          { src: 'Projects/Thumbnail_BCN_Moving Forward.webp',   x: -190, y: -165, r: -8 },
+          { src: 'Projects/Thumbnail_BCN_Reducing Anxiety.png',  x:    5, y: -210, r:  5 },
+          { src: 'Projects/Thumbnail_Bad_Habits.webp',           x:  190, y: -165, r:  9 }
+        ],
+        Agency: [
+          { src: 'Projects/Thumbnail_Vidsy_Walkers.png',     x: -215, y: -170, r: -8 },
+          { src: 'Projects/Thumbnail_Vidsy_MountainDew.png', x:  -35, y: -208, r:  6 },
+          { src: 'Projects/Thumbnail_Sunshine Boy.png',      x: -175, y:   85, r: 10 }
+        ]
+      };
+
+      document.querySelectorAll('.experience-item').forEach(item => {
+        const cfg = FANS[item.textContent.trim()];
+        if (!cfg) return;
+
+        const fan = document.createElement('div');
+        fan.className = 'exp-fan';
+        fan.setAttribute('aria-hidden', 'true');
+        const imgs = cfg.map(c => {
+          const img = new Image();
+          img.alt = '';
+          img.decoding = 'async';
+          img.src = c.src;
+          fan.appendChild(img);
+          return img;
+        });
+        item.appendChild(fan);
+
+        const rest = { x: 0, y: 0, rotation: 0, scale: 0, opacity: 0 };
+        gsap.set(imgs, { xPercent: -50, yPercent: -50, ...rest });
+
+        item.addEventListener('mouseenter', () => {
+          if (!desktop.matches || reduce.matches) return;
+          const s = Math.min(1.2, Math.max(0.7, innerWidth / 1440));   // scale spread with viewport
+          imgs.forEach((img, i) => {
+            gsap.to(img, {
+              x: cfg[i].x * s, y: cfg[i].y * s, rotation: cfg[i].r, scale: 1, opacity: 1,
+              duration: 0.75, delay: i * 0.05, ease: 'back.out(1.7)', overwrite: true
+            });
+          });
+        });
+
+        item.addEventListener('mouseleave', () => {
+          imgs.forEach((img, i) => {
+            gsap.to(img, {
+              ...rest, duration: 0.45, delay: (imgs.length - 1 - i) * 0.03,
+              ease: 'power3.in', overwrite: true
+            });
+          });
+        });
+      });
+    })();
+
     /* AI workflow diagram: runs the workflow it describes, once as it scrolls into view. */
     (function () {
       const root = document.querySelector('.ai-flow');
