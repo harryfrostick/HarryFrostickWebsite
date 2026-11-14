@@ -245,22 +245,28 @@
       inset: 0;
       z-index: 50;                 /* above the video, below the nav and menu */
       display: grid;
-      place-items: center;
+      place-items: end center;     /* centred across, low on the screen */
+      padding-bottom: max(14vh, 5.5rem);   /* clears the ticker */
       pointer-events: none;        /* the video link stays clickable around it */
     }
     .home-cta {
       pointer-events: auto;
       cursor: none;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.74rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: min(13.5rem, 80vw);
+      min-height: 3.7rem;
+      font-size: 0.95rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       color: #fff;
-      padding: 0.95rem 1.7rem;
+      padding: 0 2.2rem;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(252, 232, 236, 0.2);   /* page pink #fce8ec at 20% */
       -webkit-backdrop-filter: blur(12px) saturate(150%);
       backdrop-filter: blur(12px) saturate(150%);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55),
