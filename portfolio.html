@@ -195,10 +195,27 @@
 
     /* Masonry */
     .grid-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
-    /* Flex rather than grid so an incomplete last row sits centred instead of leaving a gap */
-    .masonry { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards; }
-    .masonry-item { flex: 0 0 calc((100% - 4px) / 3); margin-bottom: 0; position: relative; overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: none; }
-    .masonry-item .masonry-thumb { aspect-ratio: 9/16; }
+    /* Bento grid: 4 columns x 6 rows (24 cells). Heroes span 2x2, wides span 2x1, the rest are single cells.
+       Row height is derived from column width so every cell is 5:6 portrait and spans line up exactly.
+       Thumbnails are cropped with object-fit; nudge any crop with --pos (x% y%) on that tile. */
+    .masonry {
+      --gap: 6px; --cols: 4; --cell-ratio: 1.2;
+      --bw: calc(min(100vw, 1400px) - 6rem);              /* content width: page max-width minus side padding */
+      display: grid;
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+      grid-auto-rows: calc((var(--bw) - (var(--cols) - 1) * var(--gap)) / var(--cols) * var(--cell-ratio));
+      grid-auto-flow: row dense;
+      gap: var(--gap);
+      opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+    .masonry-item { margin-bottom: 0; position: relative; overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: none; min-width: 0; }
+    .masonry-item.bento-hero { grid-column: span 2; grid-row: span 2; }
+    .masonry-item.bento-wide { grid-column: span 2; }
+    .masonry-item .masonry-thumb { height: 100%; }
+    .masonry-item .masonry-thumb img { object-position: var(--pos, 50% 40%); }
+    .bento-hero .masonry-overlay { padding: 2rem; }
+    .bento-hero .masonry-overlay-title { font-size: 2.6rem; }
+    .bento-hero .masonry-overlay-client { font-size: 0.7rem; }
 
 
 
@@ -265,7 +282,7 @@
       .featured-card { grid-template-columns: 1fr; }
       .featured-info { border-left: none; border-top: 1px solid var(--line); }
       .featured-media { aspect-ratio: 16/9; }
-      .masonry-item { flex-basis: calc((100% - 2px) / 2); }
+      .masonry { --cols: 2; }   /* heroes and wides become full-width, singles pair up */
     }
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -275,9 +292,11 @@
       .featured-title { font-size: clamp(2rem,8vw,3.5rem); }
       .featured-desc { font-size: 0.8rem; }
       .grid-label { margin-bottom: 1rem; }
+      .masonry { --bw: calc(100vw - 3rem); --gap: 4px; }
+      .bento-hero .masonry-overlay { padding: 1.25rem; }
+      .bento-hero .masonry-overlay-title { font-size: 2rem; }
     }
     @media (max-width: 500px) {
-      .masonry-item { flex-basis: 100%; }
       .featured-media { aspect-ratio: 4/3; }
     }
     @media (hover: none) and (pointer: coarse) {
@@ -957,7 +976,7 @@
     <p class="grid-label" data-m>All projects</p>
     <div class="masonry" data-m-group data-m-batch>
 
-      <a href="#" class="masonry-item" data-m-cursor data-project="0"
+      <a href="#" class="masonry-item bento-hero" data-m-cursor data-project="0"
          data-title="Duck &amp; Boy"
          data-client="Personal"
          data-type="Frame-by-Frame Animation"
@@ -971,7 +990,7 @@
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Duck &amp; Boy</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-m-cursor data-project="1"
+      <a href="#" class="masonry-item bento-wide" data-m-cursor data-project="1"
          data-title="Zorra"
          data-client="Commission"
          data-type="Logo Animation"
@@ -1030,7 +1049,7 @@
         <div class="masonry-overlay"><p class="masonry-overlay-client">PepsiCo · via Vidsy</p><p class="masonry-overlay-title">Lay's MAX</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-m-cursor data-project="5"
+      <a href="#" class="masonry-item bento-hero" data-m-cursor data-project="5"
          data-title="Mountain Dew"
          data-client="PepsiCo · via Vidsy"
          data-type="Social Content · Motion"
@@ -1044,7 +1063,7 @@
         <div class="masonry-overlay"><p class="masonry-overlay-client">PepsiCo · via Vidsy</p><p class="masonry-overlay-title">Mountain Dew</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-m-cursor data-project="6"
+      <a href="#" class="masonry-item bento-wide" data-m-cursor data-project="6"
          data-title="Smorph"
          data-client="Tech Will Save Us"
          data-type="Illustration · Design"
@@ -1072,7 +1091,7 @@
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Birdwatcher</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-m-cursor data-project="8"
+      <a href="#" class="masonry-item bento-hero" data-m-cursor data-project="8"
          data-title="Reducing Anxiety"
          data-client="Breast Cancer Now"
          data-type="Social Content · Motion"
@@ -1114,7 +1133,7 @@
         <div class="masonry-overlay"><p class="masonry-overlay-client">Personal</p><p class="masonry-overlay-title">Sunshine Boy</p></div>
       </a>
 
-      <a href="#" class="masonry-item" data-m-cursor data-project="11"
+      <a href="#" class="masonry-item bento-wide" data-m-cursor data-project="11"
          data-title="Victoria Park"
          data-client="Personal"
          data-type="Illustration · Motion"
